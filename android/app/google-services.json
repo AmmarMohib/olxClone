@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "774007259454",
+    "project_id": "olx-clone-flutter-f4be8",
+    "storage_bucket": "olx-clone-flutter-f4be8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774007259454:android:976aa7c4bb9e51aac76c6f",
+        "android_client_info": {
+          "package_name": "com.example.olx_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "774007259454-5gcb91r6t7593ggaf4jhn8r77tde7co9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpG_baxBgjaAdBdGFb7vPGRBuT5L8FqFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "774007259454-5gcb91r6t7593ggaf4jhn8r77tde7co9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "774007259454-mf9iedrf6ku86n3d4l4gqb0ag274q8o3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.olxClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
