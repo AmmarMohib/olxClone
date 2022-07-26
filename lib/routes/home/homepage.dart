@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:olx_clone/routes/home/filters.dart';
 import 'package:olx_clone/routes/home/location_selector.dart';
+import 'package:olx_clone/routes/login/loginPage.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class HomePage extends StatefulWidget {
@@ -117,80 +119,111 @@ class _HomePageState extends State<HomePage> {
               bottom: PreferredSize(
                 preferredSize: Size.fromHeight(150),
                 child: Wrap(
+                  children: [
+                    InkWell(
+                      onTap: (() => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LocationSelect()),
+                          )),
+                      child: SafeArea(
+                        child: Row(
                           children: [
-                InkWell(
-                  onTap: (() => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LocationSelect()),
-                      )),
-                  child: SafeArea(
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 15,
-                          height: 50,
-                        ),
-                        const Icon(Icons.location_on_outlined, size: 25),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Container(
-                            margin: const EdgeInsets.only(top: 5),
-                            child: Text(
-                              location_name,
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(5, 51, 56, 1),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16),
-                            )),
-                        // alignment: Alignment.bottomRight,
-                        const Spacer(),
-                        // alignment: Alignment.center ,
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.arrow_drop_down_rounded,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 20),
-                  child: SizedBox(
-                    width: 360,
-                    height: 50,
-                    child: ScrollablePositionedList.builder(
-                      itemCount: 1,
-                      itemBuilder: (context, index) {
-                        return TextField(
-                          // expands: true,
-                          // minLines: 2,
-                          // maxLines: 2,
-                          textAlignVertical: TextAlignVertical.center,
-                          // controller: loc,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.search),
-                            hoverColor: Colors.amberAccent,
-                            border: OutlineInputBorder(),
-                            hintStyle: TextStyle(color: Colors.black),
-                            hintText: 'Search area, city or country',
-                          ),
-                        );
-                      }
-                    ),
-                  ),
-                ),
+                            const SizedBox(
+                              width: 15,
+                              height: 50,
+                            ),
+                            const Icon(Icons.location_on_outlined, size: 25),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Container(
+                                margin: const EdgeInsets.only(top: 5),
+                                child: Text(
+                                  location_name,
+                                  style: const TextStyle(
+                                      color: Color.fromRGBO(5, 51, 56, 1),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16),
+                                )),
+                            // alignment: Alignment.bottomRight,
+                            const Spacer(),
+                            // alignment: Alignment.center ,
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.arrow_drop_down_rounded,
+                                color: Colors.black,
+                              ),
+                            ),
                           ],
                         ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                            margin: const EdgeInsets.only(left: 20),
+                            child: SizedBox(
+                              width: 400,
+                              height: 55,
+                              child: InkWell(
+                                onTap: () {
+                                  print("object");
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Quickfilters()),
+                                  );
+                                },
+                                child: const IgnorePointer(
+                                  child: TextField(
+                                    // readOnly: true,
+                                    // expands: true,
+                                    // minLines: 2,
+                                    // maxLines: 2,
+                                    textAlignVertical: TextAlignVertical.center,
+                                    // controller: loc,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(1),
+                                      prefixIcon: Icon(Icons.search),
+                                      hoverColor: Colors.amberAccent,
+                                      border: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 5.0)),
+                                      hintStyle: TextStyle(color: Colors.black),
+                                      hintText:
+                                          'Find cars, mobiles, phones and more',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )),
+                        Container(
+                          padding: EdgeInsets.only(left: 10),
+                          child: InkWell(
+                            child: const Icon(
+                              Icons.notifications_outlined,
+                              size: 30,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginPage()));
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-          body: null
-          ),
+          body: null),
     );
   }
 }
