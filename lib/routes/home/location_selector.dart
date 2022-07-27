@@ -12,6 +12,13 @@ class _LocationSelectState extends State<LocationSelect> {
   var loc = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    double resWidth = MediaQuery.of(context).size.width * 0.755;
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      resWidth = MediaQuery.of(context).size.width * 0.755;
+    }
+     else if (MediaQuery.of(context).orientation == Orientation.landscape) {
+      resWidth = MediaQuery.of(context).size.width * 0.855;
+    }
     return MaterialApp(
         home: Scaffold(
             appBar: PreferredSize(
@@ -45,7 +52,7 @@ class _LocationSelectState extends State<LocationSelect> {
                             Container(
                               margin: const EdgeInsets.only(left: 20),
                               child: SizedBox(
-                                width: 360,
+                                width: resWidth,
                                 // height: 40,
                                 child: TextField(
                                   // expands: true,
