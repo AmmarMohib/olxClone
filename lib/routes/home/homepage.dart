@@ -6,6 +6,8 @@ import 'package:olx_clone/commons/custom_avatar.dart';
 import 'package:olx_clone/routes/home/filters.dart';
 import 'package:olx_clone/routes/home/location_selector.dart';
 import 'package:olx_clone/routes/login/loginPage.dart';
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -300,53 +302,172 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.150,
-                        ),
-                        CategoriesCircleAvatar(
-                          icon: Icons.phone_android_outlined,
-                          onTap: () {
-                            print("androidea phonea");
-                          },
-                          text: "Mobiles",
-                          bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
-                          marginleft: MediaQuery.of(context).size.width * 0.02,
-                        ),
-                        CategoriesCircleAvatar(
-                          icon: CupertinoIcons.car,
-                          onTap: () {
-                            print("vehiclea");
-                          },
-                          text: "Vehicles",
-                          bgcolor: Color.fromRGBO(210, 185, 130, 1.0),
-                          marginleft: MediaQuery.of(context).size.width * 0.067,
-                        ),
-                        CategoriesCircleAvatar(
-                          icon: Icons.abc,
-                          onTap: () {
-                            print("propertea salea");
-                          },
-                          text: "Property for \n sale",
-                          bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
-                          marginleft: MediaQuery.of(context).size.width * 0.067,
-                        ),
-                           CategoriesCircleAvatar(
-                          icon: Icons.abc,
-                          onTap: () {
-                            print("propertea salea");
-                          },
-                          text: "Property for sale",
-                          bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
-                          marginleft: MediaQuery.of(context).size.width * 0.067,
-                        ),
-                      ],
-
-                    )
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      width: MediaQuery.of(context).size.width * 1.0,
+                      child: ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.150,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.phone_android_outlined,
+                            onTap: () {
+                              print("androidea phonea");
+                            },
+                            text: "Mobiles",
+                            bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.02,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: CupertinoIcons.car,
+                            onTap: () {
+                              print("vehiclea");
+                            },
+                            text: "Vehicles",
+                            bgcolor: Color.fromRGBO(210, 185, 130, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.point_of_sale,
+                            onTap: () {
+                              print("propertea salea");
+                            },
+                            text: "Property for \n sale",
+                            bgcolor: const Color.fromRGBO(35, 229, 216, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.point_of_sale,
+                            onTap: () {
+                              print("propertea salea");
+                            },
+                            text: "Property for \n rent",
+                            bgcolor: const Color.fromRGBO(248, 221, 60, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.desktop_windows,
+                            onTap: () {
+                              print("propertea salea");
+                            },
+                            text: "Electronics \n & Home ...",
+                            bgcolor: const Color.fromRGBO(155, 185, 255, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.electric_bike,
+                            onTap: () {
+                              print("propertea salea");
+                            },
+                            text: "Bikes",
+                            bgcolor: const Color.fromRGBO(255, 100, 92, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.business_sharp,
+                            onTap: () {
+                              print("propertea salea");
+                            },
+                            text: "Business, \n Industrial",
+                            bgcolor: const Color.fromRGBO(255, 232, 148, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          CategoriesCircleAvatar(
+                              icon: Icons.room_service_sharp,
+                              onTap: () {},
+                              text: "Services",
+                              bgcolor: Color.fromRGBO(255, 100, 92, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.02),
+                          CategoriesCircleAvatar(
+                              icon: Icons.badge,
+                              onTap: () {},
+                              text: "Jobs",
+                              bgcolor: Color.fromRGBO(205, 220, 255, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.02),
+                          CategoriesCircleAvatar(
+                              icon: CommunityMaterialIcons.baby_face_outline,
+                              onTap: () {},
+                              text: "Animals",
+                              bgcolor: Color.fromRGBO(141, 241, 238, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.02),
+                          CategoriesCircleAvatar(
+                              icon: CommunityMaterialIcons.sofa,
+                              onTap: () {},
+                              text: "Furniture \n & Hom ...",
+                              bgcolor: Color.fromRGBO(210, 185, 130, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.01),
+                          CategoriesCircleAvatar(
+                              icon: FontAwesomeIcons.shirt,
+                              onTap: () {},
+                              text: "Fashion & \n beauty",
+                              bgcolor: Color.fromRGBO(35, 229, 216, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.01),
+                          CategoriesCircleAvatar(
+                              icon: CommunityMaterialIcons.guitar_acoustic,
+                              onTap: () {},
+                              text: "Books, \n Sports",
+                              bgcolor: Color.fromRGBO(248, 221, 60, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.01),
+                          CategoriesCircleAvatar(
+                              icon: CommunityMaterialIcons.baby_bottle,
+                              onTap: () {},
+                              text: "Kids",
+                              bgcolor: Color.fromRGBO(155, 185, 225, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.02),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.04,
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           )),
     );

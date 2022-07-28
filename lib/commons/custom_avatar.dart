@@ -6,13 +6,15 @@ class CategoriesCircleAvatar extends StatelessWidget {
   final VoidCallback onTap;
   final Color bgcolor;
   final double marginleft;
+  final double margintop;
   // final IconData iconurl;
   const CategoriesCircleAvatar(
       {Key? key,
       required this.icon,
       required this.onTap,
       required this.text,
-      required this.bgcolor, required this.marginleft})
+      required this.bgcolor,
+      required this.marginleft, required this.margintop})
       : super(key: key);
 
   @override
@@ -20,6 +22,8 @@ class CategoriesCircleAvatar extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: marginleft),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           InkWell(
             onTap: onTap,
@@ -34,19 +38,21 @@ class CategoriesCircleAvatar extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.02),
-  
-            child: Text(
-              text,
-              // ignore: prefer_const_constructors
-              style: TextStyle(
-                  color: Color.fromRGBO(5, 51, 56, 1),
-                  fontWeight: FontWeight.w500,
-              
+            padding:
+                EdgeInsets.only(top: margintop),
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(
+                    color: Color.fromRGBO(5, 51, 56, 1),
+                    fontWeight: FontWeight.w500,
                   ),
+                ),
+              ),
             ),
-          )
         ],
       ),
     );
