@@ -127,13 +127,6 @@ class _LocationSelectState extends State<LocationSelect> {
                     ),
                   ),
                 )),
-            // actions: [
-            //   Image.asset(
-            //     'assets/images/olx_logo_blue.png',
-            //     height: 30,
-            //     width: 30,
-            //   ),
-            // ],
             body: null));
   }
 }

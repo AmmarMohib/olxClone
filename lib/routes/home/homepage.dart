@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:olx_clone/commons/custom_avatar.dart';
+import 'package:olx_clone/routes/home/categories.dart';
 import 'package:olx_clone/routes/home/filters.dart';
 import 'package:olx_clone/routes/home/location_selector.dart';
 import 'package:olx_clone/routes/login/loginPage.dart';
@@ -288,16 +289,25 @@ class _HomePageState extends State<HomePage> {
                             padding: EdgeInsets.only(
                                 right:
                                     MediaQuery.of(context).size.width * 0.03),
-                            child: const Align(
-                                alignment: Alignment.bottomRight,
-                                child: Text(
-                                  "See All",
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(5, 51, 56, 1),
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                )),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const AllCatagories()),
+                                );
+                              },
+                              child: const Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Text(
+                                    "See All",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(5, 51, 56, 1),
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  )),
+                            ),
                           ),
                         ),
                       ],
@@ -330,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                               print("vehiclea");
                             },
                             text: "Vehicles",
-                            bgcolor: Color.fromRGBO(210, 185, 130, 1.0),
+                            bgcolor: const Color.fromRGBO(210, 185, 130, 1.0),
                             marginleft:
                                 MediaQuery.of(context).size.width * 0.07,
                             margintop:
@@ -400,7 +410,7 @@ class _HomePageState extends State<HomePage> {
                               icon: Icons.room_service_sharp,
                               onTap: () {},
                               text: "Services",
-                              bgcolor: Color.fromRGBO(255, 100, 92, 1.0),
+                              bgcolor: const Color.fromRGBO(255, 100, 92, 1.0),
                               marginleft:
                                   MediaQuery.of(context).size.width * 0.08,
                               margintop:
@@ -409,7 +419,7 @@ class _HomePageState extends State<HomePage> {
                               icon: Icons.badge,
                               onTap: () {},
                               text: "Jobs",
-                              bgcolor: Color.fromRGBO(205, 220, 255, 1.0),
+                              bgcolor: const Color.fromRGBO(205, 220, 255, 1.0),
                               marginleft:
                                   MediaQuery.of(context).size.width * 0.08,
                               margintop:
@@ -418,7 +428,7 @@ class _HomePageState extends State<HomePage> {
                               icon: CommunityMaterialIcons.baby_face_outline,
                               onTap: () {},
                               text: "Animals",
-                              bgcolor: Color.fromRGBO(141, 241, 238, 1.0),
+                              bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
                               marginleft:
                                   MediaQuery.of(context).size.width * 0.08,
                               margintop:
@@ -427,7 +437,7 @@ class _HomePageState extends State<HomePage> {
                               icon: CommunityMaterialIcons.sofa,
                               onTap: () {},
                               text: "Furniture \n & Hom ...",
-                              bgcolor: Color.fromRGBO(210, 185, 130, 1.0),
+                              bgcolor: const Color.fromRGBO(210, 185, 130, 1.0),
                               marginleft:
                                   MediaQuery.of(context).size.width * 0.08,
                               margintop:
@@ -436,7 +446,7 @@ class _HomePageState extends State<HomePage> {
                               icon: FontAwesomeIcons.shirt,
                               onTap: () {},
                               text: "Fashion & \n beauty",
-                              bgcolor: Color.fromRGBO(35, 229, 216, 1.0),
+                              bgcolor: const Color.fromRGBO(35, 229, 216, 1.0),
                               marginleft:
                                   MediaQuery.of(context).size.width * 0.08,
                               margintop:
@@ -445,7 +455,7 @@ class _HomePageState extends State<HomePage> {
                               icon: CommunityMaterialIcons.guitar_acoustic,
                               onTap: () {},
                               text: "Books, \n Sports",
-                              bgcolor: Color.fromRGBO(248, 221, 60, 1.0),
+                              bgcolor: const Color.fromRGBO(248, 221, 60, 1.0),
                               marginleft:
                                   MediaQuery.of(context).size.width * 0.08,
                               margintop:
@@ -454,7 +464,7 @@ class _HomePageState extends State<HomePage> {
                               icon: CommunityMaterialIcons.baby_bottle,
                               onTap: () {},
                               text: "Kids",
-                              bgcolor: Color.fromRGBO(155, 185, 225, 1.0),
+                              bgcolor: const Color.fromRGBO(155, 185, 225, 1.0),
                               marginleft:
                                   MediaQuery.of(context).size.width * 0.08,
                               margintop:
