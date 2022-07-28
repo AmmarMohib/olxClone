@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -94,7 +95,9 @@ class _LocationSelectState extends State<LocationSelect> {
                         InkWell(
                           // ignore: avoid_print
                           onTap: () {
-                            print("bhai na dubao location is developing");
+                            if (kDebugMode) {
+                              print("bhai na dubao location is developing");
+                            }
                           },
                           child: Row(
                             children: [
