@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:olx_clone/commons/custom_avatar.dart';
 import 'package:olx_clone/routes/home/filters.dart';
 import 'package:olx_clone/routes/home/location_selector.dart';
 import 'package:olx_clone/routes/login/loginPage.dart';
@@ -23,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   String location_name = 'Pakistan';
   @override
   Widget build(BuildContext context) {
+    print("orientation = ${MediaQuery.of(context).orientation}");
     double resWidth = MediaQuery.of(context).size.width * 0.85;
     // if (Platform.isAndroid.) {
     //   resWidth = MediaQuery.of(context);
@@ -31,6 +33,7 @@ class _HomePageState extends State<HomePage> {
     //   resWidth =
     // }
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      // print("orientation = ${MediaQuery.of(context).orientation}");
       resWidth = MediaQuery.of(context).size.width * 0.85;
     } else if (MediaQuery.of(context).orientation == Orientation.landscape) {
       resWidth = MediaQuery.of(context).size.width * 0.92;
@@ -61,6 +64,7 @@ class _HomePageState extends State<HomePage> {
                             width: 74,
                           ),
                           Align(
+                            // alignment: Alignment.center,
                             alignment: Alignment.center,
                             child: InkWell(
                               onTap: () {
@@ -252,6 +256,9 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: [
                     // SizedBox(width: MediaQuery.of(context).size.width * 1.0,),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.01,
+                    ),
                     Stack(
                       // mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -265,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(
                                   color: Color.fromRGBO(5, 51, 56, 1),
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ),
@@ -280,12 +287,63 @@ class _HomePageState extends State<HomePage> {
                                 right:
                                     MediaQuery.of(context).size.width * 0.03),
                             child: const Align(
-                                alignment: Alignment.centerRight,
-                                child: Text("See All")),
+                                alignment: Alignment.bottomRight,
+                                child: Text(
+                                  "See All",
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(5, 51, 56, 1),
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                )),
                           ),
                         ),
                       ],
                     ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.150,
+                        ),
+                        CategoriesCircleAvatar(
+                          icon: Icons.phone_android_outlined,
+                          onTap: () {
+                            print("androidea phonea");
+                          },
+                          text: "Mobiles",
+                          bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.02,
+                        ),
+                        CategoriesCircleAvatar(
+                          icon: CupertinoIcons.car,
+                          onTap: () {
+                            print("vehiclea");
+                          },
+                          text: "Vehicles",
+                          bgcolor: Color.fromRGBO(210, 185, 130, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.067,
+                        ),
+                        CategoriesCircleAvatar(
+                          icon: Icons.abc,
+                          onTap: () {
+                            print("propertea salea");
+                          },
+                          text: "Property for \n sale",
+                          bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.067,
+                        ),
+                           CategoriesCircleAvatar(
+                          icon: Icons.abc,
+                          onTap: () {
+                            print("propertea salea");
+                          },
+                          text: "Property for sale",
+                          bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.067,
+                        ),
+                      ],
+
+                    )
                   ],
                 ),
               )
