@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:olx_clone/commons/custom_avatar.dart';
+import 'package:olx_clone/routes/home/categoriesPage/mobile.dart';
 
 class AllCatagories extends StatefulWidget {
   const AllCatagories({Key? key}) : super(key: key);
@@ -59,6 +60,11 @@ class _AllCatagoriesState extends State<AllCatagories> {
                   icon: Icons.phone_android_outlined,
                   onTap: () {
                     print("androidea phonea");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Mobiles()),
+                    );
                   },
                   text: "Mobiles",
                   bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),

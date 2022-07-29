@@ -90,36 +90,41 @@ class AllCategoriesCircleAvatar extends StatelessWidget {
             // mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: margintop,),
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: bgcolor,
-                  foregroundColor: Colors.black,
-                  child: Icon(
-                    icon,
-                    size: 27,
-                  ),
+              SizedBox(
+                height: margintop,
+              ),
+              CircleAvatar(
+                radius: 20,
+                backgroundColor: bgcolor,
+                foregroundColor: Colors.black,
+                child: Icon(
+                  icon,
+                  size: 27,
                 ),
+              ),
               Padding(
                 padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.125, top: MediaQuery.of(context).size.height * 0.0125),
+                    left: MediaQuery.of(context).size.width * 0.125,
+                    top: MediaQuery.of(context).size.height * 0.0125),
                 child: Text(
-                    text,
-                    // ignore: prefer_const_constructors
-                    style: TextStyle(
-                      color: const Color.fromRGBO(5, 51, 56, 1),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  text,
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(
+                    color: const Color.fromRGBO(5, 51, 56, 1),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
+              ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: IconButton(
-                    onPressed: () {
-                      print("go to next page, Urdu 😎😀: agli page pe jao");
-                    },
-                    icon: const Icon(CupertinoIcons.forward), iconSize: 20,),
+                  onPressed: () {
+                    onTap;
+                  },
+                  icon: const Icon(CupertinoIcons.forward),
+                  iconSize: 20,
+                ),
               )
             ],
           ),

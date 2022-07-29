@@ -32,7 +32,6 @@ class SignUpButton extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Stack(
-                
                 children: [
                 Container(
                   height: 20.0,
