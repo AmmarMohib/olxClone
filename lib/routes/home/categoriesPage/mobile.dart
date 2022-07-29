@@ -109,6 +109,7 @@ class Accessories extends StatelessWidget {
           "Mobiles",
           style: TextStyle(
               fontSize: 18,
+              
               fontWeight: FontWeight.w600,
               color: Color.fromRGBO(5, 51, 56, 1)),
         ),
