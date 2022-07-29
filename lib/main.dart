@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:olx_clone/routes.dart';
 import 'package:olx_clone/routes/login/loginPage.dart';
 // ignore: depend_on_referenced_packages
 import 'package:firebase_core/firebase_core.dart';
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Olx clone',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.blue,
@@ -33,7 +32,6 @@ class MyApp extends StatelessWidget {
       //     headline1: (TextStyle(backgroundColor: Colors.green))
       //   ),
       // ),
-      onGenerateRoute: (settings) => generateRoute(settings),
       home: const LoginPage(),
     );
   }

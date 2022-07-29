@@ -2,8 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:olx_clone/commons/custom_avatar.dart';
+import 'package:olx_clone/routes/home/categories.dart';
+import 'package:olx_clone/routes/home/filters.dart';
 import 'package:olx_clone/routes/home/location_selector.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:olx_clone/routes/login/loginPage.dart';
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,16 +21,26 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
   }
 
   // ignore: non_constant_identifier_names
   String location_name = 'Pakistan';
   @override
   Widget build(BuildContext context) {
+    print("orientation = ${MediaQuery.of(context).orientation}");
+    double resWidth = MediaQuery.of(context).size.width * 0.85;
+    // if (Platform.isAndroid.) {
+    //   resWidth = MediaQuery.of(context);
+    // }
+    // else if (Platform.isWindows) {
+    //   resWidth =
+    // }
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      // print("orientation = ${MediaQuery.of(context).orientation}");
+      resWidth = MediaQuery.of(context).size.width * 0.85;
+    } else if (MediaQuery.of(context).orientation == Orientation.landscape) {
+      resWidth = MediaQuery.of(context).size.width * 0.92;
+    }
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -40,157 +55,431 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.centerLeft,
                 child: Container(
                     margin: const EdgeInsets.only(left: 10),
-                    child: Row(children: [
-                      Image.asset(
-                        "assets/images/olx_logo_blue.png",
-                        // fit: BoxFit.fitWidth,
-                        width: 33,
-                      ),
-                      const SizedBox(
-                        width: 74,
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: InkWell(
-                          onTap: () {
-                            if (kDebugMode) {
-                              print('object');
-                            }
-                          },
-                          child: Row(
-                            children: [
-                              const CircleAvatar(
-                                backgroundColor:
-                                    Color.fromRGBO(239, 237, 240, 1.0),
-                                child: Icon(
-                                  Icons.directions_car_outlined,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Container(
-                                  margin:
-                                      const EdgeInsets.only(left: 10, top: 5),
-                                  child: Text("olx motors".toUpperCase(),
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400)))
-                            ],
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.asset(
+                            "assets/images/olx_logo_blue.png",
+                            // fit: BoxFit.fitWidth,
+                            width: 33,
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 50,
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: InkWell(
-                          onTap: () {
-                            if (kDebugMode) {
-                              print('object');
-                            }
-                          },
-                          child: Row(
-                            children: [
-                              const CircleAvatar(
-                                backgroundColor:
-                                    Color.fromRGBO(239, 237, 240, 1.0),
-                                child: Icon(
-                                  CupertinoIcons.building_2_fill,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Container(
-                                  margin:
-                                      const EdgeInsets.only(left: 10, top: 5),
-                                  child: Text("olx property".toUpperCase(),
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400)))
-                            ],
+                          const SizedBox(
+                            width: 74,
                           ),
-                        ),
-                      ),
-                    ])),
+                          Align(
+                            // alignment: Alignment.center,
+                            alignment: Alignment.center,
+                            child: InkWell(
+                              onTap: () {
+                                if (kDebugMode) {
+                                  print('object');
+                                }
+                              },
+                              child: Row(
+                                children: [
+                                  const CircleAvatar(
+                                    backgroundColor:
+                                        Color.fromRGBO(239, 237, 240, 1.0),
+                                    child: Icon(
+                                      Icons.directions_car_outlined,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 10, top: 5),
+                                      child: Text("olx motors".toUpperCase(),
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400)))
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 50,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: InkWell(
+                              onTap: () {
+                                if (kDebugMode) {
+                                  print('object');
+                                }
+                              },
+                              child: Row(
+                                children: [
+                                  const CircleAvatar(
+                                    backgroundColor:
+                                        Color.fromRGBO(239, 237, 240, 1.0),
+                                    child: Icon(
+                                      CupertinoIcons.building_2_fill,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 10, top: 5),
+                                      child: Text("olx property".toUpperCase(),
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400)))
+                                ],
+                              ),
+                            ),
+                          ),
+                        ])),
               ),
               bottom: PreferredSize(
-                preferredSize: Size.fromHeight(150),
-                child: Wrap(
-                          children: [
-                InkWell(
-                  onTap: (() => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LocationSelect()),
-                      )),
-                  child: SafeArea(
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 15,
-                          height: 50,
-                        ),
-                        const Icon(Icons.location_on_outlined, size: 25),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Container(
-                            margin: const EdgeInsets.only(top: 5),
-                            child: Text(
-                              location_name,
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(5, 51, 56, 1),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16),
+                preferredSize: const Size.fromHeight(150),
+                child: Container(
+                  color: const Color.fromRGBO(250, 250, 250, 1.0),
+                  child: Wrap(
+                    children: [
+                      InkWell(
+                        onTap: (() => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LocationSelect()),
                             )),
-                        // alignment: Alignment.bottomRight,
-                        const Spacer(),
-                        // alignment: Alignment.center ,
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.arrow_drop_down_rounded,
-                            color: Colors.black,
+                        child: SafeArea(
+                          child: Row(
+                            children: [
+                              const SizedBox(
+                                width: 15,
+                                height: 50,
+                              ),
+                              const Icon(Icons.location_on_outlined, size: 25),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Container(
+                                  margin: const EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    location_name,
+                                    style: const TextStyle(
+                                        color: Color.fromRGBO(5, 51, 56, 1),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16),
+                                  )),
+                              // alignment: Alignment.bottomRight,
+                              const Spacer(),
+                              // alignment: Alignment.center ,
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.arrow_drop_down_rounded,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                              margin: const EdgeInsets.only(left: 20),
+                              child: SizedBox(
+                                width: resWidth,
+                                height: 55,
+                                child: InkWell(
+                                  onTap: () {
+                                    if (kDebugMode) {
+                                      print("object");
+                                    }
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Quickfilters()),
+                                    );
+                                  },
+                                  child: const IgnorePointer(
+                                    child: TextField(
+                                      // style: TextStyle(backgroundColor: Colors.amber),
+                                      // readOnly: true,
+                                      // expands: true,
+                                      // minLines: 2,
+                                      // maxLines: 2,
+                                      textAlignVertical:
+                                          TextAlignVertical.center,
+                                      // controller: loc,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        fillColor: Colors.white,
+                                        filled: true,
+                                        contentPadding: EdgeInsets.all(1),
+                                        prefixIcon: Icon(Icons.search),
+                                        hoverColor: Colors.amberAccent,
+                                        // border:
+                                        hintStyle:
+                                            TextStyle(color: Colors.black),
+                                        hintText:
+                                            'Find cars, mobiles, phones and more',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )),
+                          Container(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: InkWell(
+                              child: const Icon(
+                                Icons.notifications_outlined,
+                                size: 30,
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPage()));
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          body: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.005,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 1.0,
+                decoration: const BoxDecoration(color: Colors.white),
+                child: Column(
+                  children: [
+                    // SizedBox(width: MediaQuery.of(context).size.width * 1.0,),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.01,
+                    ),
+                    Stack(
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.03),
+                          child: const Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "Browse Categories",
+                              style: TextStyle(
+                                  color: Color.fromRGBO(5, 51, 56, 1),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            if (kDebugMode) {
+                              print("detected");
+                            }
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                right:
+                                    MediaQuery.of(context).size.width * 0.03),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const AllCatagories()),
+                                );
+                              },
+                              child: const Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Text(
+                                    "See All",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(5, 51, 56, 1),
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  )),
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 20),
-                  child: SizedBox(
-                    width: 360,
-                    height: 50,
-                    child: ScrollablePositionedList.builder(
-                      itemCount: 1,
-                      itemBuilder: (context, index) {
-                        return TextField(
-                          // expands: true,
-                          // minLines: 2,
-                          // maxLines: 2,
-                          textAlignVertical: TextAlignVertical.center,
-                          // controller: loc,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.search),
-                            hoverColor: Colors.amberAccent,
-                            border: OutlineInputBorder(),
-                            hintStyle: TextStyle(color: Colors.black),
-                            hintText: 'Search area, city or country',
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      width: MediaQuery.of(context).size.width * 1.0,
+                      child: ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.150,
                           ),
-                        );
-                      }
+                          CategoriesCircleAvatar(
+                            icon: Icons.phone_android_outlined,
+                            onTap: () {
+                              print("androidea phonea");
+                            },
+                            text: "Mobiles",
+                            bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.02,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: CupertinoIcons.car,
+                            onTap: () {
+                              print("vehiclea");
+                            },
+                            text: "Vehicles",
+                            bgcolor: const Color.fromRGBO(210, 185, 130, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.point_of_sale,
+                            onTap: () {
+                              print("propertea salea");
+                            },
+                            text: "Property for \n sale",
+                            bgcolor: const Color.fromRGBO(35, 229, 216, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.point_of_sale,
+                            onTap: () {
+                              print("propertea salea");
+                            },
+                            text: "Property for \n rent",
+                            bgcolor: const Color.fromRGBO(248, 221, 60, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.desktop_windows,
+                            onTap: () {
+                              print("propertea salea");
+                            },
+                            text: "Electronics \n & Home ...",
+                            bgcolor: const Color.fromRGBO(155, 185, 255, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.electric_bike,
+                            onTap: () {
+                              print("propertea salea");
+                            },
+                            text: "Bikes",
+                            bgcolor: const Color.fromRGBO(255, 100, 92, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          CategoriesCircleAvatar(
+                            icon: Icons.business_sharp,
+                            onTap: () {
+                              print("propertea salea");
+                            },
+                            text: "Business, \n Industrial",
+                            bgcolor: const Color.fromRGBO(255, 232, 148, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.07,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          CategoriesCircleAvatar(
+                              icon: Icons.room_service_sharp,
+                              onTap: () {},
+                              text: "Services",
+                              bgcolor: const Color.fromRGBO(255, 100, 92, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.02),
+                          CategoriesCircleAvatar(
+                              icon: Icons.badge,
+                              onTap: () {},
+                              text: "Jobs",
+                              bgcolor: const Color.fromRGBO(205, 220, 255, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.02),
+                          CategoriesCircleAvatar(
+                              icon: CommunityMaterialIcons.baby_face_outline,
+                              onTap: () {},
+                              text: "Animals",
+                              bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.02),
+                          CategoriesCircleAvatar(
+                              icon: CommunityMaterialIcons.sofa,
+                              onTap: () {},
+                              text: "Furniture \n & Hom ...",
+                              bgcolor: const Color.fromRGBO(210, 185, 130, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.01),
+                          CategoriesCircleAvatar(
+                              icon: FontAwesomeIcons.shirt,
+                              onTap: () {},
+                              text: "Fashion & \n beauty",
+                              bgcolor: const Color.fromRGBO(35, 229, 216, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.01),
+                          CategoriesCircleAvatar(
+                              icon: CommunityMaterialIcons.guitar_acoustic,
+                              onTap: () {},
+                              text: "Books, \n Sports",
+                              bgcolor: const Color.fromRGBO(248, 221, 60, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.01),
+                          CategoriesCircleAvatar(
+                              icon: CommunityMaterialIcons.baby_bottle,
+                              onTap: () {},
+                              text: "Kids",
+                              bgcolor: const Color.fromRGBO(155, 185, 225, 1.0),
+                              marginleft:
+                                  MediaQuery.of(context).size.width * 0.08,
+                              margintop:
+                                  MediaQuery.of(context).size.height * 0.02),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.04,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                          ],
-                        ),
               ),
-            ),
-          ),
-          body: null
-          ),
+            ],
+          )),
     );
   }
 }
