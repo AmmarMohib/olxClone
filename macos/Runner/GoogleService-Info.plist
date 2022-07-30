@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>774007259454-mf9iedrf6ku86n3d4l4gqb0ag274q8o3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.774007259454-mf9iedrf6ku86n3d4l4gqb0ag274q8o3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB3LhAVXUqHackltUmrOSQULMaVB4aMugE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>774007259454</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.olxClone</string>
+	<key>PROJECT_ID</key>
+	<string>olx-clone-flutter-f4be8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>olx-clone-flutter-f4be8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:774007259454:ios:f268be1260c5b01ec76c6f</string>
+</dict>
+</plist>
