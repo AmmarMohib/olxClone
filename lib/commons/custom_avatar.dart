@@ -9,7 +9,7 @@ class CategoriesCircleAvatar extends StatefulWidget {
   final double marginleft;
   final double margintop;
   // final IconData iconurl;
-  CategoriesCircleAvatar(
+  const CategoriesCircleAvatar(
       {Key? key,
       required this.icon,
       required this.onTap,
