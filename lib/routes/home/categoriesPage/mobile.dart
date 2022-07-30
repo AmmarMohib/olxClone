@@ -130,6 +130,12 @@ class Accessories extends StatelessWidget {
                 CataTxt(txt: "See all in Accessories", func: () {}, showico: false, color: Color.fromRGBO(82, 136, 255, 1.0)),
                 CataTxt(
                   txt: "Charging Cables",
+                   func: () {},
+                  showico: false, color: Color.fromRGBO(5, 51, 56, 1),
+                ),
+                CataTxt(txt: "See all in Mobiles", func: () {}, showico: false, color: const Color.fromRGBO(82, 136, 255, 1.0)),
+                CataTxt(
+                  txt: "Tablets",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),
