@@ -1,5 +1,5 @@
+// ignore_for_file: avoid_print
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +25,15 @@ import 'package:olx_clone/routes/home/location_selector.dart';
 import 'package:olx_clone/routes/login/loginPage.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+extension StringCasingExtension on String {
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized())
+      .join(' ');
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -58,8 +67,8 @@ class _HomePageState extends State<HomePage> {
       resWidth = MediaQuery.of(context).size.width * 0.92;
     }
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(150),
             child: AppBar(
@@ -264,358 +273,427 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          body: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.005,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 1.0,
-                decoration: const BoxDecoration(color: Colors.white),
-                child: Column(
-                  children: [
-                    // SizedBox(width: MediaQuery.of(context).size.width * 1.0,),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.01,
-                    ),
-                    Stack(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.03),
-                          child: const Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "Browse Categories",
-                              style: TextStyle(
-                                  color: Color.fromRGBO(5, 51, 56, 1),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500),
-                            ),
+          body: SingleChildScrollView(
+              child: Column(children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.005,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 1.0,
+              decoration: const BoxDecoration(color: Colors.white),
+              child: Column(
+                children: [
+                  // SizedBox(width: MediaQuery.of(context).size.width * 1.0,),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.01,
+                  ),
+                  Stack(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.03),
+                        child: const Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text(
+                            "Browse Categories",
+                            style: TextStyle(
+                                color: Color.fromRGBO(5, 51, 56, 1),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
-                        GestureDetector(
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          if (kDebugMode) {
+                            print("detected");
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.03),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AllCatagories()),
+                              );
+                            },
+                            child: const Align(
+                                alignment: Alignment.bottomRight,
+                                child: Text(
+                                  "See All",
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(5, 51, 56, 1),
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                )),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    width: MediaQuery.of(context).size.width * 1.0,
+                    child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.150,
+                        ),
+                        CategoriesCircleAvatar(
+                          icon: Icons.phone_android_outlined,
                           onTap: () {
-                            if (kDebugMode) {
-                              print("detected");
-                            }
+                            print("androidea phonea");
+                            Timer(const Duration(microseconds: 1), () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Mobiles()),
+                              );
+                            });
                           },
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                right:
-                                    MediaQuery.of(context).size.width * 0.03),
-                            child: InkWell(
-                              onTap: () {
+                          text: "Mobiles",
+                          bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.02,
+                          margintop: MediaQuery.of(context).size.height * 0.02,
+                        ),
+                        CategoriesCircleAvatar(
+                          icon: CupertinoIcons.car,
+                          onTap: () {
+                            print("vehiclea");
+                            Timer(const Duration(microseconds: 1), () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Vehicles()),
+                              );
+                            });
+                          },
+                          text: "Vehicles",
+                          bgcolor: const Color.fromRGBO(210, 185, 130, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.07,
+                          margintop: MediaQuery.of(context).size.height * 0.02,
+                        ),
+                        CategoriesCircleAvatar(
+                          icon: Icons.point_of_sale,
+                          onTap: () {
+                            print("propertea salea");
+                            Timer(const Duration(microseconds: 1), () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PropertyforSale()),
+                              );
+                            });
+                          },
+                          text: "Property for \n sale",
+                          bgcolor: const Color.fromRGBO(35, 229, 216, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.07,
+                          margintop: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        CategoriesCircleAvatar(
+                          icon: Icons.point_of_sale,
+                          onTap: () {
+                            print("propertea salea");
+                            Timer(const Duration(microseconds: 1), () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PropertyForRent()),
+                              );
+                            });
+                          },
+                          text: "Property for \n rent",
+                          bgcolor: const Color.fromRGBO(248, 221, 60, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.07,
+                          margintop: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        CategoriesCircleAvatar(
+                          icon: Icons.desktop_windows,
+                          onTap: () {
+                            print("propertea salea");
+                            Timer(const Duration(microseconds: 1), () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Electronics()),
+                              );
+                            });
+                          },
+                          text: "Electronics \n & Home ...",
+                          bgcolor: const Color.fromRGBO(155, 185, 255, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.07,
+                          margintop: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        CategoriesCircleAvatar(
+                          icon: Icons.electric_bike,
+                          onTap: () {
+                            print("propertea salea");
+                            Timer(const Duration(microseconds: 1), () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Bikes()),
+                              );
+                            });
+                          },
+                          text: "Bikes",
+                          bgcolor: const Color.fromRGBO(255, 100, 92, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.07,
+                          margintop: MediaQuery.of(context).size.height * 0.02,
+                        ),
+                        CategoriesCircleAvatar(
+                          icon: Icons.business_sharp,
+                          onTap: () {
+                            print("propertea salea");
+                            Timer(const Duration(microseconds: 1), () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Business()),
+                              );
+                            });
+                          },
+                          text: "Business, \n Industrial",
+                          bgcolor: const Color.fromRGBO(255, 232, 148, 1.0),
+                          marginleft: MediaQuery.of(context).size.width * 0.07,
+                          margintop: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        CategoriesCircleAvatar(
+                            icon: Icons.room_service_sharp,
+                            onTap: () {
+                              Timer(const Duration(microseconds: 1), () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AllCatagories()),
+                                      builder: (context) => const Services()),
                                 );
-                              },
-                              child: const Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Text(
-                                    "See All",
-                                    style: TextStyle(
-                                      color: Color.fromRGBO(5, 51, 56, 1),
-                                      fontWeight: FontWeight.bold,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  )),
-                            ),
-                          ),
+                              });
+                            },
+                            text: "Services",
+                            bgcolor: const Color.fromRGBO(255, 100, 92, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.08,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.02),
+                        CategoriesCircleAvatar(
+                            icon: Icons.badge,
+                            onTap: () {
+                              Timer(const Duration(microseconds: 1), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Jobs()),
+                                );
+                              });
+                            },
+                            text: "Jobs",
+                            bgcolor: const Color.fromRGBO(205, 220, 255, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.08,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.02),
+                        CategoriesCircleAvatar(
+                            icon: CommunityMaterialIcons.baby_face_outline,
+                            onTap: () {
+                              Timer(const Duration(microseconds: 1), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Animals()),
+                                );
+                              });
+                            },
+                            text: "Animals",
+                            bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.08,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.02),
+                        CategoriesCircleAvatar(
+                            icon: CommunityMaterialIcons.sofa,
+                            onTap: () {
+                              Timer(const Duration(microseconds: 1), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Furniture()),
+                                );
+                              });
+                            },
+                            text: "Furniture \n & Hom ...",
+                            bgcolor: const Color.fromRGBO(210, 185, 130, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.08,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01),
+                        CategoriesCircleAvatar(
+                            icon: FontAwesomeIcons.shirt,
+                            onTap: () {
+                              Timer(const Duration(microseconds: 1), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Fashion()),
+                                );
+                              });
+                            },
+                            text: "Fashion & \n beauty",
+                            bgcolor: const Color.fromRGBO(35, 229, 216, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.08,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01),
+                        CategoriesCircleAvatar(
+                            icon: CommunityMaterialIcons.guitar_acoustic,
+                            onTap: () {
+                              Timer(const Duration(microseconds: 1), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Books()),
+                                );
+                              });
+                            },
+                            text: "Books, \n Sports",
+                            bgcolor: const Color.fromRGBO(248, 221, 60, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.08,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.01),
+                        CategoriesCircleAvatar(
+                            icon: CommunityMaterialIcons.baby_bottle,
+                            onTap: () {
+                              Timer(const Duration(microseconds: 1), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Kids()),
+                                );
+                              });
+                            },
+                            text: "Kids",
+                            bgcolor: const Color.fromRGBO(155, 185, 225, 1.0),
+                            marginleft:
+                                MediaQuery.of(context).size.width * 0.08,
+                            margintop:
+                                MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.04,
                         ),
                       ],
                     ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      width: MediaQuery.of(context).size.width * 1.0,
-                      child: ListView(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.150,
-                          ),
-                          CategoriesCircleAvatar(
-                            icon: Icons.phone_android_outlined,
-                            onTap: () {
-                              print("androidea phonea");
-                              Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Mobiles()),
-                                );
-                              });
-                            },
-                            text: "Mobiles",
-                            bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
-                            marginleft:
-                                MediaQuery.of(context).size.width * 0.02,
-                            margintop:
-                                MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          CategoriesCircleAvatar(
-                            icon: CupertinoIcons.car,
-                            onTap: () {
-                              print("vehiclea");
-                              Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Vehicles()),
-                                );
-                              });
-                            },
-                            text: "Vehicles",
-                            bgcolor: const Color.fromRGBO(210, 185, 130, 1.0),
-                            marginleft:
-                                MediaQuery.of(context).size.width * 0.07,
-                            margintop:
-                                MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          CategoriesCircleAvatar(
-                            icon: Icons.point_of_sale,
-                            onTap: () {
-                              print("propertea salea");
-                              Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PropertyforSale()),
-                                );
-                              });
-                            },
-                            text: "Property for \n sale",
-                            bgcolor: const Color.fromRGBO(35, 229, 216, 1.0),
-                            marginleft:
-                                MediaQuery.of(context).size.width * 0.07,
-                            margintop:
-                                MediaQuery.of(context).size.height * 0.01,
-                          ),
-                          CategoriesCircleAvatar(
-                            icon: Icons.point_of_sale,
-                            onTap: () {
-                              print("propertea salea");
-                              Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PropertyForRent()),
-                                );
-                              });
-                            },
-                            text: "Property for \n rent",
-                            bgcolor: const Color.fromRGBO(248, 221, 60, 1.0),
-                            marginleft:
-                                MediaQuery.of(context).size.width * 0.07,
-                            margintop:
-                                MediaQuery.of(context).size.height * 0.01,
-                          ),
-                          CategoriesCircleAvatar(
-                            icon: Icons.desktop_windows,
-                            onTap: () {
-                              print("propertea salea");
-                              Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Electronics()),
-                                );
-                              });
-                            },
-                            text: "Electronics \n & Home ...",
-                            bgcolor: const Color.fromRGBO(155, 185, 255, 1.0),
-                            marginleft:
-                                MediaQuery.of(context).size.width * 0.07,
-                            margintop:
-                                MediaQuery.of(context).size.height * 0.01,
-                          ),
-                          CategoriesCircleAvatar(
-                            icon: Icons.electric_bike,
-                            onTap: () {
-                              print("propertea salea");
-                              Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Bikes()),
-                                );
-                              });
-                            },
-                            text: "Bikes",
-                            bgcolor: const Color.fromRGBO(255, 100, 92, 1.0),
-                            marginleft:
-                                MediaQuery.of(context).size.width * 0.07,
-                            margintop:
-                                MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          CategoriesCircleAvatar(
-                            icon: Icons.business_sharp,
-                            onTap: () {
-                              print("propertea salea");
-                              Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Business()),
-                                );
-                              });
-                            },
-                            text: "Business, \n Industrial",
-                            bgcolor: const Color.fromRGBO(255, 232, 148, 1.0),
-                            marginleft:
-                                MediaQuery.of(context).size.width * 0.07,
-                            margintop:
-                                MediaQuery.of(context).size.height * 0.01,
-                          ),
-                          CategoriesCircleAvatar(
-                              icon: Icons.room_service_sharp,
-                              onTap: () {
-                                Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Services()),
-                                );
-                              });
-                              },
-                              text: "Services",
-                              bgcolor: const Color.fromRGBO(255, 100, 92, 1.0),
-                              marginleft:
-                                  MediaQuery.of(context).size.width * 0.08,
-                              margintop:
-                                  MediaQuery.of(context).size.height * 0.02),
-                          CategoriesCircleAvatar(
-                              icon: Icons.badge,
-                              onTap: () {
-                                Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Jobs()),
-                                );
-                              });
-                              },
-                              text: "Jobs",
-                              bgcolor: const Color.fromRGBO(205, 220, 255, 1.0),
-                              marginleft:
-                                  MediaQuery.of(context).size.width * 0.08,
-                              margintop:
-                                  MediaQuery.of(context).size.height * 0.02),
-                          CategoriesCircleAvatar(
-                              icon: CommunityMaterialIcons.baby_face_outline,
-                              onTap: () {
-                                Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Animals()),
-                                );
-                              });
-                              },
-                              text: "Animals",
-                              bgcolor: const Color.fromRGBO(141, 241, 238, 1.0),
-                              marginleft:
-                                  MediaQuery.of(context).size.width * 0.08,
-                              margintop:
-                                  MediaQuery.of(context).size.height * 0.02),
-                          CategoriesCircleAvatar(
-                              icon: CommunityMaterialIcons.sofa,
-                              onTap: () {
-                                Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Furniture()),
-                                );
-                              });
-                              },
-                              text: "Furniture \n & Hom ...",
-                              bgcolor: const Color.fromRGBO(210, 185, 130, 1.0),
-                              marginleft:
-                                  MediaQuery.of(context).size.width * 0.08,
-                              margintop:
-                                  MediaQuery.of(context).size.height * 0.01),
-                          CategoriesCircleAvatar(
-                              icon: FontAwesomeIcons.shirt,
-                              onTap: () {
-                                Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Fashion()),
-                                );
-                              });
-                              },
-                              text: "Fashion & \n beauty",
-                              bgcolor: const Color.fromRGBO(35, 229, 216, 1.0),
-                              marginleft:
-                                  MediaQuery.of(context).size.width * 0.08,
-                              margintop:
-                                  MediaQuery.of(context).size.height * 0.01),
-                          CategoriesCircleAvatar(
-                              icon: CommunityMaterialIcons.guitar_acoustic,
-                              onTap: () {
-                                Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Books()),
-                                );
-                              });
-                              },
-                              text: "Books, \n Sports",
-                              bgcolor: const Color.fromRGBO(248, 221, 60, 1.0),
-                              marginleft:
-                                  MediaQuery.of(context).size.width * 0.08,
-                              margintop:
-                                  MediaQuery.of(context).size.height * 0.01),
-                          CategoriesCircleAvatar(
-                              icon: CommunityMaterialIcons.baby_bottle,
-                              onTap: () {
-                                Timer(Duration(microseconds: 1), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Kids()),
-                                );
-                              });
-                              },
-                              text: "Kids",
-                              bgcolor: const Color.fromRGBO(155, 185, 225, 1.0),
-                              marginleft:
-                                  MediaQuery.of(context).size.width * 0.08,
-                              margintop:
-                                  MediaQuery.of(context).size.height * 0.02),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.04,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          )),
-    );
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.015,
+            ),
+            SingleChildScrollView(
+              child: GridView.builder(
+                physics: const ScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: 6,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 10.4 / 10.0,
+                  crossAxisCount: 2,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Card(
+                          semanticContainer: true,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Expanded(
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(8.0),
+                                    topRight: Radius.circular(8.0),
+                                  ),
+                                  // child: Image.network(
+                                  //   'https://placeimg.com/620/480/any',
+                                  //   // width: 300,
+                                  //   height: 100,
+                                  //   width: MediaQuery.of(context).size.width * 1.0,
+                                  //   // fit:BoxFit.fill
+                                  // ),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(
+                                            "https://picsum.photos/250?image=9"),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                // )
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.only(left:10.0, top: 10.0),
+                                      child: Container(
+                                        width: 163,
+                                        // color: Colors.black,
+                                        child: Text(
+                                          "Very good condition dell 8gb ram, workstation".toCapitalized(),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                              fontSize: 15.0,
+                                              color: Color.fromRGBO(5, 51, 56, 1)),
+                                        ),
+                                      )),
+                                      Theme(
+                                       data: ThemeData(
+                                        splashColor: Colors.white,
+                                        highlightColor: Colors.white
+                                       ),
+                                        child: Align(
+                                          alignment: Alignment.topRight,
+                                          child: IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.heart, size: 15,)
+                                          ),
+                                        ))
+                                ],
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.only(left: 5.0),
+                                  child: Text(
+                                    "Rs 1000".toCapitalized(),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontSize: 15.0,
+                                        color: Color.fromRGBO(5, 51, 56, 1),
+                                        fontWeight: FontWeight.w900
+                                        ),
+                                  )),
+                            ],
+                          )));
+                },
+              ),
+            )
+          ])),
+        ));
   }
 }

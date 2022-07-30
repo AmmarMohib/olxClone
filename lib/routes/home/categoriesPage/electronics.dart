@@ -90,6 +90,7 @@ class Electronics extends StatelessWidget {
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),
+                
               ]))),
     ));
   }
