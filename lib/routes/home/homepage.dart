@@ -1,10 +1,12 @@
 // ignore_for_file: avoid_print
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:olx_clone/commons/custom_avatar.dart';
+import 'package:olx_clone/routes/addDetails/details.dart';
 import 'package:olx_clone/routes/home/categories.dart';
 import 'package:olx_clone/routes/home/categoriesPage/Animals.dart';
 import 'package:olx_clone/routes/home/categoriesPage/Bussiness.dart';
@@ -48,10 +50,31 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  List _items = [];
+  List _slidesuri = [];
   // ignore: non_constant_identifier_names
   String location_name = 'Pakistan';
+  IconData favico = Icons.favorite_border_sharp;
   @override
   Widget build(BuildContext context) {
+    abc() async {
+      // String data = await DefaultAssetBundle.of(context)
+      //     .loadString("assets/example.json");
+      // final jsonResult = jsonDecode(data); //latest Dart
+      // // var jsonValue = json.decode(jsonResult['description']);
+      // print(jsonResult[0].toString().characters.map((e) => print(e)));
+      final String response =
+          await rootBundle.loadString('assets/example.json');
+      final data = await json.decode(response);
+      setState(() {
+        _items = data["items"];
+        // _slidesuri = ;
+      });
+      print(_items[0]['id']);
+    }
+
+    // abc();
+
     print("orientation = ${MediaQuery.of(context).orientation}");
     double resWidth = MediaQuery.of(context).size.width * 0.85;
     // if (Platform.isAndroid.) {
@@ -599,100 +622,150 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.015,
             ),
-            SingleChildScrollView(
-              child: GridView.builder(
-                physics: const ScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: 6,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 10.4 / 10.0,
-                  crossAxisCount: 2,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Card(
-                          semanticContainer: true,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(8.0),
-                                    topRight: Radius.circular(8.0),
-                                  ),
-                                  // child: Image.network(
-                                  //   'https://placeimg.com/620/480/any',
-                                  //   // width: 300,
-                                  //   height: 100,
-                                  //   width: MediaQuery.of(context).size.width * 1.0,
-                                  //   // fit:BoxFit.fill
-                                  // ),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            "https://picsum.photos/250?image=9"),
-                                      ),
+            InkWell(
+              child: SingleChildScrollView(
+                child: _items.isNotEmpty
+                    ? GridView.builder(
+                        physics: const ScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: _items.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: 10.4 / 10.0,
+                          crossAxisCount: 2,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AddDetails(
+                                                des: _items[index]
+                                                    ['description'],
+                                                imageUrl: _items[index]
+                                                    ['image'],
+                                                price: _items[index]['price'],
+                                                slides: [
+                                                  _items[index]['im1'],
+                                                  _items[index]['im2'],
+                                                  _items[index]['im3'],
+                                                  _items[index]['im4'],
+                                                ],
+                                              )));
+                                },
+                                child: Card(
+                                    semanticContainer: true,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
                                     ),
-                                  ),
-                                ),
-                                // )
-                              ),
-                              Row(
-                                children: [
-                                  Padding(
-                                      padding: const EdgeInsets.only(left:10.0, top: 10.0),
-                                      child: Container(
-                                        width: 163,
-                                        // color: Colors.black,
-                                        child: Text(
-                                          "Very good condition dell 8gb ram, workstation".toCapitalized(),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                              fontSize: 15.0,
-                                              color: Color.fromRGBO(5, 51, 56, 1)),
-                                        ),
-                                      )),
-                                      Theme(
-                                       data: ThemeData(
-                                        splashColor: Colors.white,
-                                        highlightColor: Colors.white
-                                       ),
-                                        child: Align(
-                                          alignment: Alignment.topRight,
-                                          child: IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.heart, size: 15,)
+                                    clipBehavior: Clip.antiAlias,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(8.0),
+                                              topRight: Radius.circular(8.0),
+                                            ),
+                                            // child: Image.network(
+                                            //   'https://placeimg.com/620/480/any',
+                                            //   // width: 300,
+                                            //   height: 100,
+                                            //   width: MediaQuery.of(context).size.width * 1.0,
+                                            //   // fit:BoxFit.fill
+                                            // ),
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 150,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  fit: BoxFit.fill,
+                                                  image: AssetImage(
+                                                      _items[index]['image']),
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                        ))
-                                ],
-                              ),
-                              Padding(
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                  child: Text(
-                                    "Rs 1000".toCapitalized(),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        fontSize: 15.0,
-                                        color: Color.fromRGBO(5, 51, 56, 1),
-                                        fontWeight: FontWeight.w900
+                                          // )
                                         ),
-                                  )),
-                            ],
-                          )));
-                },
+                                        Row(
+                                          children: [
+                                            Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10.0, top: 10.0),
+                                                child: Container(
+                                                  width: 163,
+                                                  // color: Colors.black,
+                                                  child: Text(
+                                                    // "Very good condition dell 8gb ram, workstation"
+                                                    _items[index]
+                                                        ['description'],
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: const TextStyle(
+                                                        fontSize: 15.0,
+                                                        color: Color.fromRGBO(
+                                                            5, 51, 56, 1)),
+                                                  ),
+                                                )),
+                                            Theme(
+                                                data: ThemeData(
+                                                    splashColor: Colors.white,
+                                                    highlightColor:
+                                                        Colors.white),
+                                                child: Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: IconButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          favico =
+                                                              Icons.favorite;
+                                                        });
+                                                      },
+                                                      icon: Icon(
+                                                        favico,
+                                                        size: 15,
+                                                      )),
+                                                ))
+                                          ],
+                                        ),
+                                        Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0,
+                                                top: 8.0,
+                                                bottom: 8.0),
+                                            child: Text(
+                                              "Rs: ${_items[index]['price']}",
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                  fontSize: 15.0,
+                                                  color: Color.fromRGBO(
+                                                      5, 51, 56, 1),
+                                                  fontWeight: FontWeight.w900),
+                                            )),
+                                      ],
+                                    )),
+                              ));
+                        },
+                      )
+                    : null,
               ),
-            )
+            ),
+            ElevatedButton(
+              child: const Text('Load Data'),
+              onPressed: abc,
+            ),
           ])),
         ));
   }

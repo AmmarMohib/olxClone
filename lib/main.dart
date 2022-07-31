@@ -19,12 +19,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // builder: (context, child) {
+      //   return ScrollConfiguration(
+      //     behavior: MyBehavior(),
+      //     child: child,
+      //   );
+      // },
       debugShowCheckedModeBanner: false,
       title: 'Olx clone',
       theme: ThemeData(
+        primaryColor: Colors.white,
+        // shadowColor: Colors.white,
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue,
-        ),
+            // primarySwatch: Colors.white,
+            ),
       ),
       // ThemeData(
       //   primaryColor: Colors.white,
@@ -32,7 +40,7 @@ class MyApp extends StatelessWidget {
       //     headline1: (TextStyle(backgroundColor: Colors.green))
       //   ),
       // ),
-      home: const LoginPage(),
+      home: (const LoginPage()),
     );
   }
 }
