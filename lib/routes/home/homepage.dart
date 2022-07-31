@@ -654,7 +654,7 @@ class _HomePageState extends State<HomePage> {
                                                   _items[index]['im2'],
                                                   _items[index]['im3'],
                                                   _items[index]['im4'],
-                                                ],
+                                                ], title: _items[index]['title'],
                                               )));
                                 },
                                 child: Card(
@@ -708,7 +708,7 @@ class _HomePageState extends State<HomePage> {
                                                   child: Text(
                                                     // "Very good condition dell 8gb ram, workstation"
                                                     _items[index]
-                                                        ['description'],
+                                                        ['title'],
                                                     maxLines: 2,
                                                     overflow:
                                                         TextOverflow.ellipsis,

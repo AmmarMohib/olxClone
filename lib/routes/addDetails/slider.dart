@@ -29,32 +29,8 @@ class Slideshow extends StatelessWidget {
                 },
                 iconSize: 30,
               ),
-              // title: Align(
-              //     alignment: Alignment.centerRight,
-              //     child
-              //     )
               ),
       ),
-      // body: Column(children: [
-      //   // Image(image: AssetImage(widget.imageUrl))
-      //   CarouselSlider(
-      //     options: CarouselOptions(
-      //       autoPlay: false,
-      //     ),
-      //     items: widget.slides
-      //         .map(
-      //           (items) => Center(
-      //             child: Image.asset(
-      //               items,
-      //               // fit: BoxFit.fill,
-      //               fit: BoxFit.cover, width: 1000.0,
-      //             ),
-      //           ),
-      //         )
-      //         .toList(),
-      //   ),
-      // ]),
-      // ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         color: Color.fromRGBO(0, 14, 24, 1.0),
