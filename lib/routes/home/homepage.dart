@@ -50,13 +50,29 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  PageController _myPage = PageController(initialPage: 0);
   List _items = [];
   List _slidesuri = [];
+  int _currentIndex = 0;
   // ignore: non_constant_identifier_names
   String location_name = 'Pakistan';
   IconData favico = Icons.favorite_border_sharp;
   @override
   Widget build(BuildContext context) {
+    if (_myPage.positions.length > 0 && _myPage.position.extentAfter == 0.0) {
+    } else if (_myPage.positions.length > 0 &&
+        _myPage.position.extentAfter == 0.0) {
+      _myPage.animateTo(_myPage.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+    }
+    // if (_myPage.hasClients) {
+    //   _myPage.animateTo(_myPage.position.maxScrollExtent,
+    //     duration: const Duration(milliseconds: 500),
+    //     curve: Curves.easeInOut);
+    // }
+
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     abc() async {
       // String data = await DefaultAssetBundle.of(context)
       //     .loadString("assets/example.json");
@@ -89,6 +105,7 @@ class _HomePageState extends State<HomePage> {
     } else if (MediaQuery.of(context).orientation == Orientation.landscape) {
       resWidth = MediaQuery.of(context).size.width * 0.92;
     }
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -111,9 +128,9 @@ class _HomePageState extends State<HomePage> {
                             // fit: BoxFit.fitWidth,
                             width: 33,
                           ),
-                          const SizedBox(
-                            width: 74,
-                          ),
+                          // const SizedBox(
+                          //   width: 74,
+                          // ),
                           Align(
                             // alignment: Alignment.center,
                             alignment: Alignment.center,
@@ -293,6 +310,114 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
+              ),
+            ),
+          ),
+
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              new Material(
+  type: MaterialType.transparency, //Makes it usable on any background color, thanks @IanSmith
+  child: Ink(
+    decoration: BoxDecoration(
+          // gradient: SweepGradient(
+          //       colors: [
+          //         Colors.black,
+          //         Colors.yellow,
+          //         Colors.orange,
+          //         Colors.redAccent
+          //       ],
+          //       tileMode: TileMode.mirror,
+          //     ),
+            // borderRadius: const BorderRadius.all(Radius.circular(20)),
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.green.shade800,
+                    Colors.yellow.shade600,
+                  ]),
+      // border: Border.all(color: Colors.indigoAccent, width: 4.0),
+      color: Colors.white,
+      shape: BoxShape.circle,
+    ),
+    child: InkWell(
+      //This keeps the splash effect within the circle
+      borderRadius: BorderRadius.circular(1000.0), //Something large to ensure a circle
+      // onTap: _messages,
+      child: Padding(
+        padding:EdgeInsets.all(10.0),
+        child: Icon(
+              Icons.add,
+              size: 30.0,
+              color: Color.fromRGBO(5, 51, 56, 1),
+        ),
+      ),
+    ),
+  )
+),
+// Text("data")
+            ],
+          ),
+          bottomNavigationBar: BottomAppBar(
+            shape: CircularNotchedRectangle(),
+            child: Container(
+              height: 75,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+
+                    children: [
+                      IconButton(
+                        iconSize: 30.0,
+                        padding: EdgeInsets.only(left: 28.0),
+                        icon: Icon(Icons.home),
+                        onPressed: () {
+                          // setState(() {
+                          //   _myPage.jumpToPage(0);
+                          // });
+                        },
+                      ),
+                      Text("data")
+                    ],
+                  ),
+                  IconButton(
+                    iconSize: 30.0,
+                    padding: EdgeInsets.only(right: 28.0),
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      // setState(() {
+                      //   _myPage.jumpToPage(1);
+                      // });
+                    },
+                  ),
+                  Text("sell", style: TextStyle(fontSize: 17),),
+                  IconButton(
+                    iconSize: 30.0,
+                    padding: EdgeInsets.only(left: 28.0),
+                    icon: Icon(Icons.notifications),
+                    onPressed: () {
+                      // setState(() {
+                      //   _myPage.jumpToPage(2);
+                      // });
+                    },
+                  ),
+                  IconButton(
+                    iconSize: 30.0,
+                    padding: EdgeInsets.only(right: 28.0),
+                    icon: Icon(Icons.list),
+                    onPressed: () {
+                      // setState(() {
+                      //   _myPage.jumpToPage(3);
+                      // });
+                    },
+                  )
+                ],
               ),
             ),
           ),
@@ -654,7 +779,8 @@ class _HomePageState extends State<HomePage> {
                                                   _items[index]['im2'],
                                                   _items[index]['im3'],
                                                   _items[index]['im4'],
-                                                ], title: _items[index]['title'],
+                                                ],
+                                                title: _items[index]['title'],
                                               )));
                                 },
                                 child: Card(
@@ -707,8 +833,7 @@ class _HomePageState extends State<HomePage> {
                                                   // color: Colors.black,
                                                   child: Text(
                                                     // "Very good condition dell 8gb ram, workstation"
-                                                    _items[index]
-                                                        ['title'],
+                                                    _items[index]['title'],
                                                     maxLines: 2,
                                                     overflow:
                                                         TextOverflow.ellipsis,
@@ -767,6 +892,55 @@ class _HomePageState extends State<HomePage> {
               onPressed: abc,
             ),
           ])),
+          // bottomNavigationBar: BottomNavigationBar(
+          //   type: BottomNavigationBarType.fixed,
+          //   currentIndex: _currentIndex,
+          //   backgroundColor: colorScheme.surface,
+          //   selectedItemColor: colorScheme.onSurface,
+          //   unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
+          //   selectedLabelStyle: textTheme.caption,
+          //   unselectedLabelStyle: textTheme.caption,
+          //   onTap: (value) {
+          //     // Respond to item press.
+          //     setState(() => _currentIndex = value);
+          //   },
+          // items: [
+          //   BottomNavigationBarItem(
+          //     label: 'HOME',
+          //     icon: Icon(Icons.home),
+          //   ),
+          //   BottomNavigationBarItem(
+          //     label: 'CHATS',
+          //     icon: Icon(Icons.chat),
+          //   ),
+          //   BottomNavigationBarItem(
+          //     label: 'MY ADS',
+          //     icon: Icon(Icons.favorite_border),
+          //   ),
+          //   BottomNavigationBarItem(
+          //     label: 'ACCOUNT',
+          //     icon: Icon(Icons.supervised_user_circle),
+          //   ),
+          //   // BottomNavigationBarItem(
+          //   //   label: 'ACCOUNT',
+          //   //   icon: Icon(Icons.supervised_user_circle),
+          //   // ),
+          // ],
+          // ),
+          //      bottomNavigationBar: BottomAppBar(
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: <Widget>[
+          //       Expanded(child: IconButton(icon: Icon(Icons.home), onPressed: () {  },),),
+          //       Expanded(child: IconButton(icon: Icon(Icons.show_chart), onPressed: () {  },),),
+          //       // Expanded(child: const Text('')),
+          //       Expanded(child: IconButton(icon: Icon(Icons.tab), onPressed: () {  },),),
+          //       Expanded(child: IconButton(icon: Icon(Icons.settings), onPressed: () {  },),),
+          //     ],
+          //   ),
+          // ),
+          // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          // floatingActionButton: FloatingActionButton(onPressed: (){}),
         ));
   }
 }

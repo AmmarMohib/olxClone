@@ -42,6 +42,7 @@ dependencies:
   community_material_icon: ^5.9.55
   font_awesome_flutter: ^10.1.0
   carousel_slider: ^4.1.1
+  flutter_bloc: ^8.0.1
 
 dev_dependencies:
   flutter_test:
