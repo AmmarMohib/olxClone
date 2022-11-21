@@ -1,8 +1,10 @@
 // ignore_for_file: file_names
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:olx_clone/commons/custom_button.dart';
 import 'package:olx_clone/routes/home/homepage.dart';
 import 'package:olx_clone/routes/login/terms_and_conditions.dart';
+import 'package:olx_clone/services/login/google.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/auth-page';
@@ -13,8 +15,23 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  check(context) {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      Future.delayed(Duration.zero, () {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    check(context);
+    // else {
+    //   Navigator.pushReplacement(
+    //       context, MaterialPageRoute(builder: (context) => LoginPage()));
+    // }
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -73,7 +90,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SignUpButton(
                         imageUrl: 'assets/images/google.png',
-                        onTap: () {},
+                        onTap: () {
+                          signIn(context);
+                        },
                         text: "Continue with google"),
                     Container(
                       height: 7,
@@ -93,6 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 7,
                     ),
                     SignUpButton(
+                      
                         imageUrl: 'assets/images/phone_logo.png',
                         onTap: () {
                           // print('hello');
@@ -101,7 +121,10 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 230,
                     ),
-                    const Text("If you continue, you are accepting", style: TextStyle(color: Color.fromRGBO(5, 51, 56, 1)),),
+                    const Text(
+                      "If you continue, you are accepting",
+                      style: TextStyle(color: Color.fromRGBO(5, 51, 56, 1)),
+                    ),
                     GestureDetector(
                       child: const Text("OLX Terms and Conditions",
                           style: TextStyle(

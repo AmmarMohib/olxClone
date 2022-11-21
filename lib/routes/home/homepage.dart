@@ -1,11 +1,13 @@
 // ignore_for_file: avoid_print
 import 'dart:async';
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:olx_clone/commons/custom_avatar.dart';
+import 'package:olx_clone/routes/account/account.dart';
 import 'package:olx_clone/routes/addDetails/details.dart';
 import 'package:olx_clone/routes/home/categories.dart';
 import 'package:olx_clone/routes/home/categoriesPage/Animals.dart';
@@ -27,6 +29,7 @@ import 'package:olx_clone/routes/home/location_selector.dart';
 import 'package:olx_clone/routes/login/loginPage.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 extension StringCasingExtension on String {
   String toCapitalized() =>
@@ -93,6 +96,18 @@ class _HomePageState extends State<HomePage> {
 
     print("orientation = ${MediaQuery.of(context).orientation}");
     double resWidth = MediaQuery.of(context).size.width * 0.85;
+    final double fillPercent = 56.23; // fills 56.23% for container from bottom
+    final double fillStop = (100 - fillPercent) / 100;
+    final List<double> stops = [0.0, fillStop, fillStop, 1.0];
+    final Color background = Colors.grey;
+    final Color fill = Colors.redAccent;
+    final List<Color> gradient = [
+      background,
+      background,
+      fill,
+      fill,
+    ];
+
     // if (Platform.isAndroid.) {
     //   resWidth = MediaQuery.of(context);
     // }
@@ -316,51 +331,82 @@ class _HomePageState extends State<HomePage> {
 
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              new Material(
-  type: MaterialType.transparency, //Makes it usable on any background color, thanks @IanSmith
-  child: Ink(
-    decoration: BoxDecoration(
-          // gradient: SweepGradient(
-          //       colors: [
-          //         Colors.black,
-          //         Colors.yellow,
-          //         Colors.orange,
-          //         Colors.redAccent
-          //       ],
-          //       tileMode: TileMode.mirror,
-          //     ),
-            // borderRadius: const BorderRadius.all(Radius.circular(20)),
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Colors.green.shade800,
-                    Colors.yellow.shade600,
-                  ]),
-      // border: Border.all(color: Colors.indigoAccent, width: 4.0),
-      color: Colors.white,
-      shape: BoxShape.circle,
-    ),
-    child: InkWell(
-      //This keeps the splash effect within the circle
-      borderRadius: BorderRadius.circular(1000.0), //Something large to ensure a circle
-      // onTap: _messages,
-      child: Padding(
-        padding:EdgeInsets.all(10.0),
-        child: Icon(
-              Icons.add,
-              size: 30.0,
-              color: Color.fromRGBO(5, 51, 56, 1),
-        ),
-      ),
-    ),
-  )
-),
-// Text("data")
-            ],
+          floatingActionButton:
+// Row(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               // ignore: unnecessary_new
+//               new Material(
+//                   type: MaterialType.transparency,
+//                   child: Ink(
+//                     decoration: BoxDecoration(
+//                       // gradient: SweepGradient(
+//                       //       colors: [
+//                       //         Colors.black,
+//                       //         Colors.yellow,
+//                       //         Colors.orange,
+//                       //         Colors.redAccent
+//                       //       ],
+//                       //       tileMode: TileMode.mirror,
+//                       //     ),
+//                       // borderRadius: const BorderRadius.all(Radius.circular(20)),
+//                       gradient: LinearGradient(
+//                         colors: gradient,
+//                         stops: stops,
+//                         end: Alignment.bottomCenter,
+//                         begin: Alignment.topCenter,
+//                       ),
+//                       // border: Border.all(color: Color.lerp(Colors.white, Colors.black, 0.5)),
+//                       color: Colors.white,
+//                       shape: BoxShape.circle,
+//                     ),
+//                     child: InkWell(
+//                       //This keeps the splash effect within the circle
+//                       borderRadius: BorderRadius.circular(
+//                           1000.0), //Something large to ensure a circle
+//                       // onTap: _messages,
+//                       child: Padding(
+//                         padding: EdgeInsets.all(10.0),
+//                         child: Icon(
+//                           Icons.add,
+//                           size: 30.0,
+//                           color: Color.fromRGBO(5, 51, 56, 1),
+//                         ),
+//                       ),
+//                     ),
+//                   )),
+// // Text("data")
+//             ],
+//           ),
+              OutlineGradientButton(
+                backgroundColor: Colors.white,
+            child: SizedBox(
+              width: 52,
+              height: 52,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.add,
+                    size: 30.0, 
+                    color: Color.fromRGBO(5, 51, 56, 1),
+                  ),
+                ],
+              ),
+            ),
+            gradient: LinearGradient(
+              stops: [0, 0.5, 0.5, 1],
+              colors: [
+                Color.fromRGBO(34, 229, 219, 1.0),
+                Color.fromRGBO(57, 118, 255, 1.0),
+                Color.fromRGBO(255, 206, 50, 1.0),
+                Color.fromRGBO(255, 206, 50, 1.0)
+              ],
+            ),
+            strokeWidth: 4,
+            padding: EdgeInsets.zero,
+            radius: Radius.circular(26),
           ),
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),
@@ -371,52 +417,116 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Column(
-
                     children: [
                       IconButton(
                         iconSize: 30.0,
                         padding: EdgeInsets.only(left: 28.0),
-                        icon: Icon(Icons.home),
+                        icon: Icon(
+                          Icons.home,
+                          color: Color.fromRGBO(0, 47, 52, 1.0),
+                        ),
                         onPressed: () {
                           // setState(() {
                           //   _myPage.jumpToPage(0);
                           // });
                         },
                       ),
-                      Text("data")
+                      Padding(
+                          padding: const EdgeInsets.only(left: 27.0),
+                          child: Text(
+                            "Home".toUpperCase(),
+                            style: TextStyle(
+                                color: Color.fromRGBO(0, 47, 52, 1.0),
+                                fontWeight: FontWeight.w600),
+                          ))
                     ],
                   ),
-                  IconButton(
-                    iconSize: 30.0,
-                    padding: EdgeInsets.only(right: 28.0),
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                      // setState(() {
-                      //   _myPage.jumpToPage(1);
-                      // });
-                    },
+                  Column(
+                    children: [
+                      IconButton(
+                        iconSize: 30.0,
+                        padding: EdgeInsets.only(left: 0.0),
+                        icon: Icon(
+                          Icons.chat_sharp,
+                          color: Color.fromRGBO(0, 47, 52, 1.0),
+                        ),
+                        onPressed: () {
+                          // setState(() {
+                          //   _myPage.jumpToPage(0);
+                          // });
+                        },
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 0.0, right: 0),
+                          child: Text(
+                            "Chats".toUpperCase(),
+                            style: TextStyle(
+                                color: Color.fromRGBO(0, 47, 52, 1.0),
+                                fontWeight: FontWeight.w600),
+                          ))
+                    ],
                   ),
-                  Text("sell", style: TextStyle(fontSize: 17),),
-                  IconButton(
-                    iconSize: 30.0,
-                    padding: EdgeInsets.only(left: 28.0),
-                    icon: Icon(Icons.notifications),
-                    onPressed: () {
-                      // setState(() {
-                      //   _myPage.jumpToPage(2);
-                      // });
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30, left: 15),
+                    child: Text("sell",
+                        style: TextStyle(
+                            color: Color.fromRGBO(0, 47, 52, 1.0),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20)),
                   ),
-                  IconButton(
-                    iconSize: 30.0,
-                    padding: EdgeInsets.only(right: 28.0),
-                    icon: Icon(Icons.list),
-                    onPressed: () {
-                      // setState(() {
-                      //   _myPage.jumpToPage(3);
-                      // });
-                    },
-                  )
+                  Column(
+                    children: [
+                      IconButton(
+                        iconSize: 30.0,
+                        padding: EdgeInsets.only(left: 0.0),
+                        icon: Icon(
+                          Icons.favorite_outline,
+                          color: Color.fromRGBO(0, 47, 52, 1.0),
+                        ),
+                        onPressed: () {
+                          // setState(() {
+                          //   _myPage.jumpToPage(0);
+                          // });
+                        },
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 0.0),
+                          child: Text(
+                            "My Ads".toUpperCase(),
+                            style: TextStyle(
+                                color: Color.fromRGBO(0, 47, 52, 1.0),
+                                fontWeight: FontWeight.w600),
+                          ))
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      IconButton(
+                        iconSize: 30.0,
+                        padding: EdgeInsets.only(left: 0.0, right: 20),
+                        icon: Icon(
+                          Icons.account_circle,
+                          color: Color.fromRGBO(0, 47, 52, 1.0),
+                        ),
+                        onPressed: () {
+                          
+                          // setState(() {
+                          //   _myPage.jumpToPage(0);
+                          // });
+                           Navigator.push(
+            context, MaterialPageRoute(builder: (context) => AccountPage()));
+                        },
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 0.0, right: 20),
+                          child: Text(
+                            "Account".toUpperCase(),
+                            style: TextStyle(
+                                color: Color.fromRGBO(0, 47, 52, 1.0),
+                                fontWeight: FontWeight.w600),
+                          ))
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -891,6 +1001,7 @@ class _HomePageState extends State<HomePage> {
               child: const Text('Load Data'),
               onPressed: abc,
             ),
+            // Text(FirebaseAuth.instance.currentUser!.photoURL.toString())
           ])),
           // bottomNavigationBar: BottomNavigationBar(
           //   type: BottomNavigationBarType.fixed,
