@@ -1,11 +1,13 @@
 // ignore_for_file: avoid_print
 import 'dart:async';
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:olx_clone/commons/actionbutton.dart';
+import 'package:olx_clone/commons/bottomnavbar.dart';
 import 'package:olx_clone/commons/custom_avatar.dart';
 import 'package:olx_clone/routes/account/account.dart';
 import 'package:olx_clone/routes/addDetails/details.dart';
@@ -30,6 +32,7 @@ import 'package:olx_clone/routes/login/loginPage.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
+
 
 extension StringCasingExtension on String {
   String toCapitalized() =>
@@ -175,6 +178,8 @@ class _HomePageState extends State<HomePage> {
                                               fontWeight: FontWeight.w400)))
                                 ],
                               ),
+
+
                             ),
                           ),
                           const SizedBox(
@@ -332,205 +337,9 @@ class _HomePageState extends State<HomePage> {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton:
-// Row(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               // ignore: unnecessary_new
-//               new Material(
-//                   type: MaterialType.transparency,
-//                   child: Ink(
-//                     decoration: BoxDecoration(
-//                       // gradient: SweepGradient(
-//                       //       colors: [
-//                       //         Colors.black,
-//                       //         Colors.yellow,
-//                       //         Colors.orange,
-//                       //         Colors.redAccent
-//                       //       ],
-//                       //       tileMode: TileMode.mirror,
-//                       //     ),
-//                       // borderRadius: const BorderRadius.all(Radius.circular(20)),
-//                       gradient: LinearGradient(
-//                         colors: gradient,
-//                         stops: stops,
-//                         end: Alignment.bottomCenter,
-//                         begin: Alignment.topCenter,
-//                       ),
-//                       // border: Border.all(color: Color.lerp(Colors.white, Colors.black, 0.5)),
-//                       color: Colors.white,
-//                       shape: BoxShape.circle,
-//                     ),
-//                     child: InkWell(
-//                       //This keeps the splash effect within the circle
-//                       borderRadius: BorderRadius.circular(
-//                           1000.0), //Something large to ensure a circle
-//                       // onTap: _messages,
-//                       child: Padding(
-//                         padding: EdgeInsets.all(10.0),
-//                         child: Icon(
-//                           Icons.add,
-//                           size: 30.0,
-//                           color: Color.fromRGBO(5, 51, 56, 1),
-//                         ),
-//                       ),
-//                     ),
-//                   )),
-// // Text("data")
-//             ],
-//           ),
-              OutlineGradientButton(
-                backgroundColor: Colors.white,
-            child: SizedBox(
-              width: 52,
-              height: 52,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.add,
-                    size: 30.0, 
-                    color: Color.fromRGBO(5, 51, 56, 1),
-                  ),
-                ],
-              ),
-            ),
-            gradient: LinearGradient(
-              stops: [0, 0.5, 0.5, 1],
-              colors: [
-                Color.fromRGBO(34, 229, 219, 1.0),
-                Color.fromRGBO(57, 118, 255, 1.0),
-                Color.fromRGBO(255, 206, 50, 1.0),
-                Color.fromRGBO(255, 206, 50, 1.0)
-              ],
-            ),
-            strokeWidth: 4,
-            padding: EdgeInsets.zero,
-            radius: Radius.circular(26),
-          ),
-          bottomNavigationBar: BottomAppBar(
-            shape: CircularNotchedRectangle(),
-            child: Container(
-              height: 75,
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    children: [
-                      IconButton(
-                        iconSize: 30.0,
-                        padding: EdgeInsets.only(left: 28.0),
-                        icon: Icon(
-                          Icons.home,
-                          color: Color.fromRGBO(0, 47, 52, 1.0),
-                        ),
-                        onPressed: () {
-                          // setState(() {
-                          //   _myPage.jumpToPage(0);
-                          // });
-                        },
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.only(left: 27.0),
-                          child: Text(
-                            "Home".toUpperCase(),
-                            style: TextStyle(
-                                color: Color.fromRGBO(0, 47, 52, 1.0),
-                                fontWeight: FontWeight.w600),
-                          ))
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      IconButton(
-                        iconSize: 30.0,
-                        padding: EdgeInsets.only(left: 0.0),
-                        icon: Icon(
-                          Icons.chat_sharp,
-                          color: Color.fromRGBO(0, 47, 52, 1.0),
-                        ),
-                        onPressed: () {
-                          // setState(() {
-                          //   _myPage.jumpToPage(0);
-                          // });
-                        },
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.only(left: 0.0, right: 0),
-                          child: Text(
-                            "Chats".toUpperCase(),
-                            style: TextStyle(
-                                color: Color.fromRGBO(0, 47, 52, 1.0),
-                                fontWeight: FontWeight.w600),
-                          ))
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30, left: 15),
-                    child: Text("sell",
-                        style: TextStyle(
-                            color: Color.fromRGBO(0, 47, 52, 1.0),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20)),
-                  ),
-                  Column(
-                    children: [
-                      IconButton(
-                        iconSize: 30.0,
-                        padding: EdgeInsets.only(left: 0.0),
-                        icon: Icon(
-                          Icons.favorite_outline,
-                          color: Color.fromRGBO(0, 47, 52, 1.0),
-                        ),
-                        onPressed: () {
-                          // setState(() {
-                          //   _myPage.jumpToPage(0);
-                          // });
-                        },
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.only(left: 0.0),
-                          child: Text(
-                            "My Ads".toUpperCase(),
-                            style: TextStyle(
-                                color: Color.fromRGBO(0, 47, 52, 1.0),
-                                fontWeight: FontWeight.w600),
-                          ))
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      IconButton(
-                        iconSize: 30.0,
-                        padding: EdgeInsets.only(left: 0.0, right: 20),
-                        icon: Icon(
-                          Icons.account_circle,
-                          color: Color.fromRGBO(0, 47, 52, 1.0),
-                        ),
-                        onPressed: () {
-                          
-                          // setState(() {
-                          //   _myPage.jumpToPage(0);
-                          // });
-                           Navigator.push(
-            context, MaterialPageRoute(builder: (context) => AccountPage()));
-                        },
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.only(left: 0.0, right: 20),
-                          child: Text(
-                            "Account".toUpperCase(),
-                            style: TextStyle(
-                                color: Color.fromRGBO(0, 47, 52, 1.0),
-                                fontWeight: FontWeight.w600),
-                          ))
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+
+          FloatingActionBtn(),
+          bottomNavigationBar: BottomNavigation(),
           body: SingleChildScrollView(
               child: Column(children: [
             SizedBox(
