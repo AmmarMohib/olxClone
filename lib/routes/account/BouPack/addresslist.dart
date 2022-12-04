@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:olx_clone/routes/account/BouPack/addressinfo.dart';
 
-class AdressInfo extends StatefulWidget {
-  const AdressInfo({super.key});
+class AdressList extends StatefulWidget {
+  const AdressList({super.key});
 
   @override
-  State<AdressInfo> createState() => _AdressInfoState();
+  State<AdressList> createState() => _AdressListState();
 }
 
-class _AdressInfoState extends State<AdressInfo> {
+class _AdressListState extends State<AdressList> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,9 +29,17 @@ class _AdressInfoState extends State<AdressInfo> {
               fontWeight: FontWeight.bold),
         ),
         actions: [
-          Icon(
-            Icons.add,
-            color: Color.fromRGBO(12, 56, 61, 1.0),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AddressInfo()));
+            },
+            icon: Icon(
+              Icons.add,
+              color: Color.fromRGBO(12, 56, 61, 1.0),
+            ),
           )
         ],
         elevation: 0,
@@ -45,7 +54,7 @@ class _AdressInfoState extends State<AdressInfo> {
           ),
           SizedBox(height: 10,),
           Center(
-            child: Text("You have no adress yet", style: TextStyle(color: Color.fromRGBO(12, 56, 61, 1.0), fontWeight: FontWeight.bold),),
+            child: Text("You have no address yet", style: TextStyle(color: Color.fromRGBO(12, 56, 61, 1.0), fontWeight: FontWeight.bold),),
           )
         ],
       ),

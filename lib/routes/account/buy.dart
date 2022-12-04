@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:olx_clone/commons/account_rows.dart';
 import 'package:olx_clone/routes/account/BouPack/buypack.dart';
-import 'package:olx_clone/routes/account/BouPack/adressinfo.dart';
+import 'package:olx_clone/routes/account/BouPack/addresslist.dart';
 import 'package:olx_clone/routes/account/BouPack/billinfo.dart';
 import 'package:olx_clone/routes/account/BouPack/delivord.dart';
 import 'package:olx_clone/routes/account/BouPack/myorders.dart';
@@ -67,7 +67,7 @@ class _BuyState extends State<Buy> {
                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => AdressInfo()));
+                                        builder: (context) => AdressList()));
               },
               heading: "Adress Information",
               sub_heading: "Edit your Adress Information"),

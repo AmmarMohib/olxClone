@@ -231,31 +231,7 @@ class _BillingInfoState extends State<BillingInfo> {
                             color: Color.fromRGBO(12, 56, 61, 1.0), fontSize: 18, fontWeight: FontWeight.w800),
                       ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 15, top: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Address Line*",
-                      style: TextStyle(
-                          color: Color.fromRGBO(12, 56, 61, 1.0), fontSize: 12),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.94,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Enter address',
-                            hintText: 'Enter your address'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              
               Padding(
                 padding: EdgeInsets.only(left: 15, top: 20),
                 child: Column(

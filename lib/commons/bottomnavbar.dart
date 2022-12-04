@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:olx_clone/routes/My%20Ads/myads.dart';
 import 'package:olx_clone/routes/account/account.dart';
+import 'package:olx_clone/routes/chats/chats.dart';
 import 'package:olx_clone/routes/home/filters.dart';
 import 'package:olx_clone/routes/home/homepage.dart';
 import 'package:olx_clone/routes/home/location_selector.dart';
@@ -65,6 +67,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
                           color: Color.fromRGBO(0, 47, 52, 1.0),
                         ),
                         onPressed: () {
+                                                     Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Chats()));
                           // setState(() {
                           //   _myPage.jumpToPage(0);
                           // });
@@ -101,6 +105,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
                           // setState(() {
                           //   _myPage.jumpToPage(0);
                           // });
+                           Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MyAds()));
                         },
                       ),
                       Padding(

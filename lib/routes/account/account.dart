@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:olx_clone/commons/actionbutton.dart';
 import 'package:olx_clone/commons/bottomnavbar.dart';
 import 'package:olx_clone/routes/account/buy.dart';
+import 'package:olx_clone/routes/account/settings.dart';
 import 'package:olx_clone/routes/login/loginPage.dart';
 
 class AccountPage extends StatefulWidget {
@@ -179,7 +180,12 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       Divider(height: 3),
                       InkWell(
-                        onTap: (() {}),
+                        onTap: (() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Settings()));
+                        }),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
