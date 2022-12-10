@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 
 class CataTxt extends StatelessWidget {
   const CataTxt(
-      {Key? key, required this.txt, required this.func, required this.showico, required this.color})
+      {Key? key,
+      required this.txt,
+      required this.func,
+      required this.showico,
+      required this.color, this.category,})
       : super(key: key);
   final String txt;
   final VoidCallback func;
   final bool showico;
   final Color color;
+  final category;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,12 @@ class CataTxt extends StatelessWidget {
         color: Colors.white,
         child: InkWell(
           onTap: () {
-            func();
+            if (showico == true) {
+              func();
+            }
+            else {
+              // Navigator.of(context).push(MaterialPageRoute(builder: (context) => ));
+            }
           },
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
