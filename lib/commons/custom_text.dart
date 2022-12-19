@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:olx_clone/routes/sell/details.dart';
 
 class CataTxt extends StatelessWidget {
-  const CataTxt(
-      {Key? key,
-      required this.txt,
-      required this.func,
-      required this.showico,
-      required this.color, this.category,})
-      : super(key: key);
+  const CataTxt({
+    Key? key,
+    required this.txt,
+    required this.func,
+    required this.showico,
+    required this.color,
+    this.category,
+  }) : super(key: key);
   final String txt;
   final VoidCallback func;
   final bool showico;
@@ -25,9 +27,11 @@ class CataTxt extends StatelessWidget {
           onTap: () {
             if (showico == true) {
               func();
-            }
-            else {
-              // Navigator.of(context).push(MaterialPageRoute(builder: (context) => ));
+            } else {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => IncludeDetails(
+                        category: this.category,
+                      )));
             }
           },
           child: SizedBox(
