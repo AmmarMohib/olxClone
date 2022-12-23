@@ -1,0 +1,64 @@
+{
+    "items": [
+        {
+            "title" : "The ferrari car made in America us united states of America, Ireland",
+            "description": "This is the ferrari Car for sale, with airbags imported from America, and made in Ireland, and used in japan, Africa and balochistan, also support radio and all",
+            "image": "assets/images/ferrari_car.jpg",
+            "price": "$100, 000",
+            "im1": "assets/images/ferrari_car.jpg",
+            "im2": "assets/images/ferrari_car2.jpg",
+            "im3": "assets/images/ferrari_car3.jpg",
+            "im4": "assets/images/ferrari_car4.jpg"
+        },
+        {
+            "title": "THe ferrerai car used in anatolia, turkey",
+            "description": "This is the City Car for sale, with soundsystem imported from Japan, and used in konea, turkey, england, Ireland, switzerland and made by xyz company",
+            "image": "assets/images/city_car.jpg",
+            "price": "$50, 000",
+            "im1": "assets/images/city_car.jpg",
+            "im2": "assets/images/city_car2.jpg",
+            "im3": "assets/images/city_car3.jpg",
+            "im4": "assets/images/city_car4.jpg"
+        },
+        {
+            "title": "The car made in Pakistan Pakistan Zindabad,",
+            "description": "This is the lambourghini Car for sale, with lush imported from Japan, the  car have very good and neat powers and it have supper powers of flying and is based on uk flalf",
+            "image": "assets/images/lambourghini_car.jpg",
+            "price": "$150, 000",
+            "im1": "assets/images/lambourghini_car.jpg",
+            "im2": "assets/images/lambourghini_car2.jpg",
+            "im3": "assets/images/lambourghini_car3.jpg",
+            "im4": "assets/images/lambourghini_car4.jpg"
+        },
+        {
+            "title": "The honey for sale and buy from caf",
+            "description": "This is Honey for sale, imported from jungle, the eatable honey the fresh heney and made by nature fresh from jungle cheep rate and good quality enjoy eating honey from multinational company selling honey called bees",
+            "image": "assets/images/honey_image.jpg",
+            "price": "$10",
+            "im1": "assets/images/honey_image.jpg",
+            "im2": "assets/images/honey_image2.jpg",
+            "im3": "assets/images/honey_image3.jpg",
+            "im4": "assets/images/honey_image4.jpg"
+        },
+        {
+            "title": "the car is madfevof fifiojfd",
+            "description": "The ferrari car for racing, with altrapower and faojofjoadsojfo ojfdsojfdo edjsafof",
+            "image": "assets/images/ferrari_racing_car.jpg",
+            "price": "$1000, 000",
+            "im1": "assets/images/ferrari_racing_car.jpg",
+            "im2": "assets/images/ferrari_car2.jpg",
+            "im3": "assets/images/ferrari_car3.jpg",
+            "im4": "assets/images/ferrari_car4.jpg"
+        },
+        {
+            "title": "selling prius car is good for offfjdfpfds",
+            "description": "The prius car for sell, with lcd",
+            "image": "assets/images/prius_car.jpg",
+            "price": "$1000, 000",
+            "im1": "assets/images/prius_car.jpg",
+            "im2": "assets/images/prius_car2.jpg",
+            "im3": "assets/images/prius_car3.jpg",
+            "im4": "assets/images/prius_car4.jpg"
+        }
+    ]
+}
