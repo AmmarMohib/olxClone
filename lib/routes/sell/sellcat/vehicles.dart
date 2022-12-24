@@ -47,7 +47,7 @@ class Vehicles extends StatelessWidget {
                 ),
                 CataTxt(
                   txt: "Cars on Installments",
-                  category: "cars on intallments",
+                  category: "cars on installments",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),
@@ -59,7 +59,7 @@ class Vehicles extends StatelessWidget {
                 ),
                 CataTxt(
                   txt: "Spare Parts",
-                  category: "spart parts",
+                  category: "spare parts",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),

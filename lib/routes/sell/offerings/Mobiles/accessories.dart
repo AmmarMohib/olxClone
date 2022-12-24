@@ -199,7 +199,7 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
                                     ),
                                   ],
                                 )
-                              : Text(""),
+                              : Container(),
                           widget.category == "chargers" ||
                                   widget.category == "screens" ||
                                   widget.category == "screen protectors" ||
@@ -270,7 +270,7 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
                                     ),
                                   ],
                                 )
-                              : Text(""),
+                              : Container(),
                           widget.category == "headphones" ||
                                   widget.category == "earphones"
                               ? Column(
@@ -311,7 +311,7 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
                                         SizedBox(height : 10),
                                   ],
                                 )
-                              : Text(""),
+                              : Container(),
                           widget.category == "charging cables" ||
                                   widget.category == "converters" ||
                                   widget.category == "chargers" ||
@@ -360,13 +360,13 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
                                         )),
                                   ],
                                 )
-                              : Text(""),
+                              : Container(),
                           // SizedBox(
                           //   height: 7,
                           // ),
 
                           Padding(
-                            padding: const EdgeInsets.only(top: 30),
+                            padding: const EdgeInsets.only(top: 15),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
