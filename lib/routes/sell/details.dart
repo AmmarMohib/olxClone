@@ -5,6 +5,7 @@ import 'package:olx_clone/commons/custom_radio.dart';
 import 'package:olx_clone/routes/sell/offerings/Mobiles/accessories.dart';
 import 'package:olx_clone/routes/sell/offerings/Mobiles/mobiles.dart';
 import 'package:olx_clone/routes/sell/offerings/Vehicles/vehicles.dart';
+import 'package:olx_clone/routes/sell/offerings/prop%20for%20rent/propforrent.dart';
 import 'package:olx_clone/routes/sell/offerings/prop%20for%20sale/propforsale.dart';
 
 class IncludeDetails extends StatefulWidget {
@@ -54,12 +55,18 @@ class _IncludeDetailsState extends State<IncludeDetails> {
         widget.category == "spare parts" ||
         widget.category == "buses, vans & trucks" ||
         widget.category == "rickshaw & chingchi" ||
-        widget.category == "tractors & trailors" ||
+        widget.category == "tractors & trailers" ||
         widget.category == "cars on installments" ||
         widget.category == "boats" ||
-        widget.category == "other vehicles") {
+        widget.category == "others vehicles") {
       return VehiclesDetails(category: widget.category);
-    } else
+    } else if (widget.category == "land & plots" ||
+        widget.category == "houses" ||
+        widget.category == "apartments & flats" ||
+        widget.category == "shops - offices - commercial space" ||
+        widget.category == "portions & floors") {
       return PropforsaleDetails(category: widget.category);
+    } else
+      return PropforrentDetails();
   }
 }

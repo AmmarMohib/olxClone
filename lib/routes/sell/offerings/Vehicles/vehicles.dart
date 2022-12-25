@@ -720,6 +720,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                     ],
                                   ),
                                 )
+
                               : Container(),
                           widget.category == "cars" ||
                                   widget.category == "cars on installments"

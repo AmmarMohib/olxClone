@@ -61,7 +61,7 @@ class PropertyforSale extends StatelessWidget {
                 ),
                 CataTxt(
                   txt: "Shops - Offices - Commercial Space",
-                  category: "shops - offices - comerical space",
+                  category: "shops - offices - commercial space",
                   func: () {},
                   showico: false,
                   color: Color.fromRGBO(5, 51, 56, 1),
