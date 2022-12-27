@@ -15,26 +15,11 @@ class _FloatingActionBtnState extends State<FloatingActionBtn> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Sell()));
+            context, MaterialPageRoute(builder: (context) => const Sell()));
       },
       child: OutlineGradientButton(
         backgroundColor: Colors.white,
-        child: SizedBox(
-          width: 52,
-          height: 52,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Icon(
-                Icons.add,
-                size: 30.0,
-                color: Color.fromRGBO(5, 51, 56, 1),
-              ),
-            ],
-          ),
-        ),
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           stops: [0, 0.5, 0.5, 1],
           colors: [
             Color.fromRGBO(34, 229, 219, 1.0),
@@ -45,7 +30,22 @@ class _FloatingActionBtnState extends State<FloatingActionBtn> {
         ),
         strokeWidth: 4,
         padding: EdgeInsets.zero,
-        radius: Radius.circular(26),
+        radius: const Radius.circular(26),
+        child: SizedBox(
+          width: 52,
+          height: 52,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
+              Icon(
+                Icons.add,
+                size: 30.0,
+                color: Color.fromRGBO(5, 51, 56, 1),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

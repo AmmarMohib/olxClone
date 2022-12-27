@@ -64,8 +64,8 @@ class PropertyForRent extends StatelessWidget {
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),
                 CataTxt(
-                  txt: "Rommates & Paying Guests",
-                  category: "rommates & playing guests",
+                  txt: "Roommates & Paying Guests",
+                  category: "roommates & paying guests",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),
@@ -77,7 +77,7 @@ class PropertyForRent extends StatelessWidget {
                 ),
                 CataTxt(
                   txt: "Vacation Rentals - Guest Houses",
-                  category: "vacation Rentals - Guest",
+                  category: "vacation rentals - guest houses",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),

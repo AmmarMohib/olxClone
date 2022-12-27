@@ -25,17 +25,17 @@ class _AccountPageState extends State<AccountPage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Padding(
-              padding: EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20),
               child: Row(
                 children: [
                   currentUser == null
-                      ? CircleAvatar(
-                          child: Icon(Icons.account_circle_outlined,
-                              color: Color.fromRGBO(0, 47, 52, 1.0), size: 70),
+                      ? const CircleAvatar(
                           backgroundColor: Color.fromRGBO(240, 240, 230, 1.0),
                           radius: 50,
+                          child: Icon(Icons.account_circle_outlined,
+                              color: Color.fromRGBO(0, 47, 52, 1.0), size: 70),
                         )
                       : SizedBox(
                           width: 100,
@@ -53,14 +53,14 @@ class _AccountPageState extends State<AccountPage> {
                             ),
                           ),
                         ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       currentUser == null
-                          ? Text(
+                          ? const Text(
                               "Log in",
                               style: TextStyle(
                                   color: Color.fromRGBO(0, 47, 52, 1.0),
@@ -70,12 +70,12 @@ class _AccountPageState extends State<AccountPage> {
                           : Text(
                               FirebaseAuth.instance.currentUser!.displayName
                                   .toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color.fromRGBO(0, 47, 52, 1.0),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30),
                             ),
-                      SizedBox(
+                      const SizedBox(
                         height: 3,
                       ),
                       currentUser == null
@@ -84,9 +84,9 @@ class _AccountPageState extends State<AccountPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
+                                        builder: (context) => const LoginPage()));
                               },
-                              child: Text("Log in to your account",
+                              child: const Text("Log in to your account",
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
                                       fontSize: 18,
@@ -98,9 +98,9 @@ class _AccountPageState extends State<AccountPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
+                                        builder: (context) => const LoginPage()));
                               },
-                              child: Text("View and edit profile",
+                              child: const Text("View and edit profile",
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
                                       fontSize: 18,
@@ -128,8 +128,8 @@ class _AccountPageState extends State<AccountPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20, top: 40),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 20, top: 40),
                               child: Image(
                                 image: AssetImage("assets/images/buyIcon.png"),
                                 width: 40,
@@ -146,7 +146,7 @@ class _AccountPageState extends State<AccountPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Buy Packages & My Orders",
                                           style: TextStyle(
                                               fontSize: 20,
@@ -154,10 +154,10 @@ class _AccountPageState extends State<AccountPage> {
                                               color: Color.fromRGBO(
                                                   0, 47, 52, 1.0)),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 2,
                                         ),
-                                        Text(
+                                        const Text(
                                           "Packages, orders, billing and invoices",
                                           style: TextStyle(
                                               fontSize: 15,
@@ -166,8 +166,8 @@ class _AccountPageState extends State<AccountPage> {
                                         ),
                                       ],
                                     ),
-                                    Spacer(),
-                                    Icon(Icons.arrow_forward_ios_sharp)
+                                    const Spacer(),
+                                    const Icon(Icons.arrow_forward_ios_sharp)
                                   ],
                                 ),
                               ),
@@ -175,10 +175,10 @@ class _AccountPageState extends State<AccountPage> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Divider(height: 3),
+                      const Divider(height: 3),
                       InkWell(
                         onTap: (() {
                           Navigator.push(
@@ -190,8 +190,8 @@ class _AccountPageState extends State<AccountPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20, top: 30),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 20, top: 30),
                               child: Icon(Icons.settings),
                             ),
                             Padding(
@@ -205,7 +205,7 @@ class _AccountPageState extends State<AccountPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Settings",
                                           style: TextStyle(
                                               fontSize: 20,
@@ -213,10 +213,10 @@ class _AccountPageState extends State<AccountPage> {
                                               color: Color.fromRGBO(
                                                   0, 47, 52, 1.0)),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 2,
                                         ),
-                                        Text(
+                                        const Text(
                                           "Privacy and logout",
                                           style: TextStyle(
                                               fontSize: 15,
@@ -225,8 +225,8 @@ class _AccountPageState extends State<AccountPage> {
                                         ),
                                       ],
                                     ),
-                                    Spacer(),
-                                    Icon(Icons.arrow_forward_ios_sharp)
+                                    const Spacer(),
+                                    const Icon(Icons.arrow_forward_ios_sharp)
                                   ],
                                 ),
                               ),
@@ -234,10 +234,10 @@ class _AccountPageState extends State<AccountPage> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Divider(height: 5),
+                      const Divider(height: 5),
                     ],
                   )
                 : Container(),
@@ -249,8 +249,8 @@ class _AccountPageState extends State<AccountPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, top: 40),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20, top: 40),
                     child: Image(
                       image: AssetImage("assets/images/olx_logo.png"),
                       width: 40,
@@ -266,17 +266,17 @@ class _AccountPageState extends State<AccountPage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Help & Support",
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
                                     color: Color.fromRGBO(0, 47, 52, 1.0)),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 2,
                               ),
-                              Text(
+                              const Text(
                                 "Help center and legal terms",
                                 style: TextStyle(
                                     fontSize: 15,
@@ -284,8 +284,8 @@ class _AccountPageState extends State<AccountPage> {
                               ),
                             ],
                           ),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios_sharp)
+                          const Spacer(),
+                          const Icon(Icons.arrow_forward_ios_sharp)
                         ],
                       ),
                     ),
@@ -293,11 +293,11 @@ class _AccountPageState extends State<AccountPage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Divider(height: 3),
-            SizedBox(
+            const Divider(height: 3),
+            const SizedBox(
               height: 10,
             ),
             Center(
@@ -317,9 +317,9 @@ class _AccountPageState extends State<AccountPage> {
             )
           ],
         ),
-        bottomNavigationBar: BottomNavigation(),
+        bottomNavigationBar: const BottomNavigation(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionBtn(),
+        floatingActionButton: const FloatingActionBtn(),
       )),
     );
   }

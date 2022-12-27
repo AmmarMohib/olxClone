@@ -67,13 +67,13 @@ class MyRadioListTile<T> extends StatelessWidget {
         onChanged(value);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? Color.fromRGBO(184, 247, 242, 1.0) : null,
+          color: isSelected ? const Color.fromRGBO(184, 247, 242, 1.0) : null,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isSelected
-                ? Color.fromRGBO(184, 247, 242, 1.0)
+                ? const Color.fromRGBO(184, 247, 242, 1.0)
                 : Colors.grey[300]!,
             width: 2,
           ),
@@ -82,8 +82,8 @@ class MyRadioListTile<T> extends StatelessWidget {
           leading.toString().toUpperCase(),          // "s",
           style: TextStyle(
             color: isSelected
-                ? Color.fromRGBO(61, 61, 76, 1.0)
-                : Color.fromRGBO(61, 61, 76, 1.0),
+                ? const Color.fromRGBO(61, 61, 76, 1.0)
+                : const Color.fromRGBO(61, 61, 76, 1.0),
             fontWeight: FontWeight.w600,
             fontSize: 12,
           ),

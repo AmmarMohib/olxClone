@@ -70,8 +70,8 @@ class Electronics extends StatelessWidget {
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),
                 CataTxt(
-                  txt: "Generator, UPS & Power Solutions",
-                  category: "generator, ups & power solutions",
+                  txt: "Generators, UPS & Power Solutions",
+                  category: "generators, ups & power solutions",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),

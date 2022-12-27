@@ -58,8 +58,8 @@ class Business extends StatelessWidget {
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),
                 CataTxt(
-                  txt: "Constuction & Heavy Machinery",
-                  category: "constuction & heavy machinery",
+                  txt: "Construction & Heavy Machinery",
+                  category: "construction & heavy machinery",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),

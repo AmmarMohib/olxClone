@@ -770,7 +770,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                   ],
                                 )
                               : Container(),
-                          widget.category == "spare parts"
+                          widget.category == "spare parts car"
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [

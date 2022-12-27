@@ -47,7 +47,7 @@ class Bikes extends StatelessWidget {
                 ),
                 CataTxt(
                   txt: "Spare Parts",
-                  category: "spare parts",
+                  category: "spare parts bike",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),

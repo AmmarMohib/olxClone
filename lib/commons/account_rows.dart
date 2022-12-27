@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -41,24 +40,24 @@ class _AccountRowsState extends State<AccountRows> {
                         children: [
                           Text(
                             widget.heading,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
                                 color: Color.fromRGBO(0, 47, 52, 1.0)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 2,
                           ),
                           Text(
                             widget.sub_heading,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 15,
                                 color: Color.fromRGBO(104, 132, 135, 1.0)),
                           ),
                         ],
                       ),
-                      Spacer(),
-                      Icon(Icons.arrow_forward_ios_sharp)
+                      const Spacer(),
+                      const Icon(Icons.arrow_forward_ios_sharp)
                     ],
                   ),
                 ),
@@ -66,10 +65,10 @@ class _AccountRowsState extends State<AccountRows> {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 7,
         ),
-        Divider(height: 3),
+        const Divider(height: 3),
       ],
     );
   }
