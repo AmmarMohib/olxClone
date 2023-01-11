@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:olx_clone/commons/custom_button.dart';
 import 'package:olx_clone/commons/custom_radio.dart';
 
 class PropforsaleDetails extends StatefulWidget {
@@ -227,8 +228,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                 )
                               : Container(),
                           widget.category == "houses" ||
-                                  widget.category == "apartments & flats"
-                                  || widget.category == "portions & floors"
+                                  widget.category == "apartments & flats" ||
+                                  widget.category == "portions & floors"
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -270,8 +271,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                 )
                               : Container(),
                           widget.category == "houses" ||
-                                  widget.category == "apartments & flats"
-                                  || widget.category == "portions & floors"
+                                  widget.category == "apartments & flats" ||
+                                  widget.category == "portions & floors"
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -371,8 +372,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                 )
                               : Container(),
                           widget.category == "houses" ||
-                                  widget.category == "apartments & flats"
-                                  || widget.category == "portions & floors"
+                                  widget.category == "apartments & flats" ||
+                                  widget.category == "portions & floors"
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -515,78 +516,82 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                   ],
                                 )
                               : Container(),
-                             widget.category == "shops - offices - commercial space" ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Type *",
-                                style: TextStyle(
-                                    color: Color.fromRGBO(12, 56, 61, 1.0),
-                                    fontSize: 15,
-
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Container(
-                                  margin:
-                                      const EdgeInsets.only(left: 0, top: 10),
-                                  child: Wrap(
-                                    children: [
-                                      MyRadioListTile<int>(
-                                        value: 1,
-                                        groupValue: _typevalue,
-                                        leading: 'OFFICE',
-                                        onChanged: (value) => setState(
-                                            () => _typevalue = value!),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      MyRadioListTile<int>(
-                                        value: 2,
-                                        groupValue: _typevalue,
-                                        leading: 'SHOP',
-                                        onChanged: (value) => setState(
-                                            () => _typevalue = value!),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      MyRadioListTile<int>(
-                                        value: 3,
-                                        groupValue: _typevalue,
-                                        leading: 'WAREHOUSE',
-                                        onChanged: (value) => setState(
-                                            () => _typevalue = value!),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      MyRadioListTile<int>(
-                                        value: 4,
-                                        groupValue: _typevalue,
-                                        leading: 'FACTORY',
-                                        onChanged: (value) => setState(
-                                            () => _typevalue = value!),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      MyRadioListTile<int>(
-                                        value: 5,
-                                        groupValue: _typevalue,
-                                        leading: 'BUILDING',
-                                        onChanged: (value) => setState(
-                                            () => _typevalue = value!),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                    ],
-                                  )),
-                            ],
-                          ): Container(),
-                          widget.category == "shops - offices - commercial space"
-                          || widget.category == "portions & floors"
+                          widget.category ==
+                                  "shops - offices - commercial space"
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      "Type *",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(12, 56, 61, 1.0),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 0, top: 10),
+                                        child: Wrap(
+                                          children: [
+                                            MyRadioListTile<int>(
+                                              value: 1,
+                                              groupValue: _typevalue,
+                                              leading: 'OFFICE',
+                                              onChanged: (value) => setState(
+                                                  () => _typevalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 2,
+                                              groupValue: _typevalue,
+                                              leading: 'SHOP',
+                                              onChanged: (value) => setState(
+                                                  () => _typevalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 3,
+                                              groupValue: _typevalue,
+                                              leading: 'WAREHOUSE',
+                                              onChanged: (value) => setState(
+                                                  () => _typevalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 4,
+                                              groupValue: _typevalue,
+                                              leading: 'FACTORY',
+                                              onChanged: (value) => setState(
+                                                  () => _typevalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 5,
+                                              groupValue: _typevalue,
+                                              leading: 'BUILDING',
+                                              onChanged: (value) => setState(
+                                                  () => _typevalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                          ],
+                                        )),
+                                  ],
+                                )
+                              : Container(),
+                          widget.category ==
+                                      "shops - offices - commercial space" ||
+                                  widget.category == "portions & floors"
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -611,8 +616,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '0',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -622,8 +627,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '1',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -633,8 +638,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '2',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -644,8 +649,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '3',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -655,8 +660,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '4',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -666,8 +671,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '5',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -677,17 +682,19 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '6',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
-                                            SizedBox(width: 10,),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
                                             MyRadioListTile<int>(
                                               value: 8,
                                               groupValue: _floorlevelvalue,
                                               leading: '7+',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                           ],
                                         )),
@@ -719,8 +726,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '1',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -730,8 +737,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '2',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -741,8 +748,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '3',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -752,8 +759,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '4',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -763,8 +770,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '5',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -774,8 +781,8 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '6',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -785,17 +792,19 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
                                               groupValue: _floorlevelvalue,
                                               leading: '7+',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
-                                            SizedBox(width: 10,),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
                                             MyRadioListTile<int>(
                                               value: 8,
                                               groupValue: _floorlevelvalue,
                                               leading: 'GROUND',
                                               onChanged: (value) => setState(
-                                                  () =>
-                                                      _floorlevelvalue = value!),
+                                                  () => _floorlevelvalue =
+                                                      value!),
                                             ),
                                           ],
                                         )),
@@ -1089,28 +1098,31 @@ class _PropforsaleDetailsState extends State<PropforsaleDetails> {
               ],
             ),
           ),
-          bottomNavigationBar: BottomAppBar(
-              child: Row(
-            children: [
-              SizedBox(
-                width: 17,
-              ),
-              SizedBox(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width * 0.93,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        // loc.text = "";
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(5, 51, 56, 1))),
-                      child: const Text("Next"))),
-              SizedBox(
-                height: 70,
-              )
-            ],
-          ))),
+          // bottomNavigationBar: NextButton(
+            // datatosend: [
+              // widget.category,
+              //       _fuelvalue,
+              // _carDocvalue,
+              // _assemblyvalue,
+              // _transmissionvalue,
+              // _conditionvalue,
+              // _installmentplanvalue,
+              // _registeredvalue,
+              // _typevalue,
+              // _maketext,
+              // _modeltext,
+              // _pricetext,
+              // _yeartext,
+              // _KMstext,
+              // _registext,
+              // _featurestext,
+              // _adtitletext,
+              // _downpaymenttext,
+              // _monthlypaymenttext
+            // ],
+          )
+          // )
+          // ,
     );
   }
 }

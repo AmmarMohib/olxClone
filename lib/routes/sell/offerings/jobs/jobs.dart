@@ -1,17 +1,21 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:olx_clone/commons/custom_radio.dart';
 
-class BussinessDetails extends StatefulWidget {
+class JobsDetails extends StatefulWidget {
   final String category;
-  const BussinessDetails({super.key, required this.category});
+  const JobsDetails({super.key, required this.category});
 
   @override
-  State<BussinessDetails> createState() => _BussinessDetailsState();
+  State<JobsDetails> createState() => _JobsDetailsState();
 }
 
-class _BussinessDetailsState extends State<BussinessDetails> {
+class _JobsDetailsState extends State<JobsDetails> {
+  int _typeadvalue = 0;
   int _typevalue = 0;
+  int _hiringvalue = 0;
+  int _careervalue = 0;
+  int _salaryvalue = 0;
+  int _positionvalue = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -91,49 +95,15 @@ class _BussinessDetailsState extends State<BussinessDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 30),
+                      padding: const EdgeInsets.only(left: 10, top: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Price *",
-                            style: TextStyle(
-                                color: Color.fromRGBO(12, 56, 61, 1.0),
-                                fontSize: 12),
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.93,
-                            height: 50,
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1,
-                                        color: Color.fromRGBO(
-                                            116, 205, 202, 1.0))),
-                                border: OutlineInputBorder(),
-                                // labelText: 'Enter address',
-                                // hintText: 'Enter the name of the address'
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          widget.category == "food & resturants"
-                              ? Column(
+                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      "Type *",
+                                      "Hiring Person/Company *",
                                       style: TextStyle(
                                           color:
                                               Color.fromRGBO(12, 56, 61, 1.0),
@@ -147,48 +117,253 @@ class _BussinessDetailsState extends State<BussinessDetails> {
                                           children: [
                                             MyRadioListTile<int>(
                                               value: 1,
-                                              groupValue: _typevalue,
-                                              leading: 'COOKING EQUIPMENT',
+                                              groupValue: _hiringvalue,
+                                              leading: 'HIRING AS COMPANY',
                                               onChanged: (value) => setState(
-                                                  () => _typevalue = value!),
+                                                  () => _hiringvalue = value!),
                                             ),
                                             const SizedBox(
-                                              width: 5,
+                                              width: 8,
                                             ),
                                             MyRadioListTile<int>(
                                               value: 2,
-                                              groupValue: _typevalue,
-                                              leading: 'COOLERS & FREEZERS',
+                                              groupValue: _hiringvalue,
+                                              leading: 'HIRING AS INDVIDUAL',
                                               onChanged: (value) => setState(
-                                                  () => _typevalue = value!),
+                                                  () => _hiringvalue = value!),
                                             ),
                                             const SizedBox(
-                                              width: 5,
+                                              width: 8,
                                             ),
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 8.0),
                                               child: MyRadioListTile<int>(
                                                 value: 3,
-                                                groupValue: _typevalue,
-                                                leading: 'CROCKERY & CULTURY',
+                                                groupValue: _hiringvalue,
+                                                leading:
+                                                    'HIRING AS THIRD PARTY',
                                                 onChanged: (value) => setState(
-                                                    () => _typevalue = value!),
+                                                    () =>
+                                                        _hiringvalue = value!),
                                               ),
+                                            ),
+                                          ],
+                                        )),
+                                    const SizedBox(
+                                      height: 20,
+                                    )
+                                  ],
+                                ),
+                              Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Company Name *",
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(12, 56, 61, 1.0),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.94,
+                                        child: const TextField(
+                                          decoration: InputDecoration(
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1,
+                                                    color: Color.fromRGBO(
+                                                        116, 205, 202, 1.0))),
+                                            border: OutlineInputBorder(),
+                                            // labelText: 'Enter street',
+                                            // hintText: 'Enter your street'),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    const Text(
+                                      "Type of Ad *",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(12, 56, 61, 1.0),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 0, top: 10),
+                                        child: Wrap(
+                                          children: [
+                                            MyRadioListTile<int>(
+                                              value: 1,
+                                              groupValue: _typeadvalue,
+                                              leading: 'JOB WANTED',
+                                              onChanged: (value) => setState(
+                                                  () => _typeadvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 2,
+                                              groupValue: _typeadvalue,
+                                              leading: 'JOB OFFER',
+                                              onChanged: (value) => setState(
+                                                  () => _typeadvalue = value!),
+                                            ),
+                                          ],
+                                        )),
+                                    const SizedBox(
+                                      height: 20,
+                                    )
+                                  ],
+                                ),
+                              Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Salary from *",
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(12, 56, 61, 1.0),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.94,
+                                        child: const TextField(
+                                          decoration: InputDecoration(
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1,
+                                                    color: Color.fromRGBO(
+                                                        116, 205, 202, 1.0))),
+                                            border: OutlineInputBorder(),
+                                            // labelText: 'Enter street',
+                                            // hintText: 'Enter your street'),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              Padding(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Salary to *",
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(12, 56, 61, 1.0),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.94,
+                                        child: const TextField(
+                                          decoration: InputDecoration(
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1,
+                                                    color: Color.fromRGBO(
+                                                        116, 205, 202, 1.0))),
+                                            border: OutlineInputBorder(),
+                                            // labelText: 'Enter street',
+                                            // hintText: 'Enter your street'),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                              ),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    const Text(
+                                      "Career Level *",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(12, 56, 61, 1.0),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 0, top: 10),
+                                        child: Wrap(
+                                          children: [
+                                            MyRadioListTile<int>(
+                                              value: 1,
+                                              groupValue: _careervalue,
+                                              leading: 'ENTRY LEVEL',
+                                              onChanged: (value) => setState(
+                                                  () => _careervalue = value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0),
-                                              child: MyRadioListTile<int>(
-                                                value: 4,
-                                                groupValue: _typevalue,
-                                                leading: 'OVENS & RANGES',
-                                                onChanged: (value) => setState(
-                                                    () => _typevalue = value!),
-                                              ),
+                                            MyRadioListTile<int>(
+                                              value: 2,
+                                              groupValue: _careervalue,
+                                              leading: 'ASSOCIATE',
+                                              onChanged: (value) => setState(
+                                                  () => _careervalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 3,
+                                              groupValue: _careervalue,
+                                              leading: 'MID-SENIOR LEVEL',
+                                              onChanged: (value) => setState(
+                                                  () => _careervalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 4,
+                                              groupValue: _careervalue,
+                                              leading: 'DIRECTOR',
+                                              onChanged: (value) => setState(
+                                                  () => _careervalue = value!),
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -198,42 +373,157 @@ class _BussinessDetailsState extends State<BussinessDetails> {
                                                   top: 8.0),
                                               child: MyRadioListTile<int>(
                                                 value: 5,
-                                                groupValue: _typevalue,
-                                                leading: 'TABLES & PLATFORMS',
+                                                groupValue: _careervalue,
+                                                leading: 'EXECUTIVE',
                                                 onChanged: (value) => setState(
-                                                    () => _typevalue = value!),
+                                                    () =>
+                                                        _careervalue = value!),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0),
-                                              child: MyRadioListTile<int>(
-                                                value: 6,
-                                                groupValue: _typevalue,
-                                                leading:
-                                                    'OTHER RESTAURANT EQUIPMENT',
-                                                onChanged: (value) => setState(
-                                                    () => _typevalue = value!),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
                                             ),
                                           ],
                                         )),
                                     const SizedBox(
-                                      height: 20,
+                                      height: 10,
+                                    )
+                                  ],
+                                ),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Text(
+                                      "Salary Period *",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(12, 56, 61, 1.0),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 0, top: 10),
+                                        child: Wrap(
+                                          children: [
+                                            MyRadioListTile<int>(
+                                              value: 1,
+                                              groupValue: _salaryvalue,
+                                              leading: 'MONTHLY',
+                                              onChanged: (value) => setState(
+                                                  () => _salaryvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 2,
+                                              groupValue: _salaryvalue,
+                                              leading: 'HOURLY',
+                                              onChanged: (value) => setState(
+                                                  () => _salaryvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 3,
+                                              groupValue: _salaryvalue,
+                                              leading: 'WEEKLY',
+                                              onChanged: (value) => setState(
+                                                  () => _salaryvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 4,
+                                              groupValue: _salaryvalue,
+                                              leading: 'YEARLY',
+                                              onChanged: (value) => setState(
+                                                  () => _salaryvalue = value!),
+                                            ),
+                                          ],
+                                        )),
+                                    const SizedBox(
+                                      height: 10,
                                     )
                                   ],
                                 )
-                              : Container(),
-                          widget.category == "trade & industrial"
+                              ,Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Text(
+                                      "Position Type *",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(12, 56, 61, 1.0),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 0, top: 10),
+                                        child: Wrap(
+                                          children: [
+                                            MyRadioListTile<int>(
+                                              value: 1,
+                                              groupValue: _positionvalue,
+                                              leading: 'FULL-TIME',
+                                              onChanged: (value) => setState(
+                                                  () =>
+                                                      _positionvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 2,
+                                              groupValue: _positionvalue,
+                                              leading: 'PART-TIME',
+                                              onChanged: (value) => setState(
+                                                  () =>
+                                                      _positionvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 3,
+                                              groupValue: _positionvalue,
+                                              leading: 'CONTRACT',
+                                              onChanged: (value) => setState(
+                                                  () =>
+                                                      _positionvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 4,
+                                              groupValue: _positionvalue,
+                                              leading: 'TEMPORARY',
+                                              onChanged: (value) => setState(
+                                                  () =>
+                                                      _positionvalue = value!),
+                                            ),
+                                          ],
+                                        )),
+                                    const SizedBox(
+                                      height: 10,
+                                    )
+                                  ],
+                                ),
+                                      widget.category == "marketing jobs"
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
                                     const Text(
                                       "Type *",
                                       style: TextStyle(
@@ -250,7 +540,7 @@ class _BussinessDetailsState extends State<BussinessDetails> {
                                             MyRadioListTile<int>(
                                               value: 1,
                                               groupValue: _typevalue,
-                                              leading: 'ELECTRICAL & ELECTRONIC EQUIPMENT',
+                                              leading: 'SEO',
                                               onChanged: (value) => setState(
                                                   () => _typevalue = value!),
                                             ),
@@ -260,63 +550,7 @@ class _BussinessDetailsState extends State<BussinessDetails> {
                                             MyRadioListTile<int>(
                                               value: 2,
                                               groupValue: _typevalue,
-                                              leading: 'INDUSTRIAL EQUIPMENT',
-                                              onChanged: (value) => setState(
-                                                  () => _typevalue = value!),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0),
-                                              child: MyRadioListTile<int>(
-                                                value: 3,
-                                                groupValue: _typevalue,
-                                                leading: 'MECHANICAL EQUIPMENT',
-                                                onChanged: (value) => setState(
-                                                    () => _typevalue = value!),
-                                              ),
-                                            ),
-                                          ],
-                                        )),
-                                    const SizedBox(
-                                      height: 20,
-                                    )
-                                  ],
-                                )
-                              : Container(),
-                              widget.category == "construction & heavy machinery"
-                              ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      "Type *",
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(12, 56, 61, 1.0),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Container(
-                                        margin: const EdgeInsets.only(
-                                            left: 0, top: 10),
-                                        child: Wrap(
-                                          children: [
-                                            MyRadioListTile<int>(
-                                              value: 1,
-                                              groupValue: _typevalue,
-                                              leading: 'BULLDOZERS',
-                                              onChanged: (value) => setState(
-                                                  () => _typevalue = value!),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            MyRadioListTile<int>(
-                                              value: 2,
-                                              groupValue: _typevalue,
-                                              leading: 'CONSTRUCTION MATERIAL',
+                                              leading: 'SEM',
                                               onChanged: (value) => setState(
                                                   () => _typevalue = value!),
                                             ),
@@ -326,7 +560,7 @@ class _BussinessDetailsState extends State<BussinessDetails> {
                                             MyRadioListTile<int>(
                                               value: 3,
                                               groupValue: _typevalue,
-                                              leading: 'CRANES',
+                                              leading: 'SOCIAL MEDIA MARKETING',
                                               onChanged: (value) => setState(
                                                   () => _typevalue = value!),
                                             ),
@@ -336,7 +570,7 @@ class _BussinessDetailsState extends State<BussinessDetails> {
                                             MyRadioListTile<int>(
                                               value: 4,
                                               groupValue: _typevalue,
-                                              leading: 'DUMPERS',
+                                              leading: 'EMAIL MARKETING',
                                               onChanged: (value) => setState(
                                                   () => _typevalue = value!),
                                             ),
@@ -344,155 +578,27 @@ class _BussinessDetailsState extends State<BussinessDetails> {
                                               width: 5,
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.only(top:8.0),
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0),
                                               child: MyRadioListTile<int>(
                                                 value: 5,
                                                 groupValue: _typevalue,
-                                                leading: 'EXCAVATORS',
+                                                leading: 'OTHERS',
                                                 onChanged: (value) => setState(
-                                                    () => _typevalue = value!),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top:8.0),
-                                              child: MyRadioListTile<int>(
-                                                value: 6,
-                                                groupValue: _typevalue,
-                                                leading: 'LOADERS',
-                                                onChanged: (value) => setState(
-                                                    () => _typevalue = value!),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top:8.0),
-                                              child: MyRadioListTile<int>(
-                                                value: 7,
-                                                groupValue: _typevalue,
-                                                leading: 'ROLLER',
-                                                onChanged: (value) => setState(
-                                                    () => _typevalue = value!),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top:8.0),
-                                              child: MyRadioListTile<int>(
-                                                value: 8,
-                                                groupValue: _typevalue,
-                                                leading: 'OTHER HEAVY EQUIPMENT',
-                                                onChanged: (value) => setState(
-                                                    () => _typevalue = value!),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                          ],
-                                        )),
-                                    const SizedBox(
-                                      height: 20,
-                                    )
-                                  ],
-                                )
-                              : Container(),
-                          
-                              widget.category == "agriculture"
-                              ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      "Type *",
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(12, 56, 61, 1.0),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Container(
-                                        margin: const EdgeInsets.only(
-                                            left: 0, top: 10),
-                                        child: Wrap(
-                                          children: [
-                                            MyRadioListTile<int>(
-                                              value: 1,
-                                              groupValue: _typevalue,
-                                              leading: 'FARM MACHINERY & EQUIPMENT',
-                                              onChanged: (value) => setState(
-                                                  () => _typevalue = value!),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top:8.0),
-                                              child: MyRadioListTile<int>(
-                                                value: 2,
-                                                groupValue: _typevalue,
-                                                leading: 'SEEDS, CROPS, PESTICIDES & FERTILIZERS',
-                                                onChanged: (value) => setState(
-                                                    () => _typevalue = value!),
+                                                    () =>
+                                                        _typevalue = value!),
                                               ),
                                             ),
                                           ],
                                         )),
                                     const SizedBox(
-                                      height: 20,
-                                    )
-                                  ],
-                                )
-                              : Container(),
-                              widget.category == "medical & pharma"
-                              ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      "Type *",
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(12, 56, 61, 1.0),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Container(
-                                        margin: const EdgeInsets.only(
-                                            left: 0, top: 10),
-                                        child: Wrap(
-                                          children: [
-                                            MyRadioListTile<int>(
-                                              value: 1,
-                                              groupValue: _typevalue,
-                                              leading: 'MEDICAL EQUIPMENT',
-                                              onChanged: (value) => setState(
-                                                  () => _typevalue = value!),
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            MyRadioListTile<int>(
-                                              value: 2,
-                                              groupValue: _typevalue,
-                                              leading: 'MEDICAL SUPPLIES',
-                                              onChanged: (value) => setState(
-                                                  () => _typevalue = value!),
-                                            ),
-                                          ],
-                                        )),
-                                    const SizedBox(
-                                      height: 20,
+                                      height: 10,
                                     )
                                   ],
                                 )
                               : Container(),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10),
+                            padding: const EdgeInsets.only(top: 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

@@ -2,6 +2,7 @@
 import 'dart:async';
 import 'dart:convert';
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final Stream<QuerySnapshot> _usersStream =
+      FirebaseFirestore.instance.collection('Ads').snapshots();  
   @override
   void initState() {
     super.initState();
@@ -666,152 +669,452 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.015,
             ),
-            InkWell(
-              child: SingleChildScrollView(
-                child: _items.isNotEmpty
-                    ? GridView.builder(
-                        physics: const ScrollPhysics(),
+            // InkWell(
+            //   child: SingleChildScrollView(
+            //     child: _items.isNotEmpty
+            //         ? GridView.builder(
+            //             physics: const ScrollPhysics(),
+            //             scrollDirection: Axis.vertical,
+            //             shrinkWrap: true,
+            //             itemCount: _items.length,
+            //             gridDelegate:
+            //                 const SliverGridDelegateWithFixedCrossAxisCount(
+            //               childAspectRatio: 10.4 / 10.0,
+            //               crossAxisCount: 2,
+            //             ),
+            //             itemBuilder: (BuildContext context, int index) {
+            //               return Padding(
+            //                   padding: const EdgeInsets.all(5),
+            //                   child: InkWell(
+            //                     onTap: () {
+            //                       Navigator.push(
+            //                           context,
+            //                           MaterialPageRoute(
+            //                               builder: (context) => AddDetails(
+            //                                     des: _items[index]
+            //                                         ['desc-----------------++++++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+ription'],
+            //                                     imageUrl: _items[index]
+            //                                         ['image'],
+            //                                     price: _items[index]['price'],
+            //                                     slides: [
+            //                                       _items[index]['im1'],
+            //                                       _items[index]['im2'],
+            //                                       _items[index]['im3'],
+            //                                       _items[index]['im4'],
+            //                                     ],
+            //                                     title: _items[index]['title'],
+            //                                   )));
+            //                     },
+            //                     child: Card(
+            //                         semanticContainer: true,
+            //                         shape: RoundedRectangleBorder(
+            //                           borderRadius: BorderRadius.circular(10.0),
+            //                         ),
+            //                         clipBehavior: Clip.antiAlias,
+            //                         child: Column(
+            //                           crossAxisAlignment:
+            //                               CrossAxisAlignment.start,
+            //                           children: <Widget>[
+            //                             Expanded(
+            //                               child: ClipRRect(
+            //                                 borderRadius:
+            //                                     const BorderRadius.only(
+            //                                   topLeft: Radius.circular(8.0),
+            //                                   topRight: Radius.circular(8.0),
+            //                                 ),
+            //                                 // child: Image.network(
+            //                                 //   'https://placeimg.com/620/480/any',
+            //                                 //   // width: 300,
+            //                                 //   height: 100,
+            //                                 //   width: MediaQuery.of(context).size.width * 1.0,
+            //                                 //   // fit:BoxFit.fill
+            //                                 // ),
+            //                                 child: Container(
+            //                                   width: MediaQuery.of(context)
+            //                                       .size
+            //                                       .width,
+            //                                   height: 150,
+            //                                   decoration: BoxDecoration(
+            //                                     image: DecorationImage(
+            //                                       fit: BoxFit.fill,
+            //                                       image: AssetImage(
+            //                                           _items[index]['image']),
+            //                                     ),
+            //                                   ),
+            //                                 ),
+            //                               ),
+            //                               // )
+            //                             ),
+            //                             Row(
+            //                               children: [
+            //                                 Padding(
+            //                                     padding: const EdgeInsets.only(
+            //                                         left: 10.0, top: 10.0),
+            //                                     child: Container(
+            //                                       width: 163,
+            //                                       // color: Colors.black,
+            //                                       child: Text(
+            //                                         "Very good condition dell 8gb ram, workstation",
+            //                                         // _items[index]['title'],
+            //                                         maxLines: 2,
+            //                                         overflow:
+            //                                             TextOverflow.ellipsis,
+            //                                         style: const TextStyle(
+            //                                             fontSize: 15.0,
+            //                                             color: Color.fromRGBO(
+            //                                                 5, 51, 56, 1)),
+            //                                       ),
+            //                                     )),
+            //                                 Theme(
+            //                                     data: ThemeData(
+            //                                         splashColor: Colors.white,
+            //                                         highlightColor:
+            //                                             Colors.white),
+            //                                     child: Align(
+            //                                       alignment: Alignment.topRight,
+            //                                       child: IconButton(
+            //                                           onPressed: () {
+            //                                             setState(() {
+            //                                               favico =
+            //                                                   Icons.favorite;
+            //                                             });
+            //                                           },
+            //                                           icon: Icon(
+            //                                             favico,
+            //                                             size: 15,
+            //                                           )),
+            //                                     ))
+            //                               ],
+            //                             ),
+            //                             Padding(
+            //                                 padding: const EdgeInsets.only(
+            //                                     left: 8.0,
+            //                                     top: 8.0,
+            //                                     bottom: 8.0),
+            //                                 child: Text(
+            //                                   "Rs: ${_items[index]['price']}",
+            //                                   maxLines: 2,
+            //                                   overflow: TextOverflow.ellipsis,
+            //                                   style: const TextStyle(
+            //                                       fontSize: 15.0,
+            //                                       color: Color.fromRGBO(
+            //                                           5, 51, 56, 1),
+            //                                       fontWeight: FontWeight.w900),
+            //                                 )),
+            //                           ],
+            //                         )),
+            //                   ));
+            //             },
+            //           )
+            //         : null,
+            //   ),
+            // ),
+            // ElevatedButton(
+            //   child: const Text('Load Data'),
+            //   onPressed: abc,
+            // ),
+      //       StreamBuilder<QuerySnapshot>(
+      // stream: _usersStream,
+      // builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      //   if (snapshot.hasError) {
+      //     return const Text('Something went wrong');
+      //   }
+
+      //   if (snapshot.connectionState == ConnectionState.waiting) {
+      //     return const Text("Loading");
+      //   }
+
+      //   return SizedBox(
+      //     height: 100,
+      //     child: Padding(
+      //                         padding: const EdgeInsets.all(5),
+      //                         child: InkWell(
+      //                           // onTap: () {
+      //                           //   Navigator.push(
+      //                           //       context,
+      //                           //       MaterialPageRoute(
+      //                           //           builder: (context) => AddDetails(
+      //                           //                 des: _items[index]
+      //                           //                     ['description'],
+      //                           //                 imageUrl: _items[index]
+      //                           //                     ['image'],
+      //                           //                 price: _items[index]['price'],
+      //                           //                 slides: [
+      //                           //                   _items[index]['im1'],
+      //                           //                   _items[index]['im2'],
+      //                           //                   _items[index]['im3'],
+      //                           //                   _items[index]['im4'],
+      //                           //                 ],
+      //                           //                 title: _items[index]['title'],
+      //                           //               )));
+      //                           // },
+      //                           child: Card(
+      //                               semanticContainer: true,
+      //                               shape: RoundedRectangleBorder(
+     
+      //                                 borderRadius: BorderRadius.circular(10.0),
+      //                               ),
+      //                               clipBehavior: Clip.antiAlias,
+      //                               child: Column(
+      //                                 crossAxisAlignment:
+      //                                     CrossAxisAlignment.start,
+      //                                 children: <Widget>[
+      //                                   Expanded(
+      //                                     child: ClipRRect(
+      //                                       borderRadius:
+      //                                           const BorderRadius.only(
+      //                                         topLeft: Radius.circular(8.0),
+      //                                         topRight: Radius.circular(8.0),
+      //                                       ),
+      //                                       // child: Image.network(
+      //                                       //   'https://placeimg.com/620/480/any',
+      //                                       //   // width: 300,
+      //                                       //   height: 100,
+      //                                       //   width: MediaQuery.of(context).size.width * 1.0,
+      //                                       //   // fit:BoxFit.fill
+      //                                       // ),
+      //                                       child: Container(
+      //                                         width: MediaQuery.of(context)
+      //                                             .size
+      //                                             .width,
+      //                                         height: 150,
+      //                                         decoration: BoxDecoration(
+      //                                           image: DecorationImage(
+      //                                             fit: BoxFit.fill,
+      //                                             image: NetworkImage(
+      //                                                 snapshot.data!.docs[0]['images'][0].toString()),
+      //                                           ),
+      //                                         ),
+      //                                       ),
+      //                                     ),
+      //                                     // )
+      //                                   ),
+      //                                   Row(
+      //                                     children: [
+      //                                       Padding(
+      //                                           padding: const EdgeInsets.only(
+      //                                               left: 10.0, top: 10.0),
+      //                                           child: Container(
+      //                                             width: 163,
+      //                                             // color: Colors.black,
+      //                                             child: Text(
+      //                                               // "Very good condition dell 8gb ram, workstation",
+      //                                               snapshot.data!.docs[2]['data']['ad-title'].toString(),
+      //                                               maxLines: 2,
+      //                                               overflow:
+      //                                                   TextOverflow.ellipsis,
+      //                                               style: const TextStyle(
+      //                                                   fontSize: 15.0,
+      //                                                   color: Color.fromRGBO(
+      //                                                       5, 51, 56, 1)),
+      //                                             ),
+      //                                           )),
+      //                                       Theme(
+      //                                           data: ThemeData(
+      //                                               splashColor: Colors.white,
+      //                                               highlightColor:
+      //                                                   Colors.white),
+      //                                           child: Align(
+      //                                             alignment: Alignment.topRight,
+      //                                             child: IconButton(
+      //                                                 onPressed: () {
+      //                                                   setState(() {
+      //                                                     favico =
+      //                                                         Icons.favorite;
+      //                                                   });
+      //                                                 },
+      //                                                 icon: Icon(
+      //                                                   favico,
+      //                                                   size: 15,
+      //                                                 )),
+      //                                           ))
+      //                                     ],
+      //                                   ),
+      //                                   Padding(
+      //                                       padding: const EdgeInsets.only(
+      //                                           left: 8.0,
+      //                                           top: 8.0,
+      //                                           bottom: 8.0),
+      //                                       child: Text(
+      //                                         // "Rs: ${snapshot.data!.docs[0]['price'].toString()}",
+      //                                         "Rs: ",
+      //                                         maxLines: 2,
+      //                                         overflow: TextOverflow.ellipsis,
+      //                                         style: const TextStyle(
+      //                                             fontSize: 15.0,
+      //                                             color: Color.fromRGBO(
+      //                                                 5, 51, 56, 1),
+      //                                             fontWeight: FontWeight.w900),
+      //                                       )),
+      //                                 ],
+      //                               )),
+      //                         ))
+      //             //  ListTile(
+      //             //   title: Text(data['images'][0].toString()),
+      //             //   subtitle: Text(data['data']['description'].toString() ?? ''),
+      //             );
+      //           })
+           StreamBuilder<QuerySnapshot>(
+      stream: _usersStream,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text('Something went wrong');
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Loading");
+        }
+            return SingleChildScrollView(
+              child: SizedBox(
+                // height: MediaQuery.of(context).size.height,
+                child: GridView.builder(
+                  physics: const ScrollPhysics(),
                         scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: _items.length,
+                        // shrinkWrap: true,
+                        // itemCount: _items.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           childAspectRatio: 10.4 / 10.0,
                           crossAxisCount: 2,
-                        ),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => AddDetails(
-                                                des: _items[index]
-                                                    ['description'],
-                                                imageUrl: _items[index]
-                                                    ['image'],
-                                                price: _items[index]['price'],
-                                                slides: [
-                                                  _items[index]['im1'],
-                                                  _items[index]['im2'],
-                                                  _items[index]['im3'],
-                                                  _items[index]['im4'],
-                                                ],
-                                                title: _items[index]['title'],
-                                              )));
-                                },
-                                child: Card(
-                                    semanticContainer: true,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    clipBehavior: Clip.antiAlias,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Expanded(
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(8.0),
-                                              topRight: Radius.circular(8.0),
-                                            ),
-                                            // child: Image.network(
-                                            //   'https://placeimg.com/620/480/any',
-                                            //   // width: 300,
-                                            //   height: 100,
-                                            //   width: MediaQuery.of(context).size.width * 1.0,
-                                            //   // fit:BoxFit.fill
-                                            // ),
-                                            child: Container(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              height: 150,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  fit: BoxFit.fill,
-                                                  image: AssetImage(
-                                                      _items[index]['image']),
+                            ),
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => AddDetails(
+                                              photo_url: snapshot.data!.docs[index]['data']['pro_photo'],
+                                              profile_name: snapshot.data!.docs[index]['data']['pro_name'],
+                                              details: snapshot.data!.docs[index]['data']['details'] as Map,
+                                                  des: snapshot.data!.docs[index]['data']['description'].toString(),
+                                                  imageUrl: snapshot.data!.docs[index]['images'][0].toString(),
+                                                  price: snapshot.data!.docs[index]['data']['price'].toString(),
+                                                  slides: snapshot.data!.docs[index]['images'],
+                                                  title: snapshot.data!.docs[index]['data']['ad-title'].toString(), 
+                                                  category: snapshot.data!.docs[index]['data']['category'].toString(),
+                                                )));
+                                  },
+                                  child: Card(
+                                      semanticContainer: true,
+                                      shape: RoundedRectangleBorder(
+     
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      ),
+                                      clipBehavior: Clip.antiAlias,
+                                      child: SizedBox(
+                                        height: 100,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Expanded(
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(8.0),
+                                                  topRight: Radius.circular(8.0),
+                                                ),
+                                                // child: Image.network(
+                                                //   'https://placeimg.com/620/480/any',
+                                                //   // width: 300,
+                                                //   height: 100,
+                                                //   width: MediaQuery.of(context).size.width * 1.0,
+                                                //   // fit:BoxFit.fill
+                                                // ),
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  height: MediaQuery.of(context).size.height,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.fill,
+                                                      image: NetworkImage(
+                                                          snapshot.data!.docs[index]['images'][0].toString()),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
+                                              // )
                                             ),
-                                          ),
-                                          // )
-                                        ),
-                                        Row(
-                                          children: [
+                                            Row(
+                                              children: [
+                                                Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        left: 10.0, top: 10.0),
+                                                    child: Container(
+                                                      width: 163,
+                                                      // color: Colors.black,
+                                                      child: Text(
+                                                        // "Very good condition dell 8gb ram, workstation",
+                                                        snapshot.data!.docs[index]['data']['ad-title'].toString(),
+                                                        maxLines: 2,
+                                                        overflow:
+                                                            TextOverflow.ellipsis,
+                                                        style: const TextStyle(
+                                                            fontSize: 15.0,
+                                                            color: Color.fromRGBO(
+                                                                5, 51, 56, 1)),
+                                                      ),
+                                                    )),
+                                                Theme(
+                                                    data: ThemeData(
+                                                        splashColor: Colors.white,
+                                                        highlightColor:
+                                                            Colors.white),
+                                                    child: Align(
+                                                      alignment: Alignment.topRight,
+                                                      child: IconButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              favico =
+                                                                  Icons.favorite;
+                                                            });
+                                                          },
+                                                          icon: Icon(
+                                                            favico,
+                                                            size: 15,
+                                                          )),
+                                                    ))
+                                              ],
+                                            ),
                                             Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 10.0, top: 10.0),
-                                                child: Container(
-                                                  width: 163,
-                                                  // color: Colors.black,
-                                                  child: Text(
-                                                    // "Very good condition dell 8gb ram, workstation"
-                                                    _items[index]['title'],
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: const TextStyle(
-                                                        fontSize: 15.0,
-                                                        color: Color.fromRGBO(
-                                                            5, 51, 56, 1)),
-                                                  ),
+                                                    left: 8.0,
+                                                    top: 8.0,
+                                                    bottom: 8.0),
+                                                child: Text(
+                                                  "Rs: ${snapshot.data!.docs[index]['data']['price'].toString()}",
+                                                  // "Rs: ",
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                      fontSize: 15.0,
+                                                      color: Color.fromRGBO(
+                                                          5, 51, 56, 1),
+                                                      fontWeight: FontWeight.w900),
                                                 )),
-                                            Theme(
-                                                data: ThemeData(
-                                                    splashColor: Colors.white,
-                                                    highlightColor:
-                                                        Colors.white),
-                                                child: Align(
-                                                  alignment: Alignment.topRight,
-                                                  child: IconButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          favico =
-                                                              Icons.favorite;
-                                                        });
-                                                      },
-                                                      icon: Icon(
-                                                        favico,
-                                                        size: 15,
-                                                      )),
-                                                ))
                                           ],
                                         ),
-                                        Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0,
-                                                top: 8.0,
-                                                bottom: 8.0),
-                                            child: Text(
-                                              "Rs: ${_items[index]['price']}",
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(
-                                                  fontSize: 15.0,
-                                                  color: Color.fromRGBO(
-                                                      5, 51, 56, 1),
-                                                  fontWeight: FontWeight.w900),
-                                            )),
-                                      ],
-                                    )),
-                              ));
-                        },
-                      )
-                    : null,
-              ),
-            ),
-            ElevatedButton(
-              child: const Text('Load Data'),
-              onPressed: abc,
-            ),
+                                      )),
+                ),
+            )),
+              ));
+
+            // subtitle: Text(data['company']),
+          })
+                // .toList()
+                // .cast(),
+          // ),
+        // );
+      // },
+    // )
             // Text(FirebaseAuth.instance.currentUser!.photoURL.toString())
-          ])),
+          // ])),
           // bottomNavigationBar: BottomNavigationBar(
           //   type: BottomNavigationBarType.fixed,
           //   currentIndex: _currentIndex,
@@ -861,6 +1164,6 @@ class _HomePageState extends State<HomePage> {
           // ),
           // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           // floatingActionButton: FloatingActionButton(onPressed: (){}),
-        ));
+]        ))));
   }
 }

@@ -12,12 +12,9 @@ class PropforrentDetails extends StatefulWidget {
 
 class _PropforrentDetailsState extends State<PropforrentDetails> {
   int _typevalue = 0;
-  int _areaunitvalue = 0;
   int _furnishedvalue = 0;
   int _bedroomsvalue = 0;
   int _bathroomsvalue = 0;
-  int _constatevalue = 0;
-  int _floorlevelvalue = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

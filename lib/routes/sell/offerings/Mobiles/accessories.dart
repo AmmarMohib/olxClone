@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:olx_clone/commons/custom_button.dart';
 import 'package:olx_clone/commons/custom_radio.dart';
 
 class AccessoriesDetails extends StatefulWidget {
@@ -16,6 +17,9 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
   int _typeValue = 0;
   int _condValue = 0;
   int _devtypeValue = 0;
+  String _pricetext = "";
+  String _adtitletext = "";
+  String _describetext = "";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -112,7 +116,12 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.93,
                             height: 50,
-                            child: const TextField(
+                            child: TextField(
+                              onChanged: (value) {
+                                setState(() {
+                                  _pricetext = value;
+                                });
+                              },
                               decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -291,24 +300,24 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
                                           children: [
                                             MyRadioListTile<int>(
                                               value: 1,
-                                              groupValue: _condValue,
+                                              groupValue: _typeValue,
                                               leading: 'WIRED',
                                               onChanged: (value) => setState(
-                                                  () => _condValue = value!),
+                                                  () => _typeValue = value!),
                                             ),
                                             const SizedBox(
                                               width: 10,
                                             ),
                                             MyRadioListTile<int>(
                                               value: 2,
-                                              groupValue: _condValue,
+                                              groupValue: _typeValue,
                                               leading: 'WIRELESS',
                                               onChanged: (value) => setState(
-                                                  () => _condValue = value!),
+                                                  () => _typeValue = value!),
                                             ),
                                           ],
                                         )),
-                                        SizedBox(height : 10),
+                                    SizedBox(height: 10),
                                   ],
                                 )
                               : Container(),
@@ -316,7 +325,6 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
                                   widget.category == "converters" ||
                                   widget.category == "chargers" ||
                                   widget.category == "mobile stands" ||
-                                  widget.category == "ring lights" ||
                                   widget.category == "selfie sticks" ||
                                   widget.category == "power banks" ||
                                   widget.category == "headphones" ||
@@ -383,7 +391,12 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.94,
-                                  child: const TextField(
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _adtitletext = value;
+                                      });
+                                    },
                                     decoration: InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -418,7 +431,12 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.94,
-                                  child: const TextField(
+                                  child: TextField(
+                                    onChanged: (value) {
+                                setState(() {
+                                _describetext = value;                                  
+                                });
+                              },
                                     decoration: InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -471,28 +489,17 @@ class _AccessoriesDetailsState extends State<AccessoriesDetails> {
               ],
             ),
           ),
-          bottomNavigationBar: BottomAppBar(
-              child: Row(
-            children: [
-              SizedBox(
-                width: 17,
-              ),
-              SizedBox(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width * 0.93,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        // loc.text = "";
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(5, 51, 56, 1))),
-                      child: const Text("Next"))),
-              SizedBox(
-                height: 70,
-              )
-            ],
-          ))),
+          // bottomNavigationBar: NextButton(
+          //   datatosend: [
+          //     widget.category,
+          //     _pricetext,
+          //     _typeValue,
+          //     _condValue,
+          //     _adtitletext,
+          //     _describetext,
+          //   ],
+          // )
+          ),
     );
   }
 }

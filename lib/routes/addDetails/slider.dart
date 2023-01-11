@@ -44,7 +44,7 @@ class Slideshow extends StatelessWidget {
                     child: SizedBox(
                       height: 100,
                       width: MediaQuery.of(context).size.width ,
-                      child: Image.asset(
+                      child: Image.network(
                         imageURL[pagePosition],
                         fit: BoxFit.fitWidth,
                         width: MediaQuery.of(context).size.width,

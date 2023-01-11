@@ -40,12 +40,6 @@ class Fashion extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.9,
                 ),
                 CataTxt(
-                  txt: "Accessories",
-                  category: "accessories",
-                  func: () {},
-                  showico: false, color: Color.fromRGBO(5, 51, 56, 1),
-                ),
-                CataTxt(
                   txt: "Clothes",
                   category: "clothes",
                   func: () {},
@@ -59,7 +53,7 @@ class Fashion extends StatelessWidget {
                 ),
                 CataTxt(
                   txt: "Jewellery",
-                  category: "jewllery",
+                  category: "jewellery",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),

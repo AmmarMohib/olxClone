@@ -41,7 +41,7 @@ class Animals extends StatelessWidget {
                 ),
                 CataTxt(
                   txt: "Fish & Aquariumns",
-                  category: "fish & aquariums",
+                  category: "fish & aquariumns",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),

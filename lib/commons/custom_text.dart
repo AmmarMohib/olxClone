@@ -27,7 +27,7 @@ class CataTxt extends StatelessWidget {
         color: Colors.white,
         child: InkWell(
           onTap: () {
-            if (showico == true) {
+            if (showico == true || category.toString() == "") {
               func();
             } else {
               Navigator.of(context).push(MaterialPageRoute(

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,29 +8,53 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:olx_clone/routes/addDetails/slider.dart';
 
 class AddDetails extends StatefulWidget {
-  const AddDetails(
-      {Key? key,
-      required this.des,
-      required this.price,
-      required this.imageUrl,
-      required this.slides,
-      required this.title})
-      : super(key: key);
+  const AddDetails({
+    Key? key,
+    required this.des,
+    required this.price,
+    required this.imageUrl,
+    required this.slides,
+    required this.title,
+    required this.details,
+    required this.photo_url,
+    required this.profile_name, required this.category,
+  }) : super(key: key);
+  final Map details;
   final String des;
   final String price;
   final String imageUrl;
   final String title;
+  final String photo_url;
+  final String profile_name;
   final List slides;
+  final String category;
   @override
   State<AddDetails> createState() => _AddDetailsState();
 }
 
 class _AddDetailsState extends State<AddDetails> {
+  List condition1 = [
+    "NO OPT",
+        "new",
+    "open box",
+    "refurbished",
+    "used",
+    "for parts or not working"
+  ];
+  List condition2 = [
+    "NO OPT",
+    "new",
+    "used"
+  ];
   @override
   Widget build(BuildContext context) {
     print(widget.price);
     print(widget.des);
+    print(widget.details);
     print(widget.imageUrl);
+    // final data = Map[nameof(widget.details.propertyName)];
+    // print(map[nameof(obj.propertyName));
+    // print(widget.details.key);
     return MaterialApp(
       home: Scaffold(
           // resizeToAvoidBottomInset: false,
@@ -55,7 +81,7 @@ class _AddDetailsState extends State<AddDetails> {
                       alignment: Alignment.centerRight,
                       child: IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.share),
+                        icon: const Icon(Icons.share),
                         color: Colors.white,
                       )))),
           body: SizedBox(
@@ -81,8 +107,8 @@ class _AddDetailsState extends State<AddDetails> {
                         return Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.all(10),
-                              child: Image.asset(
+                              margin: const EdgeInsets.all(10),
+                              child: Image.network(
                                 widget.slides[pagePosition],
                                 fit: BoxFit.fitWidth,
                                 width: MediaQuery.of(context).size.width,
@@ -114,7 +140,7 @@ class _AddDetailsState extends State<AddDetails> {
                   Align(
                     alignment: Alignment.topRight,
                     child: IconButton(
-                      icon: Icon(Icons.favorite_border_outlined),
+                      icon: const Icon(Icons.favorite_border_outlined),
                       onPressed: () {},
                     ),
                   )
@@ -146,49 +172,136 @@ class _AddDetailsState extends State<AddDetails> {
               ),
               Column(
                 children: [
-                  Align(
-                    alignment: Alignment.bottomLeft,
+                  const Align(
+                    alignment: Alignment.topLeft,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
+                      padding: EdgeInsets.only(left: 15.0),
                       child: Text(
                         "Details",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 16.0,
                             color: Color.fromRGBO(5, 51, 56, 1),
                             fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),
-                  Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 15.0, top: 13),
-                          child: Text(
-                            "Condition",
-                            style: const TextStyle(
-                                fontSize: 16.0,
-                                color: Color.fromRGBO(5, 51, 56, 1),
-                                fontWeight: FontWeight.w400),
+                  // Stack(
+                  //   children: [
+                  //     const Align(
+                  //       alignment: Alignment.bottomLeft,
+                  //       child: Padding(
+                  //         padding: EdgeInsets.only(left: 15.0, top: 13),
+                  //         child: Text(
+                  //           "Condition",
+                  //           style: TextStyle(
+                  //               fontSize: 16.0,
+                  //               color: Color.fromRGBO(5, 51, 56, 1),
+                  //               fontWeight: FontWeight.w400),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     const Align(
+                  //       alignment: Alignment.centerRight,
+                  //       child: Padding(
+                  //         padding: EdgeInsets.only(
+                  //             top: 13, right: 15, bottom: 15),
+                  //         child: Text(
+                  //           "New",
+                  //           style: TextStyle(
+                  //               fontSize: 16.0,
+                  //               color: Color.fromRGBO(89, 117, 115, 1),
+                  //               fontWeight: FontWeight.w400),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+
+                  // SizedBox(
+                  //   height: 100,
+                  //   child: ListView.builder(
+                  //     itemCount: widget.details.length,
+                  //     itemBuilder: (context, index) {
+                  //       return Stack(
+                  //         children: [
+                  //            Align(
+                  //             alignment: Alignment.bottomLeft,
+                  //             child: Padding(
+                  //               padding: EdgeInsets.only(left: 15.0, top: 0),
+                  //               child: Text(
+                  //                 // "Condition",
+                  //                 widget.details.keys.,
+                  //                 style: const TextStyle(
+                  //                     fontSize: 16.0,
+                  //                     color: Color.fromRGBO(5, 51, 56, 1),
+                  //                     fontWeight: FontWeight.w400),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           const Align(
+                  //             alignment: Alignment.centerRight,
+                  //             child: Padding(
+                  //               padding: EdgeInsets.only(
+                  //                   top: 0, right: 15, bottom: 15),
+                  //               child: Text(
+                  //                 "New",
+                  //                 style: TextStyle(
+                  //                     fontSize: 16.0,
+                  //                     color: Color.fromRGBO(89, 117, 115, 1),
+                  //                     fontWeight: FontWeight.w400),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: widget.details.entries.map((e) {
+                      // return Text(e.key);
+                      return Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 15.0, top: 13),
+                              child: Text(
+                                // "Condition",
+                                e.key,
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Color.fromRGBO(5, 51, 56, 1),
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 13, right: 15, bottom: 15),
-                          child: Text(
-                            "New",
-                            style: const TextStyle(
-                                fontSize: 16.0,
-                                color: Color.fromRGBO(89, 117, 115, 1),
-                                fontWeight: FontWeight.w400),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: 13, right: 15, bottom: 5),
+                              child: Text(
+                                e.key.toString() == "condition"
+                                    ? 
+                                    widget.category == "tablets" ||
+                                    widget.category == "mobile phones" ?
+                                    // widget.category == "smart watches" ?
+                                    condition1[e.value] : condition2[e.value]
+                                    : e.value.toString(),
+                                // "New",
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Color.fromRGBO(89, 117, 115, 1),
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ],
+                        ],
+                      );
+                    }).toList(),
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 1.0,
@@ -200,13 +313,13 @@ class _AddDetailsState extends State<AddDetails> {
                       // endIndent: 60,
                     ),
                   ),
-                  Align(
+                  const Align(
                     alignment: Alignment.bottomLeft,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
+                      padding: EdgeInsets.only(left: 15.0),
                       child: Text(
                         "Description",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 16.0,
                             color: Color.fromRGBO(5, 51, 56, 1),
                             fontWeight: FontWeight.w600),
@@ -247,13 +360,23 @@ class _AddDetailsState extends State<AddDetails> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10.0, top: 10.0),
                           child: CircleAvatar(
-                            child: Icon(
-                              CommunityMaterialIcons.face,
-                              color: Colors.white,
-                              size: 50,
-                            ),
                             radius: 30,
-                            backgroundColor: Color.fromRGBO(1, 48, 52, 1.0),
+                            backgroundColor:
+                                const Color.fromRGBO(1, 48, 52, 1.0),
+                            child: widget.photo_url == null
+                                ? const Icon(
+                                    CommunityMaterialIcons.face,
+                                    color: Colors.white,
+                                    size: 50,
+                                  )
+                                : ClipRRect(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    child: Image.network(
+                                      widget.photo_url.toString(),
+                                      // height: 350.0,
+                                      // width: 300.0,
+                                    ),
+                                  ),
                           ),
                         ),
                       ),
@@ -263,8 +386,8 @@ class _AddDetailsState extends State<AddDetails> {
                             padding: EdgeInsets.only(
                                 left: MediaQuery.of(context).size.width * 0.175,
                                 top: MediaQuery.of(context).size.height * 0.02),
-                            child: const Text(
-                              "Ali_tempory",
+                            child: Text(
+                              widget.profile_name.toString(),
                               style: const TextStyle(
                                   fontSize: 16.0,
                                   color: Color.fromRGBO(5, 51, 56, 1),
@@ -289,7 +412,7 @@ class _AddDetailsState extends State<AddDetails> {
                         padding: EdgeInsets.only(
                             right: MediaQuery.of(context).size.width * 0.01,
                             top: MediaQuery.of(context).size.height * 0.03),
-                        child: Align(
+                        child: const Align(
                             alignment: Alignment.bottomRight,
                             child: Icon(
                               CupertinoIcons.forward,
@@ -298,16 +421,16 @@ class _AddDetailsState extends State<AddDetails> {
                       ),
                     ],
                   ),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * 1.0,
-                        child: const Divider(
-                          color: Color.fromRGBO(235, 238, 239, 1.0),
-                          height: 20,
-                          thickness: 1.8,
-                          // indent: 10,
-                          // endIndent: 60,
-                        ),
-                      ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 1.0,
+                    child: const Divider(
+                      color: Color.fromRGBO(235, 238, 239, 1.0),
+                      height: 20,
+                      thickness: 1.8,
+                      // indent: 10,
+                      // endIndent: 60,
+                    ),
+                  ),
                 ],
               )
             ]),

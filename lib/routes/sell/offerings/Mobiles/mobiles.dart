@@ -1,24 +1,95 @@
+import 'dart:io';
+import 'dart:math';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:olx_clone/commons/custom_button.dart';
 import 'package:olx_clone/commons/custom_radio.dart';
+import 'package:olx_clone/routes/home/homepage.dart';
+import 'package:olx_clone/routes/sell/sell.dart';
+import 'package:olx_clone/routes/sell/sellcat/mobile.dart';
+import 'package:olx_clone/routes/sell/offerings/Mobiles/brands.dart';
+import 'package:olx_clone/functions/pick_photo.dart';
 
-class Mobiles extends StatefulWidget {
+class MobilesDetails extends StatefulWidget {
   final String category;
-  const Mobiles({super.key, required this.category});
+  final String? brand; // nullable and optional
+  const MobilesDetails({super.key, required this.category, this.brand});
 
   @override
-  State<Mobiles> createState() => _MobilesState();
+  State<MobilesDetails> createState() => _MobilesDetailsState();
 }
 
-class _MobilesState extends State<Mobiles> {
-  int _value = 1;
+class _MobilesDetailsState extends State<MobilesDetails> {
+  final ImagePicker imagePicker = ImagePicker();
+  List<XFile>? imageFileList = [];
+  List urls = [];
+  void selectImages(List<XFile> _images) async {
+    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+    if (selectedImages!.isNotEmpty) {
+      imageFileList!.addAll(selectedImages);
+      // Random _ranStg = Random();
+      // final String imgPath = 'docs/${_ranStg.nextInt(10000)}';
+      // // String file = "";
+      // final FirebaseStorage storage = FirebaseStorage.instance;
+      // for (var i = 0; i < imageFileList!.length; i++) {
+      //   // file = imageFileList![i].path;
+      //   TaskSnapshot tasking =
+      //       await storage.ref(imgPath).putFile(File(imageFileList![i].path));
+      //   var urls = await FirebaseStorage.instance.ref(imgPath).getDownloadURL();
+      //   var url = urls.toString();
+      //   // print("Image List Length:" + imageFileList!.length.toString());
+      //   print(url);
+      // }
+
+      // for (var element in selectedImages) {
+      //   print(element.name);
+      // }
+      // setState(() {});
+      // }
+
+      // Future<List<String>> uploadFiles() async {
+      // if(imagePicker)
+      var imageUrls =
+          await Future.wait(_images.map((_image) => uploadFile(_image)));
+      print(imageUrls);
+      // return imageUrls;
+    }
+  }
+
+  Future<String> uploadFile(XFile _image) async {
+    Random _ranStg = Random();
+    final String imgPath = 'docs/${_ranStg.nextInt(10000)}';
+    Reference storageReference = FirebaseStorage.instance.ref().child(imgPath);
+    UploadTask uploadTask = storageReference.putFile(File(_image.path));
+    await uploadTask.then((p0) => print(p0));
+    var url = await storageReference.getDownloadURL();
+    setState(() {
+      urls.add(url.toString());
+    });
+    return await storageReference.getDownloadURL();
+  }
+
+  int _conditionvalue = 0;
+  String _pricetext = "";
+  String _adtitletext = "";
+  String _describetext = "";
+  String _brandtext = "";
   @override
   Widget build(BuildContext context) {
+    print(widget.brand);
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              onPressed: (() => Navigator.pop(context)),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              },
               icon:
                   const Icon(Icons.close, color: Color.fromRGBO(5, 51, 56, 1)),
             ),
@@ -42,48 +113,54 @@ class _MobilesState extends State<Mobiles> {
                 Center(
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.93,
-                    child: Container(
-                      color: const Color.fromRGBO(250, 250, 250, 1.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "UPLOAD UP TO 20 PHOTOS",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromRGBO(5, 51, 56, 1)),
-                              ),
-                              const Spacer(),
-                              const Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                size: 15,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          // Image(image: AssetImage("assets/images/upload_logo.png"), width: MediaQuery.of(context).size.width * 0.9,)
-                          Container(
-                              height: 150,
-                              foregroundDecoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/upload_logo.png"),
-                                      fit: BoxFit.fill))),
-                        ],
+                    child: InkWell(
+                      onTap: (() {
+                        selectImages(imageFileList!);
+                        // uploadFiles(imageFileList!);
+                      }),
+                      child: Container(
+                        color: const Color.fromRGBO(250, 250, 250, 1.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Text(
+                                  "UPLOAD UP TO 20 PHOTOS",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromRGBO(5, 51, 56, 1)),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 15,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            // Image(image: AssetImage("assets/images/upload_logo.png"), width: MediaQuery.of(context).size.width * 0.9,)
+                            Container(
+                                height: 150,
+                                foregroundDecoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/upload_logo.png"),
+                                        fit: BoxFit.fill))),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -108,7 +185,12 @@ class _MobilesState extends State<Mobiles> {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.93,
                             height: 50,
-                            child: const TextField(
+                            child: TextField(
+                              onChanged: ((value) {
+                                setState(() {
+                                  _pricetext = value;
+                                });
+                              }),
                               decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -133,61 +215,32 @@ class _MobilesState extends State<Mobiles> {
                             "Brand *",
                             style: TextStyle(
                                 color: Color.fromRGBO(12, 56, 61, 1.0),
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 12),
                           ),
-                          // SizedBox(
-                          //   height: 7,
-                          // ),
-                          Container(
-                              margin: const EdgeInsets.only(left: 0, top: 10),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.93,
-                                height: 55,
-                                child: Theme(
-                                  data: ThemeData(
-                                    splashColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                  ),
-                                  child: InkWell(
-                                    // splashFactory: NoSplash.splashFactory,
-                                    onTap: () {
-                                      if (kDebugMode) {
-                                        print("object");
-                                      }
-                                    },
-                                    child: const IgnorePointer(
-                                      child: TextField(
-                                        // style: TextStyle(backgroundColor: Colors.amber),
-                                        // readOnly: true,
-                                        // expands: true,
-                                        // minLines: 2,
-                                        // maxLines: 2,
-                                        textAlignVertical:
-                                            TextAlignVertical.center,
-                                        // controller: loc,
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          fillColor: Color.fromRGBO(
-                                              235, 238, 239, 1.0),
-                                          filled: true,
-                                          contentPadding: EdgeInsets.all(10),
-                                          // prefixIcon: Icon(Icons.search),
-                                          suffixIcon:
-                                              Icon(Icons.arrow_forward_ios),
-                                          hoverColor: Colors.amberAccent,
-                                          // border:
-                                          hintStyle: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  0, 47, 52, 1.0),
-                                              fontWeight: FontWeight.bold),
-                                          hintText: 'None',
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.93,
+                            height: 50,
+                            child: TextField(
+                              onChanged: ((value) {
+                                setState(() {
+                                  _brandtext = value;
+                                });
+                              }),
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        color: Color.fromRGBO(
+                                            116, 205, 202, 1.0))),
+                                border: OutlineInputBorder(),
+                                // labelText: 'Enter address',
+                                // hintText: 'Enter the name of the address'
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -196,7 +249,8 @@ class _MobilesState extends State<Mobiles> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          widget.category == "mobile phones" || widget.category == "tablets"
+                          widget.category == "mobile phones" ||
+                                  widget.category == "tablets"
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -213,62 +267,69 @@ class _MobilesState extends State<Mobiles> {
                                             left: 0, top: 10),
                                         child: Wrap(
                                           children: [
-                              MyRadioListTile<int>(
-                                value: 1,
-                                groupValue: _value,
-                                leading: 'new',
-                                onChanged: (value) =>
-                                   setState(() => _value = value!),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              MyRadioListTile<int>(
-                                value: 2,
-                                groupValue: _value,
-                                leading: 'open box',
-                                onChanged: (value) =>
-                                    setState(() => _value = value!),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              MyRadioListTile<int>(
-                                value: 3,
-                                groupValue: _value,
-                                leading: 'refurbished',
-                                onChanged: (value) =>
-                                    setState(() => _value = value!),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              MyRadioListTile<int>(
-                                value: 4,
-                                groupValue: _value,
-                                leading: 'used',
-                                onChanged: (value) =>
-                                    setState(() => _value = value!),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: MyRadioListTile<int>(
-                                  value: 5,
-                                  groupValue: _value,
-                                  leading: 'for parts or not working',
-                                  onChanged: (value) =>
-                                      setState(() => _value = value!),
-                                ),
-                              ),
+                                            MyRadioListTile<int>(
+                                              value: 1,
+                                              groupValue: _conditionvalue,
+                                              leading: 'new',
+                                              onChanged: (value) => setState(
+                                                  () =>
+                                                      _conditionvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 2,
+                                              groupValue: _conditionvalue,
+                                              leading: 'open box',
+                                              onChanged: (value) => setState(
+                                                  () =>
+                                                      _conditionvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 3,
+                                              groupValue: _conditionvalue,
+                                              leading: 'refurbished',
+                                              onChanged: (value) => setState(
+                                                  () =>
+                                                      _conditionvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 4,
+                                              groupValue: _conditionvalue,
+                                              leading: 'used',
+                                              onChanged: (value) => setState(
+                                                  () =>
+                                                      _conditionvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0),
+                                              child: MyRadioListTile<int>(
+                                                value: 5,
+                                                groupValue: _conditionvalue,
+                                                leading:
+                                                    'for parts or not working',
+                                                onChanged: (value) => setState(
+                                                    () => _conditionvalue =
+                                                        value!),
+                                              ),
+                                            ),
                                           ],
                                         )),
                                   ],
                                 )
                               : Container(),
-                                widget.category == "smart watches"
+                          widget.category == "smart watches"
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -285,26 +346,28 @@ class _MobilesState extends State<Mobiles> {
                                             left: 0, top: 10),
                                         child: Wrap(
                                           children: [
-                              MyRadioListTile<int>(
-                                value: 1,
-                                groupValue: _value,
-                                leading: 'new',
-                                onChanged: (value) =>
-                                    setState(() => _value = value!),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              MyRadioListTile<int>(
-                                value: 4,
-                                groupValue: _value,
-                                leading: 'used',
-                                onChanged: (value) =>
-                                    setState(() => _value = value!),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
+                                            MyRadioListTile<int>(
+                                              value: 1,
+                                              groupValue: _conditionvalue,
+                                              leading: 'new',
+                                              onChanged: (value) => setState(
+                                                  () =>
+                                                      _conditionvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            MyRadioListTile<int>(
+                                              value: 4,
+                                              groupValue: _conditionvalue,
+                                              leading: 'used',
+                                              onChanged: (value) => setState(
+                                                  () =>
+                                                      _conditionvalue = value!),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
                                           ],
                                         )),
                                   ],
@@ -318,8 +381,7 @@ class _MobilesState extends State<Mobiles> {
                                 const Text(
                                   "Ad title *",
                                   style: TextStyle(
-                                      color:
-                                          Color.fromRGBO(12, 56, 61, 1.0),
+                                      color: Color.fromRGBO(12, 56, 61, 1.0),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -327,9 +389,14 @@ class _MobilesState extends State<Mobiles> {
                                   height: 7,
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width *
-                                      0.94,
-                                  child: const TextField(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.94,
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _adtitletext = value;
+                                      });
+                                    },
                                     decoration: InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -353,8 +420,7 @@ class _MobilesState extends State<Mobiles> {
                                 const Text(
                                   "Describe what you are selling *",
                                   style: TextStyle(
-                                      color:
-                                          Color.fromRGBO(12, 56, 61, 1.0),
+                                      color: Color.fromRGBO(12, 56, 61, 1.0),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -362,9 +428,14 @@ class _MobilesState extends State<Mobiles> {
                                   height: 7,
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width *
-                                      0.94,
-                                  child: const TextField(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.94,
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                      _describetext = value;                                        
+                                      });
+                                    },
                                     decoration: InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -384,10 +455,9 @@ class _MobilesState extends State<Mobiles> {
                           Padding(
                             padding: const EdgeInsets.only(top: 30),
                             child: SizedBox(
-                              width:
-                                  MediaQuery.of(context).size.width * 0.94,
-                              child: IgnorePointer(
-                                child: const TextField(
+                              width: MediaQuery.of(context).size.width * 0.94,
+                              child: const IgnorePointer(
+                                child: TextField(
                                   decoration: InputDecoration(
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -401,8 +471,7 @@ class _MobilesState extends State<Mobiles> {
                                         Icons.arrow_forward_ios_rounded,
                                         size: 15,
                                         color: Colors.black),
-                                    hintStyle:
-                                        TextStyle(color: Colors.black),
+                                    hintStyle: TextStyle(color: Colors.black),
                                     // semanticCounterText: ""
                                     // prefixText: "jojoo"
                                   ),
@@ -419,28 +488,22 @@ class _MobilesState extends State<Mobiles> {
               ],
             ),
           ),
-          bottomNavigationBar: BottomAppBar(
-              child: Row(
-            children: [
-              SizedBox(
-                width: 17,
-              ),
-              SizedBox(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width * 0.93,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        // loc.text = "";
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(5, 51, 56, 1))),
-                      child: const Text("Next"))),
-              SizedBox(
-                height: 70,
-              )
-            ],
-          ))),
+          bottomNavigationBar: NextButton(
+            datatosend: {
+              "category" : widget.category,
+              "pro_photo": FirebaseAuth.instance.currentUser!.photoURL,
+              "pro_name": FirebaseAuth.instance.currentUser!.displayName,
+              "pro_email": FirebaseAuth.instance.currentUser!.email,
+             "price" : _pricetext,
+             "details" : {
+             "brand" : _brandtext,
+             "condition" : _conditionvalue,
+             },
+            "ad-title" :  _adtitletext,
+             "description" : _describetext,
+            },
+            images: urls,
+          )),
     );
   }
 }

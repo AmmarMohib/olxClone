@@ -41,7 +41,7 @@ class Books extends StatelessWidget {
                 ),
                 CataTxt(
                   txt: "Books & Magazines",
-                  category: "books & magzines",
+                  category: "books & magazines",
                   func: () {},
                   showico: false, color: Color.fromRGBO(5, 51, 56, 1),
                 ),

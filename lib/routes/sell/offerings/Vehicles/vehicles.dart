@@ -1,5 +1,8 @@
+// ignore_for_file: unused_field, non_constant_identifier_names
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:olx_clone/commons/custom_button.dart';
 import 'package:olx_clone/commons/custom_radio.dart';
 
 class VehiclesDetails extends StatefulWidget {
@@ -19,6 +22,16 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
   int _installmentplanvalue = 0;
   int _registeredvalue = 0;
   int _typevalue = 0;
+  String _maketext = "";
+  String _modeltext = "";
+  String _pricetext = "";
+  String _yeartext = "";
+  String _KMstext = "";
+  String _registext = "";
+  String _featurestext = "";
+  String _adtitletext = "";
+  String _downpaymenttext = "";
+  String _monthlypaymenttext = "";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -109,65 +122,33 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                   "Make *",
                                   style: TextStyle(
                                       color: Color.fromRGBO(12, 56, 61, 1.0),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                      fontSize: 12),
                                 ),
-                                // SizedBox(
-                                //   height: 7,
-                                // ),
-                                Container(
-                                    margin:
-                                        const EdgeInsets.only(left: 0, top: 10),
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.93,
-                                      height: 55,
-                                      child: Theme(
-                                        data: ThemeData(
-                                          splashColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                        ),
-                                        child: InkWell(
-                                          // splashFactory: NoSplash.splashFactory,
-                                          onTap: () {
-                                            if (kDebugMode) {
-                                              print("object");
-                                            }
-                                          },
-                                          child: const IgnorePointer(
-                                            child: TextField(
-                                              // style: TextStyle(backgroundColor: Colors.amber),
-                                              // readOnly: true,
-                                              // expands: true,
-                                              // minLines: 2,
-                                              // maxLines: 2,
-                                              textAlignVertical:
-                                                  TextAlignVertical.center,
-                                              // controller: loc,
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                fillColor: Color.fromRGBO(
-                                                    235, 238, 239, 1.0),
-                                                filled: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(10),
-                                                // prefixIcon: Icon(Icons.search),
-                                                suffixIcon: Icon(
-                                                    Icons.arrow_forward_ios),
-                                                hoverColor: Colors.amberAccent,
-                                                // border:
-                                                hintStyle: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        0, 47, 52, 1.0),
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                hintText: 'None',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )),
+                                const SizedBox(
+                                  height: 7,
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.93,
+                                  height: 50,
+                                  child: TextField(
+                                    onChanged: ((value) {
+                                      setState(() {
+                                        _maketext = value;
+                                      });
+                                    }),
+                                    decoration: InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: Color.fromRGBO(
+                                                  116, 205, 202, 1.0))),
+                                      border: OutlineInputBorder(),
+                                      // labelText: 'Enter address',
+                                      // hintText: 'Enter the name of the address'
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           )
@@ -184,65 +165,33 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                   "Model *",
                                   style: TextStyle(
                                       color: Color.fromRGBO(12, 56, 61, 1.0),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                      fontSize: 12),
                                 ),
-                                // SizedBox(
-                                //   height: 7,
-                                // ),
-                                Container(
-                                    margin:
-                                        const EdgeInsets.only(left: 0, top: 10),
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.93,
-                                      height: 55,
-                                      child: Theme(
-                                        data: ThemeData(
-                                          splashColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                        ),
-                                        child: InkWell(
-                                          // splashFactory: NoSplash.splashFactory,
-                                          onTap: () {
-                                            if (kDebugMode) {
-                                              print("object");
-                                            }
-                                          },
-                                          child: const IgnorePointer(
-                                            child: TextField(
-                                              // style: TextStyle(backgroundColor: Colors.amber),
-                                              // readOnly: true,
-                                              // expands: true,
-                                              // minLines: 2,
-                                              // maxLines: 2,
-                                              textAlignVertical:
-                                                  TextAlignVertical.center,
-                                              // controller: loc,
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                fillColor: Color.fromRGBO(
-                                                    235, 238, 239, 1.0),
-                                                filled: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(10),
-                                                // prefixIcon: Icon(Icons.search),
-                                                suffixIcon: Icon(
-                                                    Icons.arrow_forward_ios),
-                                                hoverColor: Colors.amberAccent,
-                                                // border:
-                                                hintStyle: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        0, 47, 52, 1.0),
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                hintText: 'None',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )),
+                                const SizedBox(
+                                  height: 7,
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.93,
+                                  height: 50,
+                                  child: TextField(
+                                    onChanged: ((value) {
+                                      setState(() {
+                                        _modeltext = value;
+                                      });
+                                    }),
+                                    decoration: InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: Color.fromRGBO(
+                                                  116, 205, 202, 1.0))),
+                                      border: OutlineInputBorder(),
+                                      // labelText: 'Enter address',
+                                      // hintText: 'Enter the name of the address'
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           )
@@ -266,7 +215,12 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.93,
                                   height: 50,
-                                  child: const TextField(
+                                  child: TextField(
+                                    onChanged: ((value) {
+                                      setState(() {
+                                        _pricetext = value;
+                                      });
+                                    }),
                                     decoration: InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -314,7 +268,12 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.94,
-                                        child: const TextField(
+                                        child: TextField(
+                                          onChanged: ((value) {
+                                      setState(() {
+                                        _yeartext = value;
+                                      });
+                                    }),
                                           decoration: InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -356,7 +315,12 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.94,
-                                        child: const TextField(
+                                        child: TextField(
+                                       onChanged: ((value) {
+                                      setState(() {
+                                        _KMstext = value;
+                                      });
+                                    }),   
                                           decoration: InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -460,81 +424,44 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                               : Container(),
                           widget.category == "cars"
                               ? Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 0, top: 30),
+                                  padding: const EdgeInsets.only(top: 30),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       const Text(
-                                        "Registration city",
+                                        "Registration City *",
                                         style: TextStyle(
                                             color:
                                                 Color.fromRGBO(12, 56, 61, 1.0),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
+                                            fontSize: 12),
                                       ),
-                                      // SizedBox(
-                                      //   height: 7,
-                                      // ),
-                                      Container(
-                                          margin: const EdgeInsets.only(
-                                              left: 0, top: 10),
-                                          child: SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
                                                 0.93,
-                                            height: 55,
-                                            child: Theme(
-                                              data: ThemeData(
-                                                splashColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                              ),
-                                              child: InkWell(
-                                                // splashFactory: NoSplash.splashFactory,
-                                                onTap: () {
-                                                  if (kDebugMode) {
-                                                    print("object");
-                                                  }
-                                                },
-                                                child: const IgnorePointer(
-                                                  child: TextField(
-                                                    // style: TextStyle(backgroundColor: Colors.amber),
-                                                    // readOnly: true,
-                                                    // expands: true,
-                                                    // minLines: 2,
-                                                    // maxLines: 2,
-                                                    textAlignVertical:
-                                                        TextAlignVertical
-                                                            .center,
-                                                    // controller: loc,
-                                                    decoration: InputDecoration(
-                                                      border: InputBorder.none,
-                                                      fillColor: Color.fromRGBO(
-                                                          235, 238, 239, 1.0),
-                                                      filled: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(10),
-                                                      // prefixIcon: Icon(Icons.search),
-                                                      suffixIcon: Icon(Icons
-                                                          .arrow_forward_ios),
-                                                      hoverColor:
-                                                          Colors.amberAccent,
-                                                      // border:
-                                                      hintStyle: TextStyle(
-                                                          color: Color.fromRGBO(
-                                                              0, 47, 52, 1.0),
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                      hintText: 'None',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          )),
+                                        height: 50,
+                                        child: TextField(
+                                          onChanged: ((value) {
+                                      setState(() {
+                                        _registext = value;
+                                      });
+                                    }),
+                                          decoration: InputDecoration(
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1,
+                                                    color: Color.fromRGBO(
+                                                        116, 205, 202, 1.0))),
+                                            border: OutlineInputBorder(),
+                                            // labelText: 'Enter address',
+                                            // hintText: 'Enter the name of the address'
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 )
@@ -639,8 +566,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                           widget.category == "cars" ||
                                   widget.category == "cars on installments"
                               ? Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 0, top: 0),
+                                  padding: const EdgeInsets.only(top: 0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -650,77 +576,38 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                         style: TextStyle(
                                             color:
                                                 Color.fromRGBO(12, 56, 61, 1.0),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
+                                            fontSize: 12),
                                       ),
-                                      // SizedBox(
-                                      //   height: 7,
-                                      // ),
-                                      Container(
-                                          margin: const EdgeInsets.only(
-                                              left: 0, top: 10),
-                                          child: SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.93,
-                                            height: 55,
-                                            child: Theme(
-                                              data: ThemeData(
-                                                splashColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                              ),
-                                              child: InkWell(
-                                                // splashFactory: NoSplash.splashFactory,
-                                                onTap: () {
-                                                  if (kDebugMode) {
-                                                    print("object");
-                                                  }
-                                                },
-                                                child: const IgnorePointer(
-                                                  child: TextField(
-                                                    // style: TextStyle(backgroundColor: Colors.amber),
-                                                    // readOnly: true,
-                                                    // expands: true,
-                                                    // minLines: 2,
-                                                    // maxLines: 2,
-                                                    textAlignVertical:
-                                                        TextAlignVertical
-                                                            .center,
-                                                    // controller: loc,
-                                                    decoration: InputDecoration(
-                                                      border: InputBorder.none,
-                                                      fillColor: Color.fromRGBO(
-                                                          235, 238, 239, 1.0),
-                                                      filled: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(10),
-                                                      // prefixIcon: Icon(Icons.search),
-                                                      suffixIcon: Icon(Icons
-                                                          .arrow_forward_ios),
-                                                      hoverColor:
-                                                          Colors.amberAccent,
-                                                      // border:
-                                                      hintStyle: TextStyle(
-                                                          color: Color.fromRGBO(
-                                                              0, 47, 52, 1.0),
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                      hintText: 'None',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          )),
+                                      const SizedBox(
+                                        height: 7,
+                                      ),
                                       SizedBox(
-                                        height: 20,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.93,
+                                        height: 50,
+                                        child: TextField(
+                                          onChanged: ((value) {
+                                      setState(() {
+                                        _featurestext = value;
+                                      });
+                                    }),
+                                          decoration: InputDecoration(
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1,
+                                                    color: Color.fromRGBO(
+                                                        116, 205, 202, 1.0))),
+                                            border: OutlineInputBorder(),
+                                            // labelText: 'Enter address',
+                                            // hintText: 'Enter the name of the address'
+                                          ),
+                                        ),
                                       ),
+                                      SizedBox(height: 20)
                                     ],
                                   ),
                                 )
-
                               : Container(),
                           widget.category == "cars" ||
                                   widget.category == "cars on installments"
@@ -917,7 +804,12 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                                     .size
                                                     .width *
                                                 0.94,
-                                            child: const TextField(
+                                            child: TextField(
+                                              onChanged: ((value) {
+                                      setState(() {
+                                        _downpaymenttext = value;
+                                      });
+                                    }),
                                               decoration: InputDecoration(
                                                 focusedBorder:
                                                     OutlineInputBorder(
@@ -960,7 +852,12 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                                     .size
                                                     .width *
                                                 0.94,
-                                            child: const TextField(
+                                            child: TextField(
+                                              onChanged: ((value) {
+                                      setState(() {
+                                        _monthlypaymenttext = value;
+                                      });
+                                    }),
                                               decoration: InputDecoration(
                                                 focusedBorder:
                                                     OutlineInputBorder(
@@ -1225,28 +1122,32 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
               ],
             ),
           ),
-          bottomNavigationBar: BottomAppBar(
-              child: Row(
-            children: [
-              SizedBox(
-                width: 17,
-              ),
-              SizedBox(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width * 0.93,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        // loc.text = "";
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(5, 51, 56, 1))),
-                      child: const Text("Next"))),
-              SizedBox(
-                height: 70,
-              )
-            ],
-          ))),
+  //         bottomNavigationBar: NextButton(
+  //           datatosend: [
+  //             widget.category,
+  //       _fuelvalue,
+  // _carDocvalue,
+  // _assemblyvalue,
+  // _transmissionvalue,
+  // _conditionvalue,
+  // _installmentplanvalue,
+  // _registeredvalue,
+  // _typevalue,
+  // _maketext,
+  // _modeltext,
+  // _pricetext,
+  // _yeartext,
+  // _KMstext,
+  // _registext,
+  // _featurestext,
+  // _adtitletext,
+  // _downpaymenttext,
+  // _monthlypaymenttext,
+  // _adtitletext,
+
+  //           ],
+  //         )
+  ),
     );
   }
 }
