@@ -1,9 +1,16 @@
 // ignore_for_file: unused_field, non_constant_identifier_names
 
+import 'dart:io';
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:olx_clone/commons/custom_button.dart';
 import 'package:olx_clone/commons/custom_radio.dart';
+import 'package:olx_clone/routes/home/homepage.dart';
 
 class VehiclesDetails extends StatefulWidget {
   final String category;
@@ -30,8 +37,58 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
   String _registext = "";
   String _featurestext = "";
   String _adtitletext = "";
+  String _describetext = "";
   String _downpaymenttext = "";
   String _monthlypaymenttext = "";
+  final ImagePicker imagePicker = ImagePicker();
+  List<XFile>? imageFileList = [];
+  List urls = [];
+  void selectImages(List<XFile> _images) async {
+    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+    if (selectedImages!.isNotEmpty) {
+      imageFileList!.addAll(selectedImages);
+      // Random _ranStg = Random();
+      // final String imgPath = 'docs/${_ranStg.nextInt(10000)}';
+      // // String file = "";
+      // final FirebaseStorage storage = FirebaseStorage.instance;
+      // for (var i = 0; i < imageFileList!.length; i++) {
+      //   // file = imageFileList![i].path;
+      //   TaskSnapshot tasking =
+      //       await storage.ref(imgPath).putFile(File(imageFileList![i].path));
+      //   var urls = await FirebaseStorage.instance.ref(imgPath).getDownloadURL();
+      //   var url = urls.toString();
+      //   // print("Image List Length:" + imageFileList!.length.toString());
+      //   print(url);
+      // }
+
+      // for (var element in selectedImages) {
+      //   print(element.name);
+      // }
+      // setState(() {});
+      // }
+
+      // Future<List<String>> uploadFiles() async {
+      // if(imagePicker)
+      var imageUrls =
+          await Future.wait(_images.map((_image) => uploadFile(_image)));
+      print(imageUrls);
+      // return imageUrls;
+    }
+  }
+
+  Future<String> uploadFile(XFile _image) async {
+    Random _ranStg = Random();
+    final String imgPath = 'docs/${_ranStg.nextInt(10000)}';
+    Reference storageReference = FirebaseStorage.instance.ref().child(imgPath);
+    UploadTask uploadTask = storageReference.putFile(File(_image.path));
+    await uploadTask.then((p0) => print(p0));
+    var url = await storageReference.getDownloadURL();
+    setState(() {
+      urls.add(url.toString());
+    });
+    return await storageReference.getDownloadURL();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -59,51 +116,56 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                 const SizedBox(
                   height: 10,
                 ),
-                Center(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.93,
-                    child: Container(
-                      color: const Color.fromRGBO(250, 250, 250, 1.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "UPLOAD UP TO 20 PHOTOS",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromRGBO(5, 51, 56, 1)),
-                              ),
-                              const Spacer(),
-                              const Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                size: 15,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          // Image(image: AssetImage("assets/images/upload_logo.png"), width: MediaQuery.of(context).size.width * 0.9,)
-                          Container(
-                              height: 150,
-                              foregroundDecoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/upload_logo.png"),
-                                      fit: BoxFit.fill))),
-                        ],
+                InkWell(
+                  onTap: () {
+                    selectImages(imageFileList!);
+                  },
+                  child: Center(
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.93,
+                      child: Container(
+                        color: const Color.fromRGBO(250, 250, 250, 1.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Text(
+                                  "UPLOAD UP TO 20 PHOTOS",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromRGBO(5, 51, 56, 1)),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 15,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            // Image(image: AssetImage("assets/images/upload_logo.png"), width: MediaQuery.of(context).size.width * 0.9,)
+                            Container(
+                                height: 150,
+                                foregroundDecoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/upload_logo.png"),
+                                        fit: BoxFit.fill))),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -137,7 +199,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                         _maketext = value;
                                       });
                                     }),
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                               width: 1,
@@ -180,7 +242,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                         _modeltext = value;
                                       });
                                     }),
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                               width: 1,
@@ -221,7 +283,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                         _pricetext = value;
                                       });
                                     }),
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                               width: 1,
@@ -270,11 +332,11 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                                 0.94,
                                         child: TextField(
                                           onChanged: ((value) {
-                                      setState(() {
-                                        _yeartext = value;
-                                      });
-                                    }),
-                                          decoration: InputDecoration(
+                                            setState(() {
+                                              _yeartext = value;
+                                            });
+                                          }),
+                                          decoration: const InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                     width: 1,
@@ -316,12 +378,12 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                             MediaQuery.of(context).size.width *
                                                 0.94,
                                         child: TextField(
-                                       onChanged: ((value) {
-                                      setState(() {
-                                        _KMstext = value;
-                                      });
-                                    }),   
-                                          decoration: InputDecoration(
+                                          onChanged: ((value) {
+                                            setState(() {
+                                              _KMstext = value;
+                                            });
+                                          }),
+                                          decoration: const InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                     width: 1,
@@ -343,7 +405,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                     const Text(
                                       "Fuel *",
                                       style: TextStyle(
@@ -446,11 +508,11 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                         height: 50,
                                         child: TextField(
                                           onChanged: ((value) {
-                                      setState(() {
-                                        _registext = value;
-                                      });
-                                    }),
-                                          decoration: InputDecoration(
+                                            setState(() {
+                                              _registext = value;
+                                            });
+                                          }),
+                                          decoration: const InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                     width: 1,
@@ -466,7 +528,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                   ),
                                 )
                               : Container(),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           widget.category == "cars" ||
@@ -509,7 +571,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                             ),
                                           ],
                                         )),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 25,
                                     ),
                                   ],
@@ -557,7 +619,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                             ),
                                           ],
                                         )),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 25,
                                     ),
                                   ],
@@ -588,11 +650,11 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                         height: 50,
                                         child: TextField(
                                           onChanged: ((value) {
-                                      setState(() {
-                                        _featurestext = value;
-                                      });
-                                    }),
-                                          decoration: InputDecoration(
+                                            setState(() {
+                                              _featurestext = value;
+                                            });
+                                          }),
+                                          decoration: const InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                     width: 1,
@@ -604,7 +666,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 20)
+                                      const SizedBox(height: 20)
                                     ],
                                   ),
                                 )
@@ -651,7 +713,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                             ),
                                           ],
                                         )),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20,
                                     ),
                                   ],
@@ -742,7 +804,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20,
                                     ),
                                     const Text(
@@ -806,11 +868,11 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                                 0.94,
                                             child: TextField(
                                               onChanged: ((value) {
-                                      setState(() {
-                                        _downpaymenttext = value;
-                                      });
-                                    }),
-                                              decoration: InputDecoration(
+                                                setState(() {
+                                                  _downpaymenttext = value;
+                                                });
+                                              }),
+                                              decoration: const InputDecoration(
                                                 focusedBorder:
                                                     OutlineInputBorder(
                                                         borderSide: BorderSide(
@@ -854,11 +916,12 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                                 0.94,
                                             child: TextField(
                                               onChanged: ((value) {
-                                      setState(() {
-                                        _monthlypaymenttext = value;
-                                      });
-                                    }),
-                                              decoration: InputDecoration(
+                                                setState(() {
+                                                  _monthlypaymenttext = value;
+                                                  _pricetext = value;
+                                                });
+                                              }),
+                                              decoration: const InputDecoration(
                                                 focusedBorder:
                                                     OutlineInputBorder(
                                                         borderSide: BorderSide(
@@ -878,7 +941,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                   ],
@@ -931,7 +994,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                                   () => _installmentplanvalue =
                                                       value!),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 10,
                                             ),
                                             MyRadioListTile<int>(
@@ -1034,8 +1097,13 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.94,
-                                  child: const TextField(
-                                    decoration: InputDecoration(
+                                  child: TextField(
+                                    onChanged: ((value) {
+                                      setState(() {
+                                        _adtitletext = value;
+                                      });
+                                    }),
+                                    decoration: const InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                               width: 1,
@@ -1068,8 +1136,13 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.94,
-                                  child: const TextField(
-                                    decoration: InputDecoration(
+                                  child: TextField(
+                                    onChanged: ((value) {
+                                      setState(() {
+                                        _describetext = value;
+                                      });
+                                    }),
+                                    decoration: const InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                               width: 1,
@@ -1089,8 +1162,8 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
                             padding: const EdgeInsets.only(top: 30),
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.94,
-                              child: IgnorePointer(
-                                child: const TextField(
+                              child: const IgnorePointer(
+                                child: TextField(
                                   decoration: InputDecoration(
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -1122,32 +1195,67 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
               ],
             ),
           ),
-  //         bottomNavigationBar: NextButton(
-  //           datatosend: [
-  //             widget.category,
-  //       _fuelvalue,
-  // _carDocvalue,
-  // _assemblyvalue,
-  // _transmissionvalue,
-  // _conditionvalue,
-  // _installmentplanvalue,
-  // _registeredvalue,
-  // _typevalue,
-  // _maketext,
-  // _modeltext,
-  // _pricetext,
-  // _yeartext,
-  // _KMstext,
-  // _registext,
-  // _featurestext,
-  // _adtitletext,
-  // _downpaymenttext,
-  // _monthlypaymenttext,
-  // _adtitletext,
+          bottomNavigationBar: NextButton(
+            datatosend: {
+              "category": widget.category,
+              "pro_photo": FirebaseAuth.instance.currentUser!.photoURL,
+              "pro_name": FirebaseAuth.instance.currentUser!.displayName,
+              "pro_email": FirebaseAuth.instance.currentUser!.email,
+              "price": _pricetext,
+              "details": {
+                "Type": widget.category.toCapitalized(),
+                 "Make" : _maketext,
+                "Model" : _modeltext,
+                "Year" : _yeartext,
+                 "KM's driven" : _KMstext,
+                "Fuel" : _fuelvalue,
+                'Registration City' : _registext,
+                "Car documents" : _carDocvalue,
+                 "Assembly" : _assemblyvalue,
+                "features" : _featurestext,
+                     "Transmission"
+                    : _transmissionvalue,
+                "Condition": _conditionvalue,
+                "Registered" : _registeredvalue,
+                "Down Payment" : _downpaymenttext,
+                
+                     "Monthly installment"
+                    : _monthlypaymenttext,
+                    "Installment plan"
+                    : _installmentplanvalue,
+              },
+              "ad-title": _adtitletext,
 
-  //           ],
-  //         )
-  ),
+              "description": _describetext,
+            },
+            images: urls,
+          )
+          //         bottomNavigationBar: NextButton(
+          //           datatosend: [
+          //             widget.category,
+          //       _fuelvalue,
+          // _carDocvalue,
+          // _assemblyvalue,
+          // _transmissionvalue,
+          // _conditionvalue,
+          // _installmentplanvalue,
+          // _registeredvalue,
+          // _typevalue,
+          // _maketext,
+          // _modeltext,
+          // _pricetext,
+          // _yeartext,
+          // _KMstext,
+          // _registext,
+          // _featurestext,
+          // _adtitletext,
+          // _downpaymenttext,
+          // _monthlypaymenttext,
+          // _adtitletext,
+
+          //           ],
+          //         )
+          ),
     );
   }
 }

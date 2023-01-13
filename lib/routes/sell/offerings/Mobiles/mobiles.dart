@@ -496,8 +496,9 @@ class _MobilesDetailsState extends State<MobilesDetails> {
               "pro_email": FirebaseAuth.instance.currentUser!.email,
              "price" : _pricetext,
              "details" : {
-             "brand" : _brandtext,
-             "condition" : _conditionvalue,
+              "Type" : widget.category.toCapitalized(),
+             "Brand" : _brandtext,
+             "Condition" : _conditionvalue,
              },
             "ad-title" :  _adtitletext,
              "description" : _describetext,
