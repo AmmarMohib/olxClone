@@ -47,32 +47,9 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
     if (selectedImages!.isNotEmpty) {
       imageFileList!.addAll(selectedImages);
-      // Random _ranStg = Random();
-      // final String imgPath = 'docs/${_ranStg.nextInt(10000)}';
-      // // String file = "";
-      // final FirebaseStorage storage = FirebaseStorage.instance;
-      // for (var i = 0; i < imageFileList!.length; i++) {
-      //   // file = imageFileList![i].path;
-      //   TaskSnapshot tasking =
-      //       await storage.ref(imgPath).putFile(File(imageFileList![i].path));
-      //   var urls = await FirebaseStorage.instance.ref(imgPath).getDownloadURL();
-      //   var url = urls.toString();
-      //   // print("Image List Length:" + imageFileList!.length.toString());
-      //   print(url);
-      // }
-
-      // for (var element in selectedImages) {
-      //   print(element.name);
-      // }
-      // setState(() {});
-      // }
-
-      // Future<List<String>> uploadFiles() async {
-      // if(imagePicker)
       var imageUrls =
           await Future.wait(_images.map((_image) => uploadFile(_image)));
       print(imageUrls);
-      // return imageUrls;
     }
   }
 
@@ -1204,6 +1181,7 @@ class _VehiclesDetailsState extends State<VehiclesDetails> {
               "price": _pricetext,
               "details": {
                 "Type": widget.category.toCapitalized(),
+                "Part Type" : _typevalue,
                  "Make" : _maketext,
                 "Model" : _modeltext,
                 "Year" : _yeartext,

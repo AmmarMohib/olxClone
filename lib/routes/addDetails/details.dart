@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, avoid_print
 
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +16,8 @@ class AddDetails extends StatefulWidget {
     required this.title,
     required this.details,
     required this.photo_url,
-    required this.profile_name, required this.category,
+    required this.profile_name,
+    required this.category,
   }) : super(key: key);
   final Map details;
   final String des;
@@ -34,16 +35,62 @@ class AddDetails extends StatefulWidget {
 class _AddDetailsState extends State<AddDetails> {
   List condition1 = [
     "NO OPT",
-        "new",
+    "new",
     "open box",
     "refurbished",
     "used",
     "for parts or not working"
   ];
-  List condition2 = [
+  List condition2 = ["NO OPT", "New", "Used"];
+  List fuel = [
     "NO OPT",
-    "new",
-    "used"
+    "Petrol",
+    "Diesel",
+    "LPG",
+    "CNG",
+    "Hybrid",
+    "Electric",
+  ];
+  List carDocs = ["No Opt", "Original", "Duplicate"];
+  List assembly = ["no OPt", "Local", "Imported"];
+  List transmission = ["No Opt", "Automatic", "Manual"];
+  List registered = ["No OPt", "No", "Yes"];
+  List partsType = ["No OPt", "Car Parts", "Other Parts"];
+  List areaUnit = [
+    "No OPt",
+    "Kanal",
+    "Marla",
+    "Square Feet",
+    "Square Meter",
+    "Square Yards"
+  ];
+  List propType1 = [
+    "No OPt",
+    "Agriculture Land",
+    "Commercial Plots",
+    "Files",
+    "Indutrial Land",
+    "Residential Land",
+    "Plot Form"
+  ];
+  List furnished = ["No OPt", "Unfurnished", "Furnished"];
+  List bedrooms = ["No OPt", "1", "2", "3", "4", "5", "6+", "Studio"];
+  List bathrooms = ["No OPt", "1", "2", "3", "4", "5", "6", "7+"];
+  List constState = ["No OPt", "Grey Stucture", "Finished"];
+  List floorLevel1 = ["No OPt", "1", "2", "3", "4", "5", "6", "7+" "Ground"];
+  List floorLevel2 = ["No OPt", "0", "1", "2", "3", "4", "5", "6", "7+"];
+  List propType2 = ["Office", "Shop", "Warehouse", "Factory", "Building"];
+
+  List installplan = [
+    "No Opt"
+        "Flexible",
+    "1 Year",
+    "2 Year",
+    "3 Year",
+    "4 Year",
+    "5 Year",
+    "6 Year",
+    "7 Year"
   ];
   @override
   Widget build(BuildContext context) {
@@ -56,7 +103,7 @@ class _AddDetailsState extends State<AddDetails> {
     // print(widget.details.key);
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color.fromRGBO(255, 255, 255, 1.0),
+          backgroundColor: const Color.fromRGBO(255, 255, 255, 1.0),
           // resizeToAvoidBottomInset: false,
           extendBodyBehindAppBar: true,
           appBar: PreferredSize(
@@ -148,7 +195,8 @@ class _AddDetailsState extends State<AddDetails> {
                   ],
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 5, bottom: 10),
+                    padding:
+                        const EdgeInsets.only(left: 8.0, top: 5, bottom: 10),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -196,7 +244,7 @@ class _AddDetailsState extends State<AddDetails> {
                     //           "Condition",
                     //           style: TextStyle(
                     //               fontSize: 16.0,
-                    //               color: Color.fromRGBO(5, 51, 56, 1),
+                    //               color: Color.fro`mRGBO(5, 51, 56, 1),
                     //               fontWeight: FontWeight.w400),
                     //         ),
                     //       ),
@@ -217,7 +265,7 @@ class _AddDetailsState extends State<AddDetails> {
                     //     ),
                     //   ],
                     // ),
-            
+
                     // SizedBox(
                     //   height: 100,
                     //   child: ListView.builder(
@@ -265,42 +313,105 @@ class _AddDetailsState extends State<AddDetails> {
                         // return Text(e.key);
                         return Stack(
                           children: [
-                             e.value != "" ? Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 15.0, top: 13),
-                                child: 
-                                Text(
-                                  // "Condition",
-                                  e.key,
-                                  style: TextStyle(
-                                      fontSize: 16.0,
-                                      color: Color.fromRGBO(5, 51, 56, 1),
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            ):Container(),
-                             e.value != "" ? Align(
-                              alignment: Alignment.centerRight,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    top: 13, right: 15, bottom: 5),
-                                child:  Text(
-                                  e.key.toString() == "Condition"
-                                      ? 
-                                      widget.category == "tablets" ||
-                                      widget.category == "mobile phones" ?
-                                      // widget.category == "smart watches" ?
-                                      condition1[e.value] : condition2[e.value]
-                                      : e.value.toString(),
-                                  // "New",
-                                  style: TextStyle(
-                                      fontSize: 16.0,
-                                      color: Color.fromRGBO(89, 117, 115, 1),
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            ): Container(),
+                            e.value == "" || e.value == 0
+                                ? Container()
+                                : Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15.0, top: 13),
+                                      child: Text(
+                                        // "Condition",
+                                        e.key,
+                                        style: const TextStyle(
+                                            fontSize: 16.0,
+                                            color: Color.fromRGBO(5, 51, 56, 1),
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ),
+                            e.value == "" || e.value == 0
+                                ? Container()
+                                : Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 13, right: 15, bottom: 5),
+                                      child: Text(
+                                        (() {
+                                          if (e.key.toString() == "Condition") {
+                                            return widget.category ==
+                                                        "tablets" ||
+                                                    widget.category ==
+                                                        "mobile phones"
+                                                ?
+                                                // widget.category == "smart watches" ?
+                                                condition1[e.value]
+                                                : condition2[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Registered") {
+                                            return registered[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Fuel") {
+                                            return fuel[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Installment plan") {
+                                            return installplan[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Car documents") {
+                                            return carDocs[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Assembly") {
+                                            return assembly[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Transmission") {
+                                            return transmission[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Part Type") {
+                                            return partsType[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Property Type") {
+                                            return widget.category == "land & plots" ? propType1[e.value] : propType2[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Area Unit") {
+                                            return areaUnit[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Furnished") {
+                                            return furnished[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Bedrooms") {
+                                            return bedrooms[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Bathrooms") {
+                                            return bathrooms[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Construction State") {
+                                            return constState[e.value];
+                                          } else if (e.key.toString() ==
+                                              "Floor Level") {
+                                            return widget.category == "apartments & flats" ? floorLevel1[e.value] : floorLevel2[e.value];
+                                          } else {
+                                            return e.value.toString();
+                                          }
+                                        })(),
+                                        // e.key.toString() == "Condition"
+                                        //     ? widget.category == "tablets" ||
+                                        //             widget.category ==
+                                        //                 "mobile phones"
+                                        //         ?
+                                        //         // widget.category == "smart watches" ?
+                                        //         condition1[e.value]
+                                        //         : condition2[e.value]
+                                        //     :  e.value.toString(),
+                                        // "New",
+                                        style: const TextStyle(
+                                            fontSize: 16.0,
+                                            color:
+                                                Color.fromRGBO(89, 117, 115, 1),
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  )
                           ],
                         );
                       }).toList(),
@@ -360,7 +471,8 @@ class _AddDetailsState extends State<AddDetails> {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 10.0, top: 10.0),
+                            padding:
+                                const EdgeInsets.only(left: 10.0, top: 10.0),
                             child: CircleAvatar(
                               radius: 30,
                               backgroundColor:
@@ -386,8 +498,10 @@ class _AddDetailsState extends State<AddDetails> {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width * 0.175,
-                                  top: MediaQuery.of(context).size.height * 0.02),
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.175,
+                                  top: MediaQuery.of(context).size.height *
+                                      0.02),
                               child: Text(
                                 widget.profile_name.toString(),
                                 style: const TextStyle(
@@ -398,8 +512,10 @@ class _AddDetailsState extends State<AddDetails> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width * 0.175,
-                                  top: MediaQuery.of(context).size.height * 0.01),
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.175,
+                                  top: MediaQuery.of(context).size.height *
+                                      0.01),
                               child: const Text(
                                 "SEE PROFILE",
                                 style: const TextStyle(
