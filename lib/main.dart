@@ -8,12 +8,19 @@ import 'package:olx_clone/routes/login/loginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/services.dart';
+import 'dart:io';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  if (Platform.isWindows) {
+    Firebase.initializeApp(
+      options: FirebaseOptions(apiKey: 'AIzaSyCpG_baxBgjaAdBdGFb7vPGRBuT5L8FqFY', appId: '', messagingSenderId: '774007259454	', projectId: 'olx-clone-flutter-f4be8')
+    );
+  } else
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
   runApp(const MyApp());
 }
 

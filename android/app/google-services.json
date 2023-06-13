@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "774007259454-bvdatsoc88ogfjp13b9sjiehmte9b5hr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.olx_clone",
+            "certificate_hash": "b28bb41e10e71cd6254a0b697e2c914d7734839d"
+          }
+        },
+        {
           "client_id": "774007259454-5gcb91r6t7593ggaf4jhn8r77tde7co9.apps.googleusercontent.com",
           "client_type": 3
         }

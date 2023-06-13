@@ -339,9 +339,7 @@ class _HomePageState extends State<HomePage> {
 
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton:
-
-          FloatingActionBtn(),
+          floatingActionButton: FloatingActionBtn(),
           bottomNavigationBar: BottomNavigation(),
           body: SingleChildScrollView(
               child: Column(children: [
@@ -974,7 +972,7 @@ class _HomePageState extends State<HomePage> {
                         // itemCount: _items.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 10.4 / 10.0,
+                          childAspectRatio: 10.5 / 12,
                           crossAxisCount: 2,
                             ),
                   shrinkWrap: true,

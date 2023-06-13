@@ -117,7 +117,7 @@ class _AddDetailsState extends State<AddDetails> {
                   leading: IconButton(
                     icon: const Icon(
                       Icons.close,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                     onPressed: () {
                       Navigator.pop(context);
@@ -129,7 +129,7 @@ class _AddDetailsState extends State<AddDetails> {
                       child: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.share),
-                        color: Colors.white,
+                        color: Colors.black,
                       )))),
           body: SizedBox(
             width: MediaQuery.of(context).size.width,
@@ -265,7 +265,7 @@ class _AddDetailsState extends State<AddDetails> {
                     //     ),
                     //   ],
                     // ),
-
+          
                     // SizedBox(
                     //   height: 100,
                     //   child: ListView.builder(

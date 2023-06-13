@@ -5,8 +5,8 @@ import 'package:olx_clone/routes/login/loginPage.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TAC extends StatefulWidget {
-  const TAC({Key? key, this.cookieManager}) : super(key: key);
-  final CookieManager? cookieManager;
+  const TAC({Key? key}) : super(key: key);
+  // final CookieManager? cookieManager;
 
   static const String routeName = '/terms-page';
 
@@ -19,7 +19,7 @@ class _TACState extends State<TAC> {
   void initState() {
     super.initState();
     if (Platform.isAndroid) {
-      WebView.platform = SurfaceAndroidWebView();
+      // WebView.platform = SurfaceAndroidWebView();
     }
   }
 
@@ -51,9 +51,10 @@ class _TACState extends State<TAC> {
           ),
           elevation: 0,
         ),
-        body: const WebView(
-          initialUrl: 'https://help.olx.com.pk/hc/en-us',
-        ),
+        // body: const WebView(
+        //   initialUrl: 'https://help.olx.com.pk/hc/en-us',
+        // ),
+        body: Text("terms and Conditions Page"),
       ),
     );
   }

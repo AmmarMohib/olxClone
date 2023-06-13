@@ -119,22 +119,22 @@ class _AccountPageState extends State<AccountPage> {
                       InkWell(
                         onTap: (() {
                           print("ad");
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Buy()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const Buy()));
                         }),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.only(left: 20, top: 40),
-                              child: Image(
-                                image: AssetImage("assets/images/buyIcon.png"),
-                                width: 40,
-                              ),
-                            ),
+                            // const Padding(
+                            //   padding: EdgeInsets.only(left: 20, top: 40),
+                            //   child: Image(
+                            //     image: AssetImage("assets/images/buyIcon.png"),
+                            //     width: 40,
+                            //   ),
+                            // ),
                             Padding(
                               padding: const EdgeInsets.only(left: 15, top: 40),
                               child: SizedBox(
